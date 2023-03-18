@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Update StartUp Details
+  </h3>
+<div class="container" style="padding-top: 150px;">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div class="form-group">
+                {{ form.profile.label(class="form-control-label") }}
+                {% if form.profile.errors %}
+                {{ form.profile(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.profile.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.profile(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.idea.label(class="form-control-label") }}
+                {% if form.idea.errors %}
+                {{ form.idea(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.idea.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.idea(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.industry.label(class="form-control-label") }}
+                {% if form.industry.errors %}
+                {{ form.industry(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.industry.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.industry(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.category.label(class="form-control-label") }}
+                {% if form.category.errors %}
+                {{ form.category(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.category(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.country.label(class="form-control-label") }}
+                {% if form.country.errors %}
+                {{ form.country(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.country.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.country(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+              <div class="form-group">
+                {{ form.extra.label(class="form-control-label") }}
+                {% if form.extra.errors %}
+                {{ form.extra(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.extra.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.extra(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info login-btn") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

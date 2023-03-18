@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+    .program-dropdown {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    padding: 10px 20px;
+    width: 40%;
+    margin: 10px;
+    text-align: left;
+}
+
+.program-dropdown::after {
+    text-align: right;
+    float: right;
+    margin-top: 5%;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Trending StartUps
+  </h3>
+  <div class="container" style="padding-top: 150px;">
+    <form class="form" style="margin-bottom: 40px;">
+      <div class="form__group">
+        <select class="program-dropdown" id="country" name="country" data-dropdown>
+          <option value>Country of Origin</option>
+          <option value="India">India</option>
+          <option value="America">America</option>
+        </select>
+        <button class="btn btn-success my-3 my-sm-0" style="padding: 9px 15px;" type="submit">Search</button>
+      </div>
+    </form>
+    {% for trending in trendings %} 
+    <div class="card" style="margin: 10px 0; padding: 20px 50px;">
+        <h1>{{ trending.name }}</h1>
+        <p>{{ trending.desc }}</p>
+        <div class="row">
+            <div class="col-6">
+                <p>Country: {{ trending.country }}</p>
+            </div>
+            <div class="col-6">
+                <a style="float: right; color: #f37878; text-decoration: none;" href={{ trending.link }} target="_blank">StartUp Website Link
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                      </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+        {% endfor %}
+</div>
+{% endblock %}

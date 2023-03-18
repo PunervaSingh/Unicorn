@@ -1,0 +1,199 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+<style>
+    footer {
+      display: none;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        height: 20px;
+    position: absolute;
+    top: 25px;
+    }
+
+    .form-control-label {
+        padding: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="margin: 0; padding: 0;">
+    <div class="row">
+        <div class="col-lg-7">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
+                alt="" style="height: 100vh; width: 60%;object-fit: cover; position: fixed;">
+        </div>
+        <div class="col-lg-5">
+
+            <div class="content-section" style="margin: 80px 40px 40px;">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+                        <legend class="mb-6 pitch-heading">Pitch Your Idea
+                        </legend>
+                        <div class="form-group">
+                            <label for="email" class="form-control-label">Email</label>
+                            <input type="email" name="" id="" class="form-control form-control-lg" placeholder={{ current_user.email }} readonly>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form.profile.label(class="form-control-label") }}
+                            {% if form.profile.errors %}
+                            {{ form.profile(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.profile.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.profile(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.name.label(class="form-control-label") }}
+                            {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.idea.label(class="form-control-label") }}
+                            {% if form.idea.errors %}
+                            {{ form.idea(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.idea.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.idea(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.industry.label(class="form-control-label") }}
+                            {% if form.industry.errors %}
+                            {{ form.industry(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.industry.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.industry(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="contact" class="form-control-label">Contact</label>
+                            <input type="contact" name="" id="" class="form-control form-control-lg" placeholder={{ current_user.phone }} readonly>
+                            <div class="invalid-feedback">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ form.category.label(class="form-control-label") }}
+                            {% if form.category.errors %}
+                            {{ form.category(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.category.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.category(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.country.label(class="form-control-label") }}
+                            {% if form.country.errors %}
+                            {{ form.country(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.country.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.country(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.women.label(class="form-control-label") }}
+                            {% if form.women.errors %}
+                            {{ form.women(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.women.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.women(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.tier.label(class="form-control-label") }}
+                            {% if form.tier.errors %}
+                            {{ form.tier(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.tier.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.tier(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <div class="form-group">
+                            {{ form.village.label(class="form-control-label") }}
+                            {% if form.village.errors %}
+                            {{ form.village(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.village.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.village(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                          <div class="form-group">
+                            {{ form.extra.label(class="form-control-label") }}
+                            {% if form.extra.errors %}
+                            {{ form.extra(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.extra.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.extra(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                          <div class="form-group">
+                            {{ form.pic.label(class="form-label") }}
+                            {{ form.pic(class="form-control") }}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info login-btn") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

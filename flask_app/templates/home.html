@@ -1,0 +1,199 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}" />
+{% endblock %} {% block content %} 
+
+{% if current_user.is_authenticated and current_user.position=='StartUp' or current_user.position=='Mentor' %}
+  <div class="notification">
+    <svg
+    class="header-msg"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-chat-dots-fill"
+    viewBox="0 0 16 16"
+    >
+    <path
+    d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+    />
+  </svg>
+  <ul class="hidden-notification-div">
+    {% for notif in notification %}
+      {% if notif.recipient_id==current_user.id %}
+        <p style="border-bottom: 1px solid gray; padding: 10px;">
+          {{ notif.message }}
+          {% if current_user.position=='StartUp' and notif.portfolio_link %}
+          <br><a href={{ notif.portfolio_link }}>Portfolio Link</a>
+          <br><a href="{{url_for('profile', user_id=notif.user_id)}}">Profile Link</a>
+          {% elif current_user.position=='StartUp'%}
+          <a href="{{url_for('profile', user_id=notif.user_id)}}">Profile Link</a>
+          {% else %} 
+          <a href="{{url_for('individual_idea', project_id=notif.project_id)}}">Project Page</a>
+          {% endif %}
+          {% if not notif.portfolio_link %}
+          <div class="row">
+            <form method="post">
+              <label style="display: none" for="title">Mentor Id</label>
+              <input style="display: none" type="text" name="mentor"
+                     placeholder={{ notif.user_id }}
+                     value={{ notif.user_id }} readonly></input>
+              <label style="display: none" for="content">Project Id</label>
+              <input style="display: none" type="text" name="project"
+                        placeholder={{ notif.project_id }}
+                        value={{ notif.project_id }} readonly></input>
+              <button type="submit" style="width: 100%; margin-left: 20px;" class="btn btn-success">Accept</button>
+          </form>
+          </div>
+          {% endif %}
+        </p>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  </div>
+{% endif %}
+<div class="home-page">
+  <div id="background-content-div2">
+    <img class="home-bg-img"  src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+    <h1 class="home-bg-heading" >Initiate Your StartUp</h1>
+    <p class="home-bg-para" >The first step on becoming a Unicorn! Initiate your start up and get started on your journey to become a successful entrepreneur.</p>
+  </div>
+  <div id="background-content-div3">
+    <img class="home-bg-img"  src="https://images.unsplash.com/photo-1605752995290-dde649b8da06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1578&q=80" alt="">
+    <h1 class="home-bg-heading" >Easily access suppliers</h1>
+    <p class="home-bg-para" >Luckily for you, Unicorn goes above and beyond to connect you to suppliers for easy access and convenience.</p>
+  </div>
+  <div id="background-content-div4">
+    <img class="home-bg-img"  src="https://images.unsplash.com/photo-1526948531399-320e7e40f0ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80" alt="">
+    <h1 class="home-bg-heading" >Connect with Incubators</h1>
+    <p class="home-bg-para" >There's no such thing surplus support! Get connected to incubators with expert knowledge of your field.</p>
+  </div>
+  <div id="background-content-div5">
+    <img class="home-bg-img"  src="https://images.unsplash.com/photo-1557858310-9052820906f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+    <h1 class="home-bg-heading" >Advertise your product</h1>
+    <p class="home-bg-para" >If it weren't for marketing, you probably wouldn't know your favourite product. Head over here to advertise your product and gain access to a wide audience.</p>
+  </div>
+  
+  <p><a class="inspiration" style="text-decoration: none; color: black;" href="https://www.deshawindia.com/explore">Page Design Inspiration</a></p>
+  <div class="nav-right-side">
+    <ul style="list-style: none;" id="home-list">
+      <li class="with-heading">With Unicorn</li>
+      <li class="home-side-nav-li">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+        </svg>
+        Initiate Your StartUp</li>
+        <li class="home-side-nav-li">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+          </svg>
+          Easily access suppliers</li>
+          <li class="home-side-nav-li">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+            </svg>
+            Connect with Incubators</li>
+            <li class="home-side-nav-li">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
+              </svg>
+              Advertise your product</li>
+              <li class="home-scroll-down"> Scroll Down <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+              </svg>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="home-top-div normal" id="showScroll">
+          <img class="home-img" id="img" src="../static/img/home.png" alt="">
+          <div class="visible-on-hover-div visible-div-part1">
+          </div>
+        </div>
+        <div id="hidden-div1" class="second hidden">
+          <div class="visible-on-hover-div visible-div-part2" onmouseover="showcontent('background-content-div2', 'hidden-div1', 'hidden-div2', 'hidden-div3', 'hidden-div4')" onmouseout="hidecontent('background-content-div2', 'hidden-div1', 'hidden-div2', 'hidden-div3', 'hidden-div4')">
+          </div>
+        </div>
+        <div id="hidden-div2" class="third hidden">
+          <div class="visible-on-hover-div visible-div-part3" onmouseover="showcontent('background-content-div3', 'hidden-div2', 'hidden-div1', 'hidden-div3', 'hidden-div4')" onmouseout="hidecontent('background-content-div3', 'hidden-div2', 'hidden-div1', 'hidden-div3', 'hidden-div4')">
+          </div>
+        </div>
+        <div id="hidden-div3" class="fourth hidden">
+          <div class="visible-on-hover-div visible-div-part4" onmouseover="showcontent('background-content-div4', 'hidden-div3', 'hidden-div2', 'hidden-div1', 'hidden-div4')" onmouseout="hidecontent('background-content-div4', 'hidden-div3', 'hidden-div2', 'hidden-div1', 'hidden-div4')">
+          </div>
+        </div>
+        <div id="hidden-div4" class="fifth hidden">
+          <div class="visible-on-hover-div visible-div-part5" onmouseover="showcontent('background-content-div5', 'hidden-div4', 'hidden-div2', 'hidden-div3', 'hidden-div1')" onmouseout="hidecontent('background-content-div5', 'hidden-div4', 'hidden-div2', 'hidden-div3', 'hidden-div1')">
+            <div class="inner-visible-on-hover-div5">
+              
+            </div>
+          </div>
+        </div>
+        <p style="height: 300vh;"></p>
+        <script>
+          function showcontent(divId, dis1, dis2, dis3, dis4) {
+            var x = document.getElementById(divId);
+            x.style.display = "block";
+            document.getElementById(dis1).style.backgroundColor = "transparent";
+            document.getElementById(dis1).style.border = "2px solid white";
+            document.getElementById(dis2).style.backgroundColor = "transparent";
+            document.getElementById(dis3).style.backgroundColor = "transparent";
+            document.getElementById(dis4).style.backgroundColor = "transparent";
+            document.getElementById("home-list").style.display = "none";
+            document.getElementById("google_translate_element").style.display = "none";
+            document.getElementById("slidein-list").style.display = "none";
+          }
+          function hidecontent(divId, dis1, dis2, dis3, dis4) {
+            var x = document.getElementById(divId);
+            x.style.display = "none";
+            document.getElementById(dis1).style.backgroundColor = "white";
+            document.getElementById(dis1).style.border = "1px solid gray";
+            document.getElementById(dis2).style.backgroundColor = "white";
+            document.getElementById(dis3).style.backgroundColor = "white";
+            document.getElementById(dis4).style.backgroundColor = "white";
+            document.getElementById("home-list").style.display = "initial";
+            document.getElementById("google_translate_element").style.display = "initial";
+            document.getElementById("slidein-list").style.display = "initial";
+          }
+          </script> 
+  <script>
+    window.addEventListener("scroll", function () {
+      myID = document.getElementById("showScroll");
+      var y = window.scrollY;
+      if(y < 300) {
+        document.getElementById("hidden-div1").className = "second hidden normal";
+        document.getElementById("hidden-div2").className = "third hidden normal";
+        document.getElementById("hidden-div3").className = "fourth hidden normal";
+        document.getElementById("hidden-div4").className = "fifth hidden normal";
+        myID.className = "home-top-div normal";
+        document.getElementById("showScroll").className = "home-top-div visible normal";
+        document.getElementById("img").className = "home-img visible";
+      }
+      else if (y >= 300 && y <= 2100) {
+        document.getElementById("hidden-div1").className = "second visible rotate";
+        document.getElementById("hidden-div1").style.top = "50px";
+        document.getElementById("hidden-div2").className = "third visible rotate";
+        document.getElementById("hidden-div2").style.top = "120px";
+        document.getElementById("hidden-div3").className = "fourth visible rotate";
+        document.getElementById("hidden-div3").style.top = "190px";
+        document.getElementById("hidden-div4").className = "fifth visible rotate";
+        document.getElementById("hidden-div4").style.top = "260px";
+        myID.className = "home-top-div rotate";
+        document.getElementById("showScroll").className = "home-top-div hidden";
+        document.getElementById("img").className = "home-img hidden";
+      } else if (y > 2100) {
+        document.getElementById("hidden-div1").style.top = "-30px";
+        document.getElementById("hidden-div2").style.top = "-10px";
+        document.getElementById("hidden-div3").style.top = "10px";
+        document.getElementById("hidden-div4").style.top = "30px";
+        document.getElementById("hidden-div1").style.left = "30%";
+        document.getElementById("hidden-div2").style.left = "30%";
+        document.getElementById("hidden-div3").style.left = "30%";
+        document.getElementById("hidden-div4").style.left = "30%";
+      }
+    });
+    </script>
+</div>
+{% endblock %}

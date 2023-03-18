@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/free_resources.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Free Resources Center
+  </h3>
+
+<main id="main" class="container">
+    <div class="row" style="padding-top: 150px;">
+        <div class="card col-4">
+            <img class="free-img" src="https://images.unsplash.com/photo-1508061538535-6effdf9eb6f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80" alt="Name - Namelix" />
+            <a href="https://namelix.com/" target="_blank">
+                <div class="text">
+                    <h2>Namelix
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                        </svg>
+                    </h2>
+                    <p>Generate a short, brandable business name using artificial intelligence with namelix.</p>
+                </div>
+            </a>
+        </div>
+        <div class="card col-4">
+            <img class="free-img" src="https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" alt="Design - Canva" />
+            <a href="https://www.canva.com/en_gb/" target="_blank">
+                <div class="text">
+                <h2>Canva
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    </svg>
+                </h2>
+                <p>Canva makes it easy to create professional designs and to share or print them.</p>
+                </div>
+            </a>
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Social - Hypefury" />
+      <a href="https://hypefury.com/" target="_blank">
+        <div class="text">
+            <h2>Hypefury
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Schedule & Automate Social Media Marketing.</p>
+        </div>
+    </a> 
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1586769852351-8791d2bb43be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Email - MailerLite" />
+      <a href="https://www.mailerlite.com/" target="_blank">
+        <div class="text">
+            <h2>MailerLite
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Grow and nurture your audiences at the speed of Lite.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1715&q=80" alt="Links - Rebrandly" />
+      <a href="https://www.rebrandly.com/" target="_blank">
+        <div class="text">
+            <h2>Rebrandly
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Rebrandly is the industry-leading link management platform to brand, track and share short URLs using a custom domain name.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Developer - Typedream" />
+      <a href="https://typedream.com/?via=paxton98&gclid=Cj0KCQiApKagBhC1ARIsAFc7Mc4n0fRYlKUVchXDMsUTiDgYV5AjOKsxnejTJ72m8AEoGZAP32DNk6kaAvoCEALw_wcB" target="_blank">
+        <div class="text">
+            <h2>Typedream
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>With Typedream, you can build web pages, customize them, and even connect your existing database without code.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1571867424488-4565932edb41?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Payments - Gumroad"/>
+      <a href="https://gumroad.com/" target="_blank">
+        <div class="text">
+            <h2>Gumroad
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>With Gumroad, anyone can earn their first dollar online. Just start with what you know, see what sticks, and get paid. It’s that easy.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1065&q=80" alt="Automations - Zapier" />
+      <a href="https://zapier.com/?utm_source=google&utm_medium=cpc&utm_campaign=gaw-gbl-nua-search-desktop-trademark-brand_exact&utm_adgroup=brand_trademark_zapier&utm_term=zapier&utm_content=_pcrid_605859591576_pkw_zapier_pmt_e_pdv_c_slid__pgrid_139732742522_ptaid_kwd-298647606221_&gclid=Cj0KCQiApKagBhC1ARIsAFc7Mc6gvTSeAByni_tGpbp0xzthAAUnl9IcnpChLQ6AQFS0gdMNdbrgjh8aAtczEALw_wcB" target="_blank">
+        <div class="text">
+            <h2>Zapier
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Zapier empowers you to automate your work across 5,000+ apps—so you can move forward, faster.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80" alt="Scheduling - Calendly" />
+      <a href="https://calendly.com/" target="_blank">
+        <div class="text">
+            <h2>Calendly
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Calendly is your scheduling automation platform for eliminating the back-and-forth emails for finding the perfect time — and so much more.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1551281306-0d52288970ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Copywriting - Copy AI" />
+      <a href="https://www.copy.ai/?via=start" target="_blank">
+        <div class="text">
+            <h2>Copy AI
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Generate High-Converting Marketing Copy In Seconds With CopyAI.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Proofreading - Hemingway" />
+      <a href="https://hemingwayapp.com/" target="_blank">
+        <div class="text">
+            <h2>Hemingway
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Hemingway App makes your writing bold and clear.</p>
+        </div>
+    </a>   
+    </div>
+</div>
+<h1 style="padding: 100px 0; text-align: center;">Team Collaboration resources</h1>
+<div class="row">
+    <div class="card col-4">
+            <img class="free-img" src="https://images.unsplash.com/photo-1612831820363-9b92f70109a4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" alt="Google meet" />
+            <a href="https://meet.google.com/" target="_blank">
+                <div class="text">
+                    <h2>Google Meet
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                        </svg>
+                    </h2>
+                    <p>Premium video meetings. Now free for everyone.</p>
+                </div>
+            </a>
+        </div>
+        <div class="card col-4">
+      
+            <img class="free-img" src="https://images.unsplash.com/photo-1592474096967-7e5d62070cf7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Sketchpad" />
+            <a href="https://sketch.io/sketchpad/" target="_blank">
+              <div class="text">
+                  <h2>Sketchpad: 
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                          <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                      </svg>
+                  </h2>
+                  <p>Free online drawing application for all ages. Create digital artwork to share online and export to popular image formats JPEG, PNG, SVG, and PDF.</p>
+              </div>
+          </a>   
+          </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1557487307-8dc8ec048eb8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" alt="Google drive" />
+      <a href="https://drive.google.com/drive/my-drive" target="_blank">
+        <div class="text">
+            <h2>Google Drive
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Drive provides a cloud space for storing all the resource files and folders safely. It provides accessibility from anywhere and everywhere with free space of 15Gb.</p>
+        </div>
+    </a> 
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1598791318878-10e76d178023?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="Asana" />
+      <a href="https://asana.com/uses/to-do-list?&utm_campaign=NB--SA--EN--Catch-All--All-Device&utm_source=google&utm_medium=pd_cpc_nb&gclid=Cj0KCQiAx6ugBhCcARIsAGNmMbgO9sRyls8oD_Mlt9oQlGdsLeMrmyXJs_RgTblf22VhI--blhYEv6MaAg04EALw_wcB&gclsrc=aw.ds" target="_blank">
+        <div class="text">
+            <h2>Asana - To do list app
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>A better online to-do list app for work. Asana makes it easier for a team to plan their work by using online to-do lists.</p>
+        </div>
+    </a>   
+    </div>
+  <div class="card col-4">
+      
+      <img class="free-img" src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2074&q=80" alt="Google Sheets" />
+      <a href="https://docs.google.com/spreadsheets/u/0/" target="_blank">
+        <div class="text">
+            <h2>Google Sheets
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </h2>
+            <p>Google Sheets is a spreadsheet program included as part of the free, web-based Google Docs Editors suite offered by Google. An effective app to maintaine cost and expenditure.</p>
+        </div>
+    </a>   
+    </div>
+</div>
+</main>
+{% endblock %}

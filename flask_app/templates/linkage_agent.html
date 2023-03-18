@@ -1,0 +1,262 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/linkage_agents.css')}}"
+/>
+{% endblock %} {% block content %}
+<div class="container" style="padding-top: 150px">
+  <h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Identify market & linkage agents
+  </h3>
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem">
+    Find Linkage Agents
+  </h1>
+  <h3 class="delivery-header show-on-scroll inline-photo">Delivery tracking of products on-the-go</h3>
+  <form class="form-inline my-2 my-lg-0 show-on-scroll inline-photo" method="GET" style="margin: 30px; margin-left: 25%;">
+    <input class = "form-control mr-sm-2"
+    type="search" placeholder="Search through state or country" name="places" style="width: 400px; padding: 10px 30px;">
+    <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <!-- <div class="dropdown team_filter">
+    <button
+      class="btn btn-secondary dropdown-toggle linkage-dropdown"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Delivery agents near me
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+  </div> -->
+  <p class="ship-para show-on-scroll inline-photo">
+    Ship in India & 220+ other countries with top courier partners
+  </p>
+  <div class="row">
+    {% for agent in agents %}
+    <div
+      class="col-3 show-on-scroll inline-photo"
+      style="background-color: #f37878; padding: 20px; margin: 10px"
+    >
+      {% if agent.pic.startswith('http') %}
+      <img
+      class="linkage-img"
+          src={{ agent.pic }}
+          alt=""
+      />
+      {% else %} 
+      <img
+      class="linkage-img"
+      src={{ url_for('static', filename='img/' + agent.pic) }}
+      alt=""
+      />
+      {% endif %}
+      <div class="project-content" style="background-color: white">
+        <div style="padding: 10px 10px 0; font-weight: bold; font-size: larger; text-align: center;">
+          {{ agent.name }}
+        </div>
+        <p style="font-size: small; color: gray">
+          {{ agent.description }}
+        </p>
+        <hr style="margin: 0" />
+        <div class="row">
+          <div class="col-6">
+            <p>{{ agent.service }}</p>    
+          </div>
+          <div class="col-6">
+            <p>{{ agent.country }}</p>
+          </div>
+        </div>
+        <hr style="margin: 0" />
+        <div class="row">
+          <div class="col-6">
+            <p>{{ agent.phone }}</p>    
+          </div>
+          <div class="col-6">
+            <p>State: {{ agent.state }}</p>
+          </div>
+        </div>
+        <hr style="margin: 0" />
+        <div class="row">
+          <div class="col-6">
+            <p>{{ agent.email }}</p>    
+          </div>
+          <div class="col-6">
+            <p>{{ agent.open_to }}</p>
+          </div>
+        </div>
+        <hr style="margin: 0" />
+        <div class="text-right" style="padding: 5px 20px">
+          <a href={{ agent.link }} style="color: #f37878">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-arrow-right-circle-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <nav aria-label="Page navigation example" style="margin-left: 30px">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="block">
+  <div class="wrapper">
+    <h1 class="track-header">Track Your Order</h1>
+    <svg style="position: absolute;width: 45vw;height: 150px;" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" class="anim" width="400px">
+        <g class="track">
+          <path d="M20,20 600,20 600,150 700,150 750,200 750,300 718,300" class="frame"/>
+          <path d="M600,40 630,40 700,150" class="frame"/>
+          <g class="wheel">
+            <circle cx="654" cy="300" r="40" class="frame"/>
+            <circle cx="654" cy="300" r="20" class="small_circle"/>
+            <circle cx="654" cy="295" r="2" class="bolt"/>
+            <circle cx="650" cy="300" r="2" class="bolt"/>
+            <circle cx="659" cy="300" r="2" class="bolt"/>
+            <circle cx="654" cy="305" r="2" class="bolt"/>
+            <circle cx="654" cy="300" r="48" class="tyre"/>
+          </g>
+          <g class="wheel">
+            <circle cx="460" cy="300" r="40" class="frame"/>
+            <circle cx="460" cy="300" r="20" class="small_circle"/>
+            <circle cx="460" cy="295" r="2" class="bolt"/>
+            <circle cx="455" cy="300" r="2" class="bolt"/>
+            <circle cx="465" cy="300" r="2" class="bolt"/>
+            <circle cx="460" cy="305" r="2" class="bolt"/>
+            <circle cx="460" cy="300" r="48" class="tyre"/>
+          </g>
+            <path d="M525,300 590,300" class="frame"/>
+            <path d="M300,300 395,300" class="frame"/>
+            <text x="370" y="150" class="description">Fast </text>
+            <text x="300" y="198" class="description">Delivery </text>
+        </g>
+      
+      </svg>
+      
+    <div class="step-wrapper move-line">
+      <article class="linestep linestep1" style="left: 56%; top: -2%">
+        <span class="num"> 1</span>
+        <p class="bottom">
+          Order retrieved from the warehouse
+        </p>
+      </article>
+
+      <article class="linestep linestep2" style="right: -0.5%; top: 20%">
+        <span class="num"> 2</span>
+        <p class="left">
+          Goods packed using material appropriate to their nature to enable safe & efficient delivery
+        </p>
+      </article>
+
+      <article class="linestep linestep3" style="left: 68%; top: 44%">
+        <span class="num"> 3</span>
+        <p class="bottom">
+          Order dispatched from the packing station
+        </p>
+      </article>
+
+      <article class="linestep linestep4" style="left: 32%; top: 44.5%">
+        <span class="num">4</span>
+        <p class="top">
+          Delivery agent with your good is out for delivery
+        </p>
+      </article>
+
+      <article class="linestep linestep5" style="left: -1.5%; top: 68%">
+        <span class="num"> 5</span>
+        <p class="right">
+          Goods delivered in excellent condition!
+        </p>
+      </article>
+
+      <svg
+        width="100%"
+        viewBox="0 0 1156 608"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class="path"
+          d="m560.30957,10.588011c0,0 438.0947,1.90476 439.04708,1.90476c0.95238,0 144.57857,-1.02912 143.80934,137.14269c-0.76923,138.17181 -116.81095,142.30859 -131.61967,143.8923c-14.80873,1.58372 -840.41472,-0.71429 -860.5941,0.71429c-20.17938,1.42858 -148.4991,6.80903 -146.83244,147.05973c1.66666,140.2507 129.52365"
+          opacity="0.5"
+          stroke-width="7"
+          stroke="white"
+          fill="none"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="margin-top: 200px">
+  <div class="row">
+    <div class="col-6" style="padding: 100px 80px 0">
+      <h1 class="analysis-header show-on-scroll inline-photo">Market Trend Analysis</h1>
+      <p class="analysis-para show-on-scroll inline-photo">
+        A business owner's job is not complete without analysing
+        the market's reception towards their services/goods. In
+        fact, the real business starts from there. Head over to
+        the Market Trend Analysis to analyse how well your product
+        is doing and tweak your business functions accordingly by
+        consulting the mentors you've found at Unicorn!
+      </p>
+      <button class="explore-btn show-on-scroll inline-photo"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+    </div>
+    <div class="col-6 meet01 show-on-scroll inline-photo">
+      <img
+        class="oneh"
+        src="https://brightdata.com/wp-content/uploads/2022/10/BInsights-Hero_Image.svg"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+    $(".btn-start").click(function () {
+      $(".step-wrapper").toggleClass("move-line");
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Update Validator Details
+  </h3>
+<div class="container" style="padding-top: 150px;">
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+  <div id="Apply" class="tabcontent" style="display: block">
+          <div class="form-group">
+            {{ form.administration.label(class="form-control-label") }}
+            {% if form.administration.errors %}
+            {{ form.administration(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.administration.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.administration(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+          <div class="form-group">
+            {{ form.rnd.label(class="form-control-label") }}
+            {% if form.rnd.errors %}
+            {{ form.rnd(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.rnd.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.rnd(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+          <div class="form-group">
+            {{ form.marketing.label(class="form-control-label") }}
+            {% if form.marketing.errors %}
+            {{ form.marketing(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.marketing.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.marketing(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+          <div class="form-group">
+            {{ form.profit.label(class="form-control-label") }}
+            {% if form.profit.errors %}
+            {{ form.profit(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.profit.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.profit(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+</fieldset>
+<div style="text-align: center">
+  {{ form.submit(class="btn btn-dark") }}
+</div>
+</form>
+</div>
+{% endblock %}

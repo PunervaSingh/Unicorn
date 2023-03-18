@@ -1,0 +1,98 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link rel="stylesheet" href="{{url_for('static', filename='css/legal_issues.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="padding-top: 150px">
+    <h3 class="underline-small" style="
+        position: absolute;
+        top: 50px;
+        left: 40%;
+        font-weight: 400;
+        letter-spacing: 1px;
+      ">
+        Contact A Legal Advisor
+    </h3>
+
+    {% if not current_user.position %}
+    <a class="underline-small cm-apply" href="{{url_for('legal_advisor_apply')}}">Apply for legal Advisor
+        <svg style="height: 20px; width: 20px; color: #F37878; font-weight: bold;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+    </a>
+    {% endif %}
+
+    <div class="row" style="padding-bottom: 100px;">
+        {% for advisor in advisors %}
+        <div class="col-6">
+            <div class="card show-on-scroll inline-photo">
+                <div class="additional">
+                    <div class="user-card">
+                        {% if advisor.pic.startswith('http') %}
+                            <img
+                                src={{ advisor.pic }}
+                                alt=""
+                            />
+                            {% else %} 
+                            <img
+                            src={{ url_for('static', filename='img/' + advisor.pic) }}
+                            alt=""
+                            />
+                            {% endif %}
+                    </div>
+                    <div class="more-info">
+                        <h1>{{ advisor.name }}</h1>
+                        <div class="coords">
+                            <span><a style="text-decoration: none; color: white;" href={{ advisor.profile }}>Profile Link</a></span>
+                            <span>Year Of Experience: {{ advisor.year }}</span>
+                        </div>
+                        <div class="coords">
+                            <span>{{ advisor.phone }}</span>
+                            <span>{{ advisor.email }}</span>
+                        </div>
+                        <div class="coords">
+                            <span>{{ advisor.role }}</span>
+                            <span>{{ advisor.city }}, {{ advisor.country }}</span>
+                        </div>
+                        <div class="stats">
+                            <div>
+                                <div class="title">Awards</div>
+                                <i class="fa fa-trophy"></i>
+                                <div class="value">{{ advisor.awards }}</div>
+                            </div>
+                            <div>
+                                <div class="title">Cases</div>
+                                <i class="fa fa-gavel"></i>
+                                <div class="value">{{ advisor.cases }}</div>
+                            </div>
+                            <div>
+                                <div class="title">Advised</div>
+                                <i class="fa fa-group"></i>
+                                <div class="value">{{ advisor.advised }}</div>
+                            </div>
+                            <div>
+                                <div class="title">Union</div>
+                                <i class="fa fa-handshake-o"></i>
+                                <div class="value">{{ advisor.union }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="general">
+                    <h1>{{ advisor.name }}</h1>
+                    <p>{{ advisor.description }}</p>
+                    <span class="more">Mouse over the card for more info</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

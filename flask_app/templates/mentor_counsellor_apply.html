@@ -1,0 +1,283 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/mc_apply.css')}}"
+/>
+<style>
+  footer {
+    display: none;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="container" style="padding-top: 150px">
+  <h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Mentoring / Counselling
+  </h3>
+  <p><a href="{{ url_for('options') }}" class="back-para underline-small">Back</a></p>
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">
+    Become a mentor / counsellor
+  </h1>
+
+  <div class="tab">
+    {% if current_user.position and current_user.validated %}
+    <button class="tablinks" style="cursor: not-allowed;">Apply</button>
+    <hr />
+    <button class="tablinks" style="cursor: not-allowed;">
+      Validate
+    </button>
+    <hr />
+    <button class="tablinks active" onclick="openCity(event, 'Find Jobs')">
+      Find Jobs
+    </button>
+    {% elif current_user.position and (current_user.validated is false) %}
+    <button class="tablinks" style="cursor: not-allowed;">Apply</button>
+    <hr />
+    <button class="tablinks active" onclick="openCity(event, 'Validate')">
+      Validate
+    </button>
+    <hr />
+    <button class="tablinks" style="cursor: not-allowed;">
+      Find Jobs
+    </button>
+    {% else %}
+    <button class="tablinks" onclick="openCity(event, 'Apply')">Apply</button>
+    <hr />
+    <button class="tablinks" style="cursor: not-allowed;">
+      Validate
+    </button>
+    <hr />
+    <button class="tablinks" style="cursor: not-allowed;">
+      Find Jobs
+    </button>
+    {% endif %}
+  </div>
+
+  {% if current_user.position is none %}
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+  <div id="Apply" class="tabcontent" style="display: block">
+    <div class="row">
+      <div class="col-4 cm-apply-div">
+        <div class="form-group">
+          {{ form.pic.label(class="form-label") }}
+          {{ form.pic(class="form-control") }}
+      </div>
+      </div>
+      
+          <div class="col-4 cm-apply-div">
+            
+          <div class="form-group">
+            {{ form.profile.label(class="form-control-label") }}
+            {% if form.profile.errors %}
+            {{ form.profile(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.profile.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.profile(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.cost.label(class="form-control-label") }}
+          {% if form.cost.errors %}
+          {{ form.cost(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+              {% for error in form.cost.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% else %}
+          {{ form.cost(class="form-control form-control-lg") }}
+          {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.availability.label(class="form-control-label") }}
+        {% if form.availability.errors %}
+        {{ form.availability(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.availability.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.availability(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+            <!-- <label for="Name">Name</label>
+            <input type="text" name="Name" id="" /> -->
+            <!-- <label for="profile">Linked In profile link</label>
+            <input type="text" name="profile" id="" /> -->
+            <!-- <label for="cost">Cost per session (In dollars)</label>
+            <input type="text" name="cost" id="" /> -->
+            <!-- <label for="cost">Avaliable for ( No. of months)</label>
+            <input type="text" name="cost" id="" /> -->
+            <!-- <div class="row">
+              <div class="col-6"></div>
+              <div class="col-6"></div>
+            </div> -->
+          </div>
+      <div class="col-4 cm-apply-div">
+        <div class="form-group">
+          {{ form.year.label(class="form-control-label") }}
+          {% if form.year.errors %}
+          {{ form.year(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+              {% for error in form.year.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% else %}
+          {{ form.year(class="form-control form-control-lg") }}
+          {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.expertise.label(class="form-control-label") }}
+        {% if form.expertise.errors %}
+        {{ form.expertise(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.expertise.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.expertise(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.choice.label(class="form-control-label") }}
+      {% if form.choice.errors %}
+      {{ form.choice(class="form-control form-control-lg is-invalid") }}
+      <div class="invalid-feedback">
+          {% for error in form.choice.errors %}
+          <span>{{ error }}</span>
+          {% endfor %}
+      </div>
+      {% else %}
+      {{ form.choice(class="form-control form-control-lg") }}
+      {% endif %}
+  </div>
+        <!-- <label for="experience">Years of Experience</label>
+        <input type="text" name="experience" id="" /> -->
+        <!-- <label for="area">Area of expertise</label>
+        <textarea name="area" id="" cols="35" rows="5">...</textarea> -->
+        <!-- <label for="">Applying for</label>
+        <div
+          class="validation-status"
+          style="display: flex; justify-content: space-around"
+        >
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault_type"
+              id="flexRadioDefault1"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Mentor
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault_type"
+              id="flexRadioDefault2"
+              checked
+            />
+            <label class="form-check-label" for="flexRadioDefault2">
+              Counsellor
+            </label> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<div style="text-align: center">
+  {{ form.submit(class="btn btn-dark") }}
+</div>
+</form>
+
+{% elif current_user.position and current_user.validated == 0 %}
+  <div id="Validate" class="tabcontent" style="display: block;">
+    <div class="validate-div">
+      <svg
+        class="validate-lock-closed"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-lock"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"
+        />
+      </svg>
+      <h1>Your profile is being validated</h1>
+    </div>
+  </div>
+
+{% elif current_user.position and current_user.validated %}
+
+  <div id="Find Jobs" class="tabcontent" style="text-align: center; display: block;">
+    <svg
+      class="validate-lock-opened"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      class="bi bi-unlock"
+      viewBox="0 0 16 16"
+    >
+      <path
+        d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2zM3 8a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H3z"
+      />
+    </svg>
+    <h2>
+      Congratulations! You are verified. <br />
+      Visit
+      <span
+        ><a class="validate-find-link" href="{{url_for('idea_validation')}}"
+          >project</a
+        ></span
+      >
+      page to start mentoring <br />
+      or <br />
+      wait for the job notification.
+    </h2>
+  </div>
+
+{% endif %}
+  <script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+  </script>
+</div>
+{% endblock %}

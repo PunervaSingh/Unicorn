@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Update Funding Agent Details
+  </h3>
+<div class="container" style="padding-top: 150px;">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset>
+      <div id="Apply" class="tabcontent" style="display: block">
+        <div class="row">
+              <div class="col-6 cm-apply-div">
+                <div class="form-group">
+                    {{ form.profile.label(class="form-control-label") }}
+                    {% if form.profile.errors %}
+                    {{ form.profile(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.profile.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.profile(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label(class="form-control-label") }}
+                    {% if form.description.errors %}
+                    {{ form.description(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.description(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.country.label(class="form-control-label") }}
+                    {% if form.country.errors %}
+                    {{ form.country(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.country.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.country(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+              </div>
+              <div class="col-6 cm-apply-div">
+              <div class="form-group">
+                  {{ form.role.label(class="form-control-label") }}
+                  {% if form.role.errors %}
+                  {{ form.role(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.role.errors %}
+                      <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+                  {% else %}
+                  {{ form.role(class="form-control form-control-lg") }}
+                  {% endif %}
+              </div>
+                <div class="form-group">
+                    {{ form.investment.label(class="form-control-label") }}
+                    {% if form.investment.errors %}
+                    {{ form.investment(class="form-control form-control-lg is-invalid numeric-field") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.investment.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.investment(class="form-control form-control-lg numeric-field") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.open_to.label(class="form-control-label") }}
+                    {% if form.open_to.errors %}
+                    {{ form.open_to(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.open_to.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.open_to(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div style="text-align: center">
+                    {{ form.submit(class="btn btn-dark") }}
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    </form>
+</div>
+{% endblock %}

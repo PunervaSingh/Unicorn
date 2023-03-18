@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Update Mentor Details
+  </h3>
+<div class="container" style="padding-top: 150px;">
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+  <div id="Apply" class="tabcontent" style="display: block">
+    <div class="row">
+      
+          <div class="col-6 cm-apply-div">
+            
+          <div class="form-group">
+            {{ form.profile.label(class="form-control-label") }}
+            {% if form.profile.errors %}
+            {{ form.profile(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.profile.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.profile(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.cost.label(class="form-control-label") }}
+          {% if form.cost.errors %}
+          {{ form.cost(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+              {% for error in form.cost.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% else %}
+          {{ form.cost(class="form-control form-control-lg") }}
+          {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.availability.label(class="form-control-label") }}
+        {% if form.availability.errors %}
+        {{ form.availability(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.availability.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.availability(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+          </div>
+      <div class="col-6 cm-apply-div">
+        <div class="form-group">
+          {{ form.year.label(class="form-control-label") }}
+          {% if form.year.errors %}
+          {{ form.year(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+              {% for error in form.year.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+          </div>
+          {% else %}
+          {{ form.year(class="form-control form-control-lg") }}
+          {% endif %}
+      </div>
+      <div class="form-group">
+        {{ form.expertise.label(class="form-control-label") }}
+        {% if form.expertise.errors %}
+        {{ form.expertise(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.expertise.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.expertise(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<div style="text-align: center">
+  {{ form.submit(class="btn btn-dark") }}
+</div>
+</form>
+</div>
+{% endblock %}

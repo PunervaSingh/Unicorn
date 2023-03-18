@@ -1,0 +1,302 @@
+.hamburger-menu {
+    width: 35px;
+    height: 30px;
+    position: fixed;
+    top: 50px;
+    right: 80px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #000;
+    padding: 3px;
+}
+
+.line{
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    transition: all 0.8s;
+}
+
+.change .line-1 {
+    transform: rotateZ(-405deg) translate(-7px, 5px);
+    background-color: white;
+}
+
+.change .line-2 {
+    opacity: 0;
+    background-color: white;
+}
+
+.change .line-3 {
+    transform: rotateZ(405deg) translate(-7px, -5px);
+    background-color: white;
+}
+
+.navbar{
+    height: 100%;
+    width: 40%;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: right .8s cubic-bezier(1, 0, 0, 1);
+    z-index: 999;
+}
+
+.change {
+    right: 0;
+}
+
+.nav-list {
+    text-align: right;
+}
+
+.nav-item {
+    list-style: none;
+    margin: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 22px;
+    color:#fff;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    padding: 3px 0;
+    text-align: center;
+    z-index: 99;
+}
+
+.nav-link::before, .nav-link::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transform: scaleX(0);
+    transition: transform 0.5s;
+}
+
+.nav-link::after{
+    bottom: 0;
+    transform-origin: right;
+}
+
+.nav-link::before{
+    top: 0;
+    transform-origin: left;
+}
+
+.nav-link:hover::before, .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-link:hover {
+    color: #F37878;
+}
+
+.msg{
+    margin-top: -1px;
+}
+
+.website-logo {
+    padding-left: 30px;
+    height: 90px; 
+    /* position: relative;  */
+    left: 0;
+    top: 20px;
+    position: fixed;
+    z-index: 99;
+}
+
+.header-profile-pic {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    margin-top: 45px;
+    border-radius: 50%;
+    position: absolute;
+    right: 280px;
+}
+
+.header-msg {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    right: 25vw;
+    margin-top: 45px;
+}
+
+.col-lg-7 {
+    padding: 0;
+}
+
+.underline-small{
+    display:inline-block;
+    position:relative;
+}
+
+.underline-small::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: black;
+    position:absolute;
+    right: 30%;
+    bottom:-7px;
+}
+
+.underline-small-footer{
+    margin-bottom: 50px;
+    display:inline-block;
+    position:relative;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.underline-small-footer::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: #f37878;
+    position:absolute;
+    right: 30%;
+    bottom:-15px;
+}
+
+footer {
+    margin-top: 100px;
+    padding: 80px 150px 10px;
+    background-color: #fae6e6;
+    position: absolute;
+}
+
+.company-desc {
+    font-size: small;
+    font-weight: lighter;
+}
+
+.footer-list-item {
+    padding: 10px;
+}
+
+.footer-anchor {
+    text-decoration: none;
+    color: black;
+}
+
+.footer-anchor:hover {
+    text-decoration: none;
+    color: #F37878;
+}
+
+.back-para {
+    text-decoration: none;
+    color: black;
+}
+
+.back-para:hover {
+    text-decoration: none;
+    color: #F37878;
+}
+
+.login-nav-link {
+    color: black; 
+    text-align: right; 
+    right: 200px; 
+    top: 20px; 
+    position: absolute;
+}
+
+.register-nav-link {
+    color: black; 
+    text-align: right; 
+    right: 50px; 
+    top: 20px; 
+    position: absolute;
+}
+
+.notification {
+    position: relative;
+}
+
+.notification .hidden-notification-div {
+    display: none;
+    background-color: white;
+    z-index: 999;
+    padding: 20px;
+    border: 1px solid gray;
+    box-shadow: 5px 5px 10px gray;
+}
+
+.notification:hover .hidden-notification-div, .notification:hover .hidden-notification-div:hover {
+    display: block;
+    position: absolute;
+    top: 80px;
+    right: 300px;
+    width: 350px;
+    height: 500px;
+    overflow: scroll;
+}
+
+.footer-link{
+    color: #F37878;
+    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 20px;
+    margin-left: 0;
+    padding-top: 30px;
+    text-decoration: none;
+}
+
+.footer-link:hover{
+    color: #F37878;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.side-slidein-div {
+    background: #f37878; 
+    padding: 10px; 
+    margin: 5px 0; 
+    width: 200px;
+    position: fixed; 
+    left: -170px;
+    color: white;
+    font-weight: medium;
+    z-index: 1;
+}
+
+.side-slidein-div:hover {
+    animation-name: example;
+    animation-duration: 1s;
+    left: 0px;
+    cursor: pointer;
+}
+
+@keyframes example {
+    from {left: -150px;}
+    to {left: 0px;}
+  }
+
+  .inline-photo {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 2s .25s cubic-bezier(0,1,.3,1),
+                opacity .3s .25s ease-out;
+    will-change: transform, opacity;
+}
+
+.inline-photo.is-visible {
+    opacity: 1;
+    transform: rotateY(0);
+}

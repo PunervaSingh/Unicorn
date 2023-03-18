@@ -1,0 +1,135 @@
+{%extends "layout.html"%} 
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/mc_apply.css')}}"
+/>
+<style>
+  footer {
+    display: none;
+  }
+</style>
+{% endblock %} 
+
+{% block content %}
+<div class="container" style="padding-top: 150px">
+  <h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Advertisement Agent
+  </h3>
+  <p><a href="{{ url_for('options') }}" class="back-para underline-small">Back</a></p>
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+  <div id="Apply" class="tabcontent" style="display: block">
+    <div class="row">
+            <div class="col-4 cm-apply-div">
+              <div class="form-group">
+                {{ form.pic.label(class="form-label") }}
+                {{ form.pic(class="form-control") }}
+            </div>
+                <div class="form-group">
+                    <label for="Name" class="form-control-label">Name</label>
+                    <input type="text" name="Name" id="" placeholder={{ current_user.name }} readonly />
+                </div>
+            </div>
+          <div class="col-4 cm-apply-div">
+            <div class="form-group">
+                <label for="Email" class="form-control-label">Email</label>
+                <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly/>
+            </div>
+            <div class="form-group">
+                <label for="Phone" class="form-control-label">Phone</label>
+                <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
+            </div>
+            <div class="form-group">
+                {{ form.city.label(class="form-control-label") }}
+                {% if form.city.errors %}
+                {{ form.city(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.city.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.city(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+          </div>
+          <div class="col-4 cm-apply-div">
+            <div class="form-group">
+                {{ form.state.label(class="form-control-label") }}
+                {% if form.state.errors %}
+                {{ form.state(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.state.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.state(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+              {{ form.country.label(class="form-control-label") }}
+              {% if form.country.errors %}
+              {{ form.country(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                  {% for error in form.country.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+              </div>
+              {% else %}
+              {{ form.country(class="form-control form-control-lg") }}
+              {% endif %}
+          </div>
+            <div class="form-group">
+                {{ form.service.label(class="form-control-label") }}
+                {% if form.service.errors %}
+                {{ form.service(class="form-control form-control-lg is-invalid numeric-field") }}
+                <div class="invalid-feedback">
+                    {% for error in form.service.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.service(class="form-control form-control-lg numeric-field") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.availability.label(class="form-control-label") }}
+                {% if form.availability.errors %}
+                {{ form.availability(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.availability.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.availability(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div style="text-align: center">
+                {{ form.submit(class="btn btn-dark") }}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+</form>
+</div>
+{% endblock %}

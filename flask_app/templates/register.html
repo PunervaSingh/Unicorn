@@ -1,0 +1,149 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+<style>
+    footer {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="margin: 0; padding: 0;">
+    <div class="row">
+        <div class="col-lg-7">
+            <img src="https://images.unsplash.com/photo-1587614203976-365c74645e83?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                alt="" style="height: 100vh; width: 100%;object-fit: cover;">
+        </div>
+        <div class="col-lg-5">
+
+            <div class="content-section" style="margin: 40px;">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="pt-4 register-heading">Join Today
+                        </legend>
+                        <div class="form-group">
+                            {{ form.name.label(class="form-control-label") }}
+
+                            {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.name(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="name" class="form-control-label">Name</label>
+                            <input type="name" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            {{ form.phone.label(class="form-control-label") }}
+                            {% if form.phone.errors %}
+                            {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.phone(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="phone" class="form-control-label">Phone</label>
+                            <input type="phone" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            {{ form.address.label(class="form-control-label") }}
+                            {% if form.address.errors %}
+                            {{ form.address(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.address.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.address(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="address" class="form-control-label">Address</label>
+                            <input type="address" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            {{ form.email.label(class="form-control-label") }}
+                            {% if form.email.errors %}
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.email(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="email" class="form-control-label">Email</label>
+                            <input type="email" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            {{ form.password.label(class="form-control-label") }}
+                            {% if form.password.errors %}
+                            {{ form.password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.password(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="password" class="form-control-label">Password</label>
+                            <input type="password" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            {{ form.confirm_password.label(class="form-control-label") }}
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.confirm_password(class="form-control form-control-lg") }}
+                            {% endif %}
+                            <!-- <label for="password" class="form-control-label">Confirm Password</label>
+                            <input type="password" name="" id="" class="form-control form-control-lg">
+                            <div class="invalid-feedback">
+                            </div> -->
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info login-btn") }}
+                        <!-- <input class="btn btn-outline-info login-btn" type="submit" value="Sign Up"> -->
+                    </div>
+                </form>
+                <div class="pt-3" style="text-align: center;">
+                    <small class="text-muted">
+                        Already Have An Account? <a class="forgot_pass ml-2" href="{{ url_for('login') }}"
+                            style="color: #F37878; font-weight: 600;">Sign In</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 80px 0;">
+    <div class="row">
+        <div class="col-lg-9"
+            style="box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 40%); height: 60vh; margin: 5vh; background-color: white; transform: translate(15%, 15%); z-index: 1; padding: 50px;">
+            <h1 class="underline-small-footer" style="text-align: center; color: #000000;">Free Promotional Mail Service</h1>
+            <div class="content-section">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {% if form.name.errors %} 
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.name(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group">
+                            {% if form.email.errors %} 
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.email(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group">
+                            {% if form.mail_body.errors %} 
+                            {{ form.mail_body(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.mail_body.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.mail_body(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-dark submit-btn") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

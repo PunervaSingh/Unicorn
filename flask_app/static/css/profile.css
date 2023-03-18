@@ -1,0 +1,216 @@
+.profile-div {
+    padding-top: 200px;
+    padding-bottom: 100px;
+}
+
+.profile-img {
+    height: 300px;
+    width: 70%;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 20%;
+}
+
+input[type=text] {
+    width: 100%;
+    border: 1px solid #4C8492;
+    margin: 10px 0;
+    padding: 10px;
+    outline: none;
+}
+
+input[type=text]:focus {
+    background-color: #d6edf3;
+}
+
+.tierI-II-tag {
+    background: #f37878;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin: 0 10px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.location-tag {
+    padding: 10px;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.location-icon {
+    height: 20px;
+    width: 20px;
+    color: #f37878;
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: white;
+    margin-right: 10px;
+  
+    font: inherit;
+    color: black;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid black;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+  
+    display: grid;
+    place-content: center;
+  }
+  
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #F37878;
+    /* Windows High Contrast Mode */
+    background-color: white;
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+  
+  input[type="radio"]:focus {
+    outline: max(2px, 0.15em) solid black;
+    outline-offset: max(2px, 0.15em);
+  }
+
+  label {
+    color: #4C8492;
+  }
+
+  .profession-dropdown {
+    width: 100%;
+    background-color: white;
+    color: #4C8492;
+    border: 1px solid #4C8492;
+    margin: 10px 0;
+    border-radius: 0;
+  }
+
+  .job-availability-option {
+    margin: 0 50px 0 10px;
+  }
+
+  .status-tabs {
+    background-color: #F37878;
+    border-radius: 30px;
+    border: none;
+    border: 5px solid #F37878;
+    padding: 5px;
+    width: 150px;
+    margin: 0;
+    outline: none;
+    color: white;
+  }
+
+  .tab div button.active, .tab div button:focus  {
+    outline: none;
+    background-color: white;
+    color: #F37878;
+  }
+
+  hr {
+    border: 25px solid #F37878;
+    width: 20px;
+    transform: translateX(-30px) translateY(-16px);
+  }
+
+.given-tab {
+    height: 50px;
+    transform: translateX(-55px) translateY(0px);
+}
+
+.edit-btn, .delete-btn {
+    background-color: white;
+    font-size: 20px;
+    font-weight: lighter;
+    border: none;
+    width: 150px;
+    outline: none;
+}
+
+.edit-btn:focus, .delete-btn:focus {
+    outline: none;
+}
+
+.edit-btn {
+    color: #4C8492;
+}
+
+.delete-btn {
+    color: #F37878;
+}
+
+::-webkit-input-placeholder { /* Edge */
+    color: #4C8492;
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #4C8492;
+  }
+  
+  ::placeholder {
+    color: #4C8492;
+  }
+
+table {
+    margin-bottom: 100px;
+}
+
+tr, td, th{
+    padding: 10px;
+}
+
+td {
+    width: 100px;
+}
+
+td a {
+    background-color: #fde5e5;
+    color: black;
+    border: 1px solid #F37878;
+    border-radius: 40px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+
+td a:hover, td a:active {
+    color: white;
+    background-color: #F37878;
+    text-decoration: none;
+}
+
+.profile-change-btn {
+    height: 40px;
+    width: 40px;
+    color: white;
+    background-color: #F37878;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.work-apply {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-weight: lighter;
+  margin-top: 20px;
+}
+
+.work-apply:hover {
+  text-decoration: none;
+  color: #F37878;
+}

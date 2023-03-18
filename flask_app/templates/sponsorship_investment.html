@@ -1,0 +1,495 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/investment.css')}}"
+/>
+{% endblock %} {% block content %}
+<div class="container" style="padding-top: 150px">
+  <h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Sponsorship / Funding / Investment
+  </h3>
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem">
+    Government Sponsored Schemes
+  </h1>
+  <div class="row">
+    <div class="col-6">
+      <p class="sponsor-para show-on-scroll inline-photo">
+        In today's trying times, every business is struggling for its survival.
+        To boost the SMEs, Governments all over the world have implemented several measures.
+        The list of such schemes and initiatives is quite extensive which showcases the
+        sector's importance and why the Governments are keen on helping them grow.
+        The idea is to create an environment so that they remain sustainable and competitive.
+      </p>
+      <p class="show-on-scroll inline-photo">
+        The key benefits of government startup schemes are as follows - 
+      </p>
+      <div class="row">
+        <div class="col-6">
+          <ul class="show-on-scroll inline-photo">
+            <li>Financial assistance</li>
+            <li>Facilitate funding</li>
+            <li>Provide collateral-free loans</li>
+            <li>Offer mentorship</li>
+            <li>Tax exemptions</li>
+            <li>Networking opportunities</li>
+            <li>Easy access to vital resources</li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <ul class="show-on-scroll inline-photo">
+            <li>Loans with low-interest rates</li>
+            <li>Relief funds</li>
+            <li>Income-based tax credits</li>
+            <li>Provide technical assistance</li>
+            <li>Access to a large market</li>
+            <li>Relaxed regulations</li>
+            <li>Government tenders</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <img class="sponsor-img show-on-scroll inline-photo" src="../static/img/funding_illustration.png" alt="" />
+    </div>
+  </div>
+</div>
+<div class="investor-div container-fluid">
+  <div class="row">
+    <div class="col-4 investor-content-div">
+      <img class="card-img" src="../static/img/card2.png" alt="" />
+      <h1 class="show-on-scroll inline-photo">Connect with your Investors</h1>
+      <p class="show-on-scroll inline-photo" style="font-weight: lighter; margin: 20px 0">
+        Investors can provide the capital you need to get your business off the ground, offer valuable advice
+        and mentorship, and help you build connections with other entrepreneurs and business leaders.
+      </p>
+      <p class="show-on-scroll inline-photo">
+        Connect Now
+        <svg
+          style="height: 20px; width: 20px; color: white; font-weight: bold"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-right"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"
+          />
+        </svg>
+      </p>
+    </div>
+    <div class="col-8">
+        <div class='demo-container'>
+            <div class='carousel'>
+              <input checked='checked' class='carousel__activator' id='carousel-slide-activator-1' name='carousel' type='radio'>
+              <input class='carousel__activator' id='carousel-slide-activator-2' name='carousel' type='radio'>
+              <input class='carousel__activator' id='carousel-slide-activator-3' name='carousel' type='radio'>
+              <div class='carousel__controls'>
+                <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-2'>
+                  👉
+                </label>
+              </div>
+              <div class='carousel__controls'>
+                <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-1'>
+                  👈
+                </label>
+                <label class='carousel__control carousel__control--forward' for='carousel-slide-activator-3'>
+                  👉
+                </label>
+              </div>
+              <div class='carousel__controls'>
+                <label class='carousel__control carousel__control--backward' for='carousel-slide-activator-2'>
+                  👈
+                </label>
+              </div>
+              <div class='carousel__screen'>
+                <div class='carousel__track'>
+                  {% for investor in investors %}
+                  <div class='show-on-scroll inline-photo carousel__item carousel__item--mobile-in-1 carousel__item--tablet-in-2 carousel__item--desktop-in-3'>
+                    <div class='demo-content'>
+                        <div style="padding: 0; ">
+                            <div>
+                              {% if investor.pic.startswith('http') %}
+                              <img
+                                style="width: 100%; height: 200px; object-fit: cover;"
+                                src={{ investor.pic }}
+                                alt=""
+                              />
+                              {% else %} 
+                              <img
+                              style="width: 100%; height: 200px; object-fit: cover;"
+                              src={{ url_for('static', filename='img/' + investor.pic) }}
+                              alt=""
+                              />
+                              {% endif %}
+                            </div>
+                            <div class="cm_desc">
+                              
+                              <div style="text-align: center; position: relative;">
+                                <h4 class="cm_name" style="margin-top: 10px;">{{ investor.name }}</h4>
+                                <h5 style="font-weight: lighter">Role - {{ investor.role }}</h5>
+                                {% if investor.open_to == 'WorldWide' %}
+                                <p style="position: absolute; top: -10px; color: white; background-color: #4c8492; right: 0px; padding: 10px;">W</p>
+                                {% else %}
+                                <p style="position: absolute; top: -10px; color: white; background-color: #4c8492; right: 0px; padding: 10px;">C</p>
+                                {% endif %}
+                                <div class="row">
+                                  <div class="col-6">
+                                    <p>{{ investor.email }}</p>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>{{ investor.phone }}</p>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-6">
+                                    <p>Country: {{ investor.country }}</p>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>Investments: {{ investor.investment }}</p>
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <p style="height: 50px;">{{ investor.description }}</p>
+                            <a style="text-decoration: none; color: white;" href={{ investor.profile }}>
+                            <button class="investor-btn">Connect Now</button>
+                            </a>
+                          </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+<div class="container banks-div">
+  <div class="tab">
+    <button class="tablinks active" onclick="openCity(event, 'London')">London</button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+    <button class="tablinks" onclick="openCity(event, 'Delhi')">Delhi</button>
+  </div>
+
+  <div id="London" class="tabcontent show-on-scroll inline-photo" style="display: block">
+    <div class="row">
+      <div class="col-6">
+        <img
+          class="bank-img"
+          src="https://images.unsplash.com/photo-1520986606214-8b456906c813?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          alt=""
+        />
+      </div>
+      <div class="col-6">
+        <h3 style="font-style: italic">British Business Bank</h3>
+        <p class="font-weight: lighter; color: gray;">
+          When you’re trying to start a business, finance can be the key to getting your idea off the ground.
+          That’s why the British Business Bank, through its partner the Start Up Loans Company,
+          is providing loans of up to £25,000 – as well as mentoring and advice – to make sure budding
+          businesses get the best start in life.
+        </p>
+        <button
+          onclick="myFunction('firstDIV')"
+          style="
+            width: 100%;
+            border: none;
+            background-color: #4c8492;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            outline: none;
+          "
+        >
+          Bank Schemes
+        </button>
+        <div id="firstDIV" style="display: none" class="bank-scheme-popup">
+            <button class="close-btn"
+            onclick="myFunction('firstDIV')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+              </svg></button>
+            <h4>British Bank Schemes</h4>
+            <div class="row popup-scheme-scroll">
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://sbi.co.in/web/business/sme/sme-loans/stand-up-india">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://sbi.co.in/web/business/information/entrepreneur-scheme">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.bajajfinservmarkets.in/loans/business-loan/stand-up-india-scheme.html">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://aim.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://seedfund.startupindia.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.startupindia.gov.in/content/sih/en/about-startup-india-initiative.html">Link to the scheme</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="Paris" class="tabcontent show-on-scroll inline-photo">
+    <div class="row">
+      <div class="col-6">
+        <img
+          class="bank-img"
+          src="https://images.unsplash.com/photo-1583265266785-aab9e443ee68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+          alt=""
+        />
+      </div>
+      <div class="col-6">
+        <h3 style="font-style: italic">Quintet Private Bank</h3>
+        <p class="font-weight: lighter; color: gray;">
+          Over the past few years, France has turned into a truly innovative country.
+          Since 2013, French Tech – the French start-up ecosystem – keeps proving its success and
+          performance: funds raised by French start-ups have quadrupled in 5 years, thus enabling
+          France to now boast 16 unicorns (June 2021).
+        </p>
+        <button
+          onclick="myFunction('secondDIV')"
+          style="
+            width: 100%;
+            border: none;
+            background-color: #4c8492;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            outline: none;
+          "
+        >
+          Bank Schemes
+        </button>
+        <div id="secondDIV" style="display: none" class="bank-scheme-popup">
+            <button class="close-btn"
+            onclick="myFunction('secondDIV')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+              </svg></button>
+              <h4>Quintet Private Bank Schemes</h4>
+              <div class="row popup-scheme-scroll">
+                <div class="col-3 popup-scheme-card">
+                  <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                  <a class="popup-card-link" href="https://sbi.co.in/web/business/sme/sme-loans/stand-up-india">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://sbi.co.in/web/business/information/entrepreneur-scheme">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.bajajfinservmarkets.in/loans/business-loan/stand-up-india-scheme.html">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://aim.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://seedfund.startupindia.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.startupindia.gov.in/content/sih/en/about-startup-india-initiative.html">Link to the scheme</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="Tokyo" class="tabcontent show-on-scroll inline-photo">
+    <div class="row">
+      <div class="col-6">
+        <img
+          class="bank-img"
+          src="https://images.unsplash.com/photo-1549693578-d683be217e58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=877&q=80"
+          alt=""
+        />
+      </div>
+      <div class="col-6">
+        <h3 style="font-style: italic">Mizuho Bank</h3>
+        <p class="font-weight: lighter; color: gray;">
+          The banks have set up dedicated sections for startups, focusing on support in the
+          fields of finance and human resources as well as assistance with initial public offerings.
+          In April, Mizuho Bank launched a section staffed with specialists in evaluating the future
+          potential of startups and gauging the extent of innovation in their technologies which 
+          conducts such evaluations when extending loans to early-stage startups, which tend to be
+          loss-making and have no assets to put up as collateral, such as real estate. The banks also
+          hold regular events to help startups forge connections with larger companies.
+        </p>
+        <button
+          onclick="myFunction('thirdDIV')"
+          style="
+            width: 100%;
+            border: none;
+            background-color: #4c8492;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            outline: none;
+          "
+        >
+          Bank Schemes
+        </button>
+        <div id="thirdDIV" style="display: none" class="bank-scheme-popup">
+            <button class="close-btn"
+            onclick="myFunction('thirdDIV')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+              </svg></button>
+              <h4>Mizuho Bank Schemes</h4>
+              <div class="row popup-scheme-scroll">
+                <div class="col-3 popup-scheme-card">
+                  <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                  <a class="popup-card-link" href="https://sbi.co.in/web/business/sme/sme-loans/stand-up-india">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://sbi.co.in/web/business/information/entrepreneur-scheme">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.bajajfinservmarkets.in/loans/business-loan/stand-up-india-scheme.html">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://aim.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://seedfund.startupindia.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.startupindia.gov.in/content/sih/en/about-startup-india-initiative.html">Link to the scheme</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="Delhi" class="tabcontent show-on-scroll inline-photo">
+    <div class="row">
+      <div class="col-6">
+        <img
+          class="bank-img"
+          src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          alt=""
+        />
+      </div>
+      <div class="col-6">
+        <h3 style="font-style: italic">State Bank of India</h3>
+        <p class="font-weight: lighter; color: gray;">
+          State Bank of India (SBI) has decided to float dedicated branches to offer collateral-free
+          financial assistance upto ₹2 crore to start-up entrepreneurs in the country.
+          This move was aimed at unleashing the potential of unused funds that were lying in the
+          Credit Guarantee Fund Trust for Micro and Small Enterprises (CGTSME).
+        </p>
+        <button
+          onclick="myFunction('fourthDIV')"
+          style="
+            width: 100%;
+            border: none;
+            background-color: #4c8492;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            outline: none;
+          "
+        >
+          Bank Schemes
+        </button>
+        <div id="fourthDIV" style="display: none" class="bank-scheme-popup">
+            <button class="close-btn"
+            onclick="myFunction('fourthDIV')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+              </svg></button>
+              <h4>State Bank of India Schemes</h4>
+              <div class="row popup-scheme-scroll">
+                <div class="col-3 popup-scheme-card">
+                  <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                  <a class="popup-card-link" href="https://sbi.co.in/web/business/sme/sme-loans/stand-up-india">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://sbi.co.in/web/business/information/entrepreneur-scheme">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.bajajfinservmarkets.in/loans/business-loan/stand-up-india-scheme.html">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://aim.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://seedfund.startupindia.gov.in/">Link to the scheme</a>
+                </div>
+                <div class="col-3 popup-scheme-card">
+                    <img class="popup-img" src="https://www.freepnglogos.com/uploads/sbi-logo-png/state-bank-india-maitech-safe-and-secure-now-2.png" alt="">
+                    <a class="popup-card-link" href="https://www.startupindia.gov.in/content/sih/en/about-startup-india-initiative.html">Link to the scheme</a>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  function myFunction(divNo) {
+    var x = document.getElementById(divNo);
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+{% endblock %}

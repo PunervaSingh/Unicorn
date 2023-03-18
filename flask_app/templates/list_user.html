@@ -1,0 +1,23 @@
+{% extends 'admin/model/list.html' %}
+
+{% block head_css %}
+<link rel="icon" href="../static/img/icon2.png">
+{{ super() }}
+<style>
+  .website-logo {
+    padding-left: 30px;
+    height: 150px;
+    position: absolute; 
+    top: 10px;
+    left: 0;
+    z-index: 99;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+<a href="{{url_for('home')}}">
+    <img class="website-logo" src="../static/img/logo2.jpg" alt="" />
+  </a>
+{% endblock %}

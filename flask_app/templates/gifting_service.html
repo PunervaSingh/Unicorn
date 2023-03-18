@@ -1,0 +1,211 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+    .services-box
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.service
+{
+  margin: 8px;
+}
+
+.flip-box {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f37878;  
+  border-radius: 10px;
+  perspective: 1000px;
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front, .flip-box-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flip-box-front {
+  background-color: #fff;
+  color: black;
+  border-radius: 10px;
+}
+
+.flip-box-front img
+{
+  height: 50px;
+  width: 50px;
+}
+
+.flip-box-back {
+  background-color: #ffffff;
+  color: #000;
+  transform: rotateY(180deg);
+  border-radius: 10px;
+  padding: 16px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Gifting service
+  </h3>
+  
+  <div class="services-box" style="padding: 200px 0 100px;">
+      <div class="service">
+          <div class="flip-box">
+              <div class="flip-box-inner">
+                  <div class="flip-box-front">
+                      <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                      <h2>Necklace</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="service">
+          <div class="flip-box">
+              <div class="flip-box-inner">
+                  <div class="flip-box-front">
+                      <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                      <h2>Cakes</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="service">
+          <div class="flip-box">
+              <div class="flip-box-inner">
+                  <div class="flip-box-front">
+                      <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                      <h2>Bags</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                        <h2>Phone cases</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                        <h2>Photo Frames</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                        <h2>Cups</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                        <h2>Cushions</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="service">
+            <div class="flip-box">
+                <div class="flip-box-inner">
+                    <div class="flip-box-front">
+                        <img src="https://i.ibb.co/KXXzgvm/greeting-card.png">
+                        <h2>Plant / Flower Pots</h2>
+                    </div>
+                    <div class="flip-box-back">
+                        <p>We provide unique gifting ideas & products that will have a long-lasting impact on customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{url_for('gifting')}}" class="container" style="padding-left: 100px; text-decoration: none; color: #f37878;">Send a customized gift
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+    </a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/6c5fb23c6b.js"></script>
+{% endblock %}

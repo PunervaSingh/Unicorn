@@ -1,0 +1,191 @@
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<style>
+  .underline-small {
+    display: inline-block;
+    position: relative;
+  }
+
+  .underline-small::after {
+    content: "";
+    height: 3px;
+    width: 70%;
+    background: black;
+    position: absolute;
+    right: 30%;
+    bottom: -7px;
+  }
+
+  .underline-small-footer {
+    margin-bottom: 50px;
+    display: inline-block;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+
+  .underline-small-footer::after {
+    content: "";
+    height: 3px;
+    width: 70%;
+    background: #af7352;
+    position: absolute;
+    right: 30%;
+    bottom: -15px;
+  }
+
+  nav {
+    display: none;
+  }
+
+  .container {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    flex: 1;
+    margin-top: 25vh;
+  }
+  .container .card {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    flex: 1;
+    height: 400px;
+    margin: 0 5px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: 0.3s all ease;
+  }
+  .container .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .container .card:hover {
+    flex: 2;
+    background-color: #f37878;
+  }
+  .container .card:hover img {
+    filter: grayscale(100%);
+  }
+  .options-header {
+    position: absolute;
+    top: 40%;
+    z-index: 99;
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background-color: white;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .container .card:hover .options-header {
+    color: #f37878;
+    filter: grayscale(0%);
+  }
+  
+  footer {
+    display: none;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<h1
+  class="underline-small"
+  style="
+    position: absolute;
+    top: 50px;
+    left: 40%;
+    font-weight: 400;
+    letter-spacing: 1px;
+  "
+>
+  Options
+</h1>
+<div class="container">
+  <div class="card">
+    <a class="nav-link" href="{{url_for('idea_generation')}}">
+    <p class="options-header">StartUp Project</p>
+    <img
+      src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+    />
+    </a>
+  </div>
+  <div class="card">
+      <a class="nav-link" href="{{url_for('mentorship_counsellor_apply')}}">
+        <p class="options-header">Mentor</p>
+        <img
+        src="https://images.unsplash.com/photo-1561346745-5db62ae43861?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2183&q=80"
+        />
+      </a>
+    </div>
+    <div class="card">
+    <a class="nav-link" href="{{url_for('validator_apply')}}">
+      <p class="options-header">Validator</p>
+      <img
+      src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80"
+      />
+    </a>
+  </div>
+  <div class="card">
+    <a class="nav-link" href="{{url_for('legal_advisor_apply')}}">
+      <p class="options-header">Legal Advisor</p>
+      <img
+      src="https://images.unsplash.com/photo-1551836022-b06985bceb24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+      />
+    </a>
+  </div>
+  <div class="card">
+    <a class="nav-link" href="{{url_for('funding_agent_apply')}}">
+      <p class="options-header">Funding Agent</p>
+      <img
+      src="https://images.unsplash.com/photo-1593510987459-9a1489817a3b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+      />
+    </a>
+  </div>
+  <div class="card">
+    <a class="nav-link" href="{{url_for('team_building_hiring')}}">
+    <p class="options-header">Job Seeker</p>
+    <img
+    src="https://images.unsplash.com/photo-1552652893-2aa10a0ab4df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+    />
+    </a>
+  </div>
+  <div class="card">
+    <a class="nav-link" href="{{url_for('advertisement_agent_apply')}}">
+    <p class="options-header">Advertiser</p>
+    <img
+    src="https://images.unsplash.com/photo-1513757378314-e46255f6ed16?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+    />
+    </a>
+  </div>
+  <div class="card">
+    <a class="nav-link" href="{{url_for('linkage_agent_apply')}}">
+    <p class="options-header">Linkage Agent</p>
+    <img
+      src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+    />
+    </a>
+  </div>
+</div>
+<!-- <script>
+  const images = document.querySelectorAll(".container .card img")
+
+images.forEach((img, key) =>(
+  img.src =`https://source.unsplash.com/random?sig=${key}`
+))
+</script> -->
+{% endblock %}

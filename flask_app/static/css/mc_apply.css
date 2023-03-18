@@ -1,0 +1,209 @@
+.underline-small{
+    display:inline-block;
+    position:relative;
+}
+
+.underline-small::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: black;
+    position:absolute;
+    right: 30%;
+    bottom:-7px;
+}
+
+.underline-small-footer{
+    margin-bottom: 50px;
+    display:inline-block;
+    position:relative;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.underline-small-footer::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: #af7352;
+    position:absolute;
+    right: 30%;
+    bottom:-15px;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 350px;
+    margin: 0px 50px;
+    /* padding: 14px 30px; */
+    transition: 0.3s;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid gray;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #F37878;
+    color: white;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #F37878;
+    color: white;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+  }
+
+hr {
+    color: black;
+    /* z-index: 99; */
+    border: 4px dotted #000;
+    width: 10%;
+    border-style: none none dotted; 
+}
+
+.cm_apply-img {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cm-apply-div {
+    padding: 0 30px;
+}
+
+input[type=text] {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #F37878;
+    padding: 10px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+input[type=text]:focus {
+    background-color: #f6e3e3;
+}
+
+textarea {
+    width: 100%;
+    border: 1px solid #F37878;
+    padding: 10px;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+textarea:focus {
+    background-color: #f6e3e3;
+}
+
+label {
+    font-size: 15px;
+    color: gray;
+    font-weight: 300;
+}
+
+input[type="radio"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: white;
+    margin-right: 10px;
+  
+    font: inherit;
+    color: black;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid black;
+    border-radius: 50%;
+    transform: translateY(-0.075em) translateX(-5px);
+  
+    display: grid;
+    place-content: center;
+  }
+  
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em #F37878;
+    /* Windows High Contrast Mode */
+    background-color: white;
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+  
+  input[type="radio"]:focus {
+    outline: max(2px, 0.15em) solid black;
+    outline-offset: max(2px, 0.15em);
+  }
+
+.validate-div {
+    height: 400px;
+    width: 100%;
+    background-color: #4C8492;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+}
+
+.validate-lock-closed {
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    margin: 10px 20px;
+}
+
+.validate-lock-opened {
+    height: 50px;
+    width: 50px;
+    margin: 40px 0;
+}
+
+.validate-find-link {
+  text-decoration: none;
+  color: #F37878;
+}
+
+.validate-find-link:hover {
+  text-decoration: none;
+  color: #c83232;
+}
+
+.numeric-field {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #F37878;
+  padding: 10px;
+  margin-bottom: 20px;
+  outline: none;
+}

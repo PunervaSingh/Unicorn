@@ -1,0 +1,314 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/profile.css')}}"
+/>
+{% endblock %} {% block content %}
+<div class="profile-div container">
+  <div style="float: right; display: flex">
+    <!-- <p class="tierI-II-tag">Tier I/ Tier II</p> -->
+    <p class="location-tag">
+      <svg
+        class="location-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-geo-alt"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+        />
+        <path
+          d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+        />
+      </svg>
+      Location - {{ user.address }}
+    </p>
+  </div>
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">PROFILE</h1>
+  <div class="row">
+    <div class="col-7">
+      <input type="text" name="Name" id="" placeholder="Name: {{ user.name }}" readonly/>
+      <input type="text" name="email" id="" placeholder="Email: {{ user.email }}" readonly/>
+      <!-- <input type="text" name="profile" id="" placeholder="link" /> -->
+      <input type="text" name="positions" id="" placeholder="Position: {{ user.position }}" readonly/>
+      <input type="text" name="phone" id="" placeholder="Phone: {{ user.phone }}" readonly/>
+      <input type="text" name="validation" id="" placeholder="Validation Status: {{ user.validated }}" readonly/>
+      <!-- <input type="text" placeholder={{ user.profile_pic }}> -->
+      <!-- <label for="">Gender</label> -->
+      <!-- <input type="text" name="positions" id="" placeholder={{ user.gender }} /> -->
+      {% if user.id == current_user.id %}
+      {% if not current_user.open_to_work and not current_user.position %}
+      <a class="underline-small work-apply" href="{{url_for('open_to_work')}}">Open to work?
+        <svg style="height: 20px; width: 20px; color: #F37878; font-weight: bold;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+      </a>
+      {% endif %}
+      {% if current_user.open_to_work %}
+        <input type="text" name="work" id="" placeholder="Work Status: Open to work" readonly/>
+      {% endif %}
+      {% endif %}
+    </div>
+    <div class="col-5">
+      {% if current_user.profile_pic.startswith('http') %}
+      <img class="profile-img" src={{current_user.profile_pic}} alt="">
+      {% else %} 
+      <img
+      class="profile-img"
+      src={{ url_for('static', filename='img/' + current_user.profile_pic) }}
+      alt=""
+      />
+      {% endif %}
+      {% if user.id == current_user.id %}
+      <div style="display: flex; justify-content: center; margin-top: 20px">
+        <a href="{{url_for('update_details')}}" class="edit-btn">Edit Profile</a>
+        <a href="{{url_for('update_password')}}" class="delete-btn">Update Password</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if user.id == current_user.id and current_user.position=='StartUp' %}
+  {% for project in projects %}
+  {% if project.user==current_user.id %}
+  <div class="tab" style="display: flex; margin-top: 80px">
+    <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">
+      STARTUP STATUS
+    </h1>
+  </div>
+  <div id="Received" class="tabcontent" style="display: block">
+    <table>
+      <tbody>
+        <tr>
+          <th scope="row">Idea Validation</th>
+          {% if project.validated == 1 %}
+          <td>Validated</td>
+          {% else %}
+          <td>Not Validated</td>
+          {% endif %}
+        </tr>
+        <tr>
+          <th scope="row">Mentors / Counsellor</th>
+          <td><a class="name-tag" href="{{url_for('profile', user_id=project.mentor)}}">Name</a></td>
+        </tr>
+        <!-- <tr>
+          <th scope="row">Sponsorship / funding / investment</th>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+        </tr> -->
+        
+        
+        <!-- <tr>
+          <th scope="row">Team Building & hiring</th>
+          <td>
+            <a class="name-tag" href="{{url_for('profile', user_id=current_user.id)}}">Name</a>
+          </td>
+          <td>
+            <a class="name-tag" href="{{url_for('profile', user_id=current_user.id)}}">Name</a>
+          </td>
+          <td>
+            <a class="name-tag" href="{{url_for('profile', user_id=current_user.id)}}">Name</a>
+          </td>
+          <td>
+            <a class="name-tag" href="{{url_for('profile', user_id=current_user.id)}}">Name</a>
+          </td>
+        </tr> -->
+
+
+        <!-- <tr>
+          <th scope="row">Advertisement / Marketing team</th>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+        </tr>
+        <tr>
+          <th scope="row">Supplier / agents</th>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+          <td><a href="{{url_for('profile', user_id=current_user.id)}}">Name</a></td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+  {% endfor %}
+
+  <!-- projects -->
+  {% for project in projects %}
+  {% if project.user==current_user.id %}
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">STARTUP</h1>
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('project_profile', user_id=project.id)}}">Update Details</a>
+  <input type="text" placeholder="Profile link: {{ project.profile }}"></input>
+  <input type="text" placeholder="Project Name: {{ project.name }}"></input>
+  <input type="text" placeholder="Phone: {{ project.phone }}"></input>
+  <input type="text" placeholder="Idea: {{ project.idea }}"></input>
+  <input type="text" placeholder="Validation Status: {{ project.validated }}"></input>
+  <input type="text" placeholder="Category: {{ project.category }}"></input>
+  <input type="text" placeholder="Industry: {{ project.industry }}"></input>
+  <input type="text" placeholder="Country: {{ project.country }}"></input>
+  {% if project.village %}
+  <input type="text" placeholder="Village Based"></input>
+  {% endif %}
+  {% if project.tier %}
+  <input type="text" placeholder="Belong to TierI / TierII"></input>
+  {% endif %}
+  {% if project.women %}
+  <input type="text" placeholder="Women Oriented"></input>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+
+  <!-- positions -->
+  {% for position in positions %}
+  {% if position.user_id==current_user.id %}
+  <br>
+  <br>
+  <br>
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">POSITIONS</h1>
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('positions_profile', user_id=position.id)}}">Update Details</a>
+  <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
+  <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">
+  {% if (0.1*(position.total_workforce + position.number_open)) > position.female_workforce %} 
+  {% if ((0.1*(position.total_workforce + position.number_open)) - position.female_workforce) >= 1 %} 
+  <span style="font-weight: bold;">Therefore, for this position currently, female employees required: {{ ((0.1*(position.total_workforce + position.number_open)) - position.female_workforce) | round }}</span>
+  {% endif %} 
+  {% endif %} 
+  {% if (0.1*(position.total_workforce + position.number_open)) > position.category_workforce %} 
+  {% if ((0.1*(position.total_workforce + position.number_open)) - position.category_workforce) >= 1 %} 
+  <span style="font-weight: bold;"> and SC/ST/OBC employees required: {{ ((0.1*(position.total_workforce + position.number_open)) - position.category_workforce) | round }}</span>
+  {% endif %} 
+  {% endif %} 
+  </div>
+  <input type="text" placeholder="Project Name: {{ position.project_name }}"></input>
+  <input type="text" placeholder="Job Title: {{ position.job_title }}"></input>
+  <input type="text" placeholder="Job Description: {{ position.job_description }}"></input>
+  <input type="text" placeholder="No of positions open: {{ position.number_open }}"></input>
+  <input type="text" placeholder="Duration: {{ position.duration }}"></input>
+  <input type="text" placeholder="Stipend: {{ position.stipend }}"></input>
+  <input type="text" placeholder="Paid/Unpaid option: {{ position.paid_unpaid }}"></input>
+  <input type="text" placeholder="Inoffice/Work from home office: {{ position.inoffice_wfh }}"></input>
+  <input type="text" placeholder="Location: {{ position.location }}"></input>
+  <input type="text" placeholder="Email: {{ position.email }}"></input>
+  <input type="text" placeholder="Conatnt no.: {{ position.phone }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  <br>
+  <br>
+  <br>
+  
+  {% if user.id == current_user.id and not current_user.position=='StartUp' %}
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">JOB PROFILE</h1>
+  {% endif %}
+
+  {% if user.id == current_user.id and ( current_user.position=='Mentor' or current_user.position=='Counsellor') %}
+  {% for mentor in mentors %}
+  {% if mentor.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('mentor_profile', user_id=mentor.id)}}">Update Details</a>
+  <input type="text" placeholder="year of experience: {{ mentor.year }}"></input>
+  <input type="text" placeholder="cost per session: {{ mentor.cost }}"></input>
+  <input type="text" placeholder="Choice(Mentor / Counsellor): {{ mentor.choice }}"></input>
+  <input type="text" placeholder="Area of expertise: {{ mentor.expertise }}"></input>
+  <input type="text" placeholder="availability: {{ mentor.availability }}"></input>
+  <input type="text" placeholder="profile link: {{ mentor.profile }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  
+  {% if user.id == current_user.id and current_user.position=='Validator' %}
+  {% for v in validator %}
+  {% if v.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('validator_profile', user_id=v.id)}}">Update Details</a>
+  <input type="text" placeholder="profile link: {{ v.profile }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if user.id == current_user.id and current_user.position=='Legal Advisor' %}
+  {% for legal in legals %}
+  {% if legal.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('legal_profile', user_id=legal.id)}}">Update Details</a>
+  <input type="text" placeholder="profile link: {{ legal.profile  }}"></input>
+  <textarea style="width: 100%; height: 50px;" type="text" placeholder="description: {{ legal.description }}"></textarea>
+  <input type="text" placeholder="city: {{ legal.city }}"></input>
+  <input type="text" placeholder="country: {{ legal.country }}"></input>
+  <input type="text" placeholder="role: {{ legal.role }}"></input>
+  <input type="text" placeholder="awards: {{ legal.awards }}"></input>
+  <input type="text" placeholder="cases: {{ legal.cases }}"></input>
+  <input type="text" placeholder="advises: {{ legal.advised }}"></input>
+  <input type="text" placeholder="union: {{ legal.union }}"></input>
+  <input type="text" placeholder="year_of_experience: {{ legal.year }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if user.id == current_user.id and current_user.position=='Funding Agent' %}
+  {% for funding in fundings %}
+  {% if funding.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('funding_profile', user_id=funding.id)}}">Update Details</a>
+  <input type="text" placeholder="profile link: {{ funding.profile }}"></input>
+  <input type="text" placeholder="country: {{ funding.country }}"></input>
+  <input type="text" placeholder="description: {{ funding.description }}"></input>
+  <input type="text" placeholder="investment: {{ funding.investment }}"></input>
+  <input type="text" placeholder="role: {{ funding.role }}"></input>
+  <input type="text" placeholder="open_to: {{ funding.open_to }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if user.id == current_user.id and current_user.position=='Linkage Agent' %}
+  {% for agent in linkages %}
+  {% if agent.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('linkage_profile', user_id=agent.id)}}">Update Details</a>
+  <input type="text" placeholder="company name: {{ agent.name }}"></input>
+  <input type="text" placeholder="link: {{ agent.link }}"></input>
+  <input type="text" placeholder="description: {{ agent.description }}"></input>
+  <input type="text" placeholder="state: {{ agent.state }}"></input>
+  <input type="text" placeholder="country: {{ agent.country }}"></input>
+  <input type="text" placeholder="service: {{ agent.service }}"></input>
+  <input type="text" placeholder="open_to: {{ agent.open_to }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% if user.id == current_user.id and current_user.position=='Advertisement Agent' %}
+  {% for advertiser in advertisers %}
+  {% if advertiser.user==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('advertiser_profile', user_id=advertiser.id)}}">Update Details</a>
+  <input type="text" placeholder="city: {{ advertiser.city }}"></input>
+  <input type="text" placeholder="country: {{ advertiser.country }}"></input>
+  <input type="text" placeholder="state: {{ advertiser.state }}"></input>
+  <input type="text" placeholder="service: {{ advertiser.service }}"></input>
+  <input type="text" placeholder="availability: {{ advertiser.availability }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  
+  {% if user.id == current_user.id and current_user.position=='Job Seeker' %}
+  {% for seeker in seekers %}
+  {% if seeker.user_id==current_user.id %}
+  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('open_to_work_profile', user_id=seeker.id)}}">Update Details</a>
+  <input type="text" placeholder="gender: {{ seeker.gender }}"></input>
+  <input type="text" placeholder="profession: {{ seeker.profession }}"></input>
+  <input type="text" placeholder="linkedin_link: {{ seeker.linkedin_link }}"></input>
+  <input type="text" placeholder="resume_link: {{ seeker.resume_link }}"></input>
+  <input type="text" placeholder="year_of_experience: {{ seeker.year_of_experience }}"></input>
+  <input type="text" placeholder="portfolio_link: {{ seeker.portfolio_link }}"></input>
+  <input type="text" placeholder="about: {{ seeker.about }}"></input>
+  <input type="text" placeholder="past_experience: {{ seeker.past_experience }}"></input>
+  <input type="text" placeholder="projects: {{ seeker.projects }}"></input>
+  <input type="text" placeholder="courses: {{ seeker.courses }}"></input>
+  <input type="text" placeholder="relocate: {{ seeker.relocate }}"></input>
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
+"
+
+: 

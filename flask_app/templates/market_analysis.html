@@ -1,0 +1,222 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<style>
+    .analysis-header {
+        font-size: 4rem;
+        font-weight: 100;
+        font-style: italic;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 0;
+    }
+
+    .card {
+        width: calc(33.33% - 10px);
+        padding: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-out;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 800px;
+        max-height: 80%;
+        overflow: auto;
+        margin-top: 150px;
+    }
+
+    .modal-content img {
+        display: block;
+        max-width: 100%;
+        margin: auto;
+        padding: 50px;
+    }
+
+    .close {
+        color: black;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 35px;
+        font-weight: bold;
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        transform: scale(1.2);
+    }
+
+    .big-card {
+        width: 100%;
+        margin: 0 auto;
+        /* position: absolute; */
+        left: -30%;
+        top: 40px;
+    }
+    .big-card2 {
+        float: right !important;
+        position: relative;
+        height: 100%;
+        margin-right: -70% !important;
+        width: fit-content;
+    }
+
+    .explore-btn {
+        width: 100%;
+        background-color: #F37878;
+        color: white;
+        font-weight: bold;
+        border: none;
+        text-align: center;
+        padding: 10px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="margin: 0; padding: 0;padding-top: 200px;  height: 280vh;">
+    <h3 class="underline-small" style="
+        position: absolute;
+        top: 50px;
+        left: 40%;
+        font-weight: 400;
+        letter-spacing: 1px;
+      ">
+        StartUp Exploratory Data Analysis
+    </h3>
+    <img style="position: absolute; right: 0; top: 50px; height: 50vh;" src="../static/img/eda_illustration.png" alt="">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8" >
+                <div class="card big-card" onclick="togglePopup(3, '../static/img/newplot (1).png');">
+                    <img src="../static/img/newplot (1).png" alt="Card 3 Image">
+                </div>
+            </div>
+                <div class="col-4" style="padding-top: 100px; left: -170px; text-align: justify;">
+                    <h1 class="analysis-header" style="text-align: left;">Market Trend Analysis</h1>
+                    <p class="analysis-para">
+                      A business owner's job is not complete without analysing
+                      the market's reception towards their services/goods. In
+                      fact, the real business starts from there. Head over to
+                      the Market Trend Analysis to analyse how well your product
+                      is doing.
+                    </p>
+                    <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+                  </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="position: relative; overflow: hidden; top: 200px;">
+        <div class="row">
+            <div class="col-6" style="padding: 70px 150px; text-align: justify;">
+                    <h1 class="analysis-header" style="text-align: left;">Market Trend Analysis</h1>
+                    <p class="analysis-para">
+                      A business owner's job is not complete without analysing
+                      the market's reception towards their services/goods. In
+                      fact, the real business starts from there. Head over to
+                      the Market Trend Analysis to analyse how well your product
+                      is doing and tweak your business functions accordingly by
+                      consulting the mentors you've found at Unicorn!
+                    </p>
+                    <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+            </div>
+            <div class="col-6">
+                <div class="card big-card2" style="overflow: hidden;" onclick="togglePopup(1, '../static/img/newplot (2).png');">
+                    <img src="../static/img/newplot (2).png" alt="Card 1 Image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="position: relative; top: 350px;">
+        <div class="row" style="margin: 0 auto;">
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;" onclick="togglePopup(2, '../static/img/newplot (4).png');">
+                <img src="../static/img/newplot (4).png" alt="Card 2 Image">
+                <h1 >Market Trend Analysis</h1>
+                <p class="analysis-para">
+                  A business owner's job is not complete without analysing
+                  the market's reception towards their services/goods. In
+                  fact, the real business starts from there. Head over to
+                  the Market Trend Analysis to analyse how well your product
+                  is doing and tweak your business functions accordingly by
+                  consulting the mentors you've found at Unicorn!
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+            </div>
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;" onclick="togglePopup(3, '../static/img/newplot (3).png');">
+                <img src="../static/img/newplot (3).png" alt="Card 3 Image">
+                <h1 >Market Trend Analysis</h1>
+                <p class="analysis-para">
+                  A business owner's job is not complete without analysing
+                  the market's reception towards their services/goods. In
+                  fact, the real business starts from there. Head over to
+                  the Market Trend Analysis to analyse how well your product
+                  is doing and tweak your business functions accordingly by
+                  consulting the mentors you've found at Unicorn!
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="togglePopup();">&times;</span>
+            <img id="modal-image">
+        </div>
+    </div>
+
+    <script>
+        function togglePopup(cardNumber, imageUrl) {
+            const modal = document.getElementById("modal");
+            const modalImage = document.getElementById("modal-image");
+
+            if (modal.style.display === "block") {
+                modal.style.display = "none";
+            } else {
+                modalImage.src = imageUrl;
+                modal.style.display = "block";
+            }
+        }
+
+        // Close the modal when the user clicks outside of it
+        window.onclick = function (event) {
+            const modal = document.getElementById("modal");
+
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</div>
+
+    {% endblock %}

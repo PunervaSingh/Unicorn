@@ -1,0 +1,307 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/about.css')}}"
+/>
+{% endblock %}
+
+{% block content %}
+<a href="{{url_for('home')}}">
+<img class="about-website-logo" src="../static/img/about_logo.png" alt="">
+</a>
+<div class="container-fluid nav_container"
+    style="padding: 0; margin-top: 0px; background-color: #fa80723f; font-family: serif; text-transform: uppercase; letter-spacing: 4px;">
+    <div
+        style="height: 600px;
+        width: 600px;
+        position: absolute;
+        top: -25%;
+        left: -25%;
+        opacity: 0.1;
+        background-color: none;
+        border: 2px solid white;
+        border-radius: 5px;
+        transform: rotate3d(1, 2, 1, -60deg);">
+    </div>
+    <div
+        style="height: 600px;
+        width: 600px;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        opacity: 0.1;
+        border: 2px solid white;
+        border-radius: 5px;
+        transform: rotate3d(1, 2, 1, -60deg);">
+    </div>
+    <div
+        style="height: 600px;
+        width: 600px;
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        border: 2px solid white;
+        border-radius: 5px;
+        transform: rotate3d(1, 2, 1, -60deg);
+        opacity: 0.1;">
+    </div>
+    <header class="header-alt">
+        <div class="book" id="wrapper" style="z-index: 99; text-align: left;">
+            <img src="../static/img/about_illustration.png" alt="">
+        </div>
+        <div class="bg" style="margin-top: 220px;">
+            <h1 class="show-on-scroll inline-photo"> About Us</h1>
+            <p style="margin-top: 30px; width: 30vw;" class="show-on-scroll inline-photo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        </div>
+        <div class="box" class="show-on-scroll inline-photo">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+</div>
+
+
+<div class="container-fluid" style="height: 100vh;">
+    <div class="row">
+        <div class="col-6" style="padding: 10% 100px; border: 2px solid black; height: 100vh;">
+          <div class="circle-filler" style="background-color: #F37878;"></div>
+          <div class="row" style="text-align: justify;">
+            <div class="col-6" style="text-align: justify; padding: 0;">
+              <h3 class="show-on-scroll inline-photo" style="padding-bottom: 30px; z-index: 99; font-size: 2.5rem; font-weight: 200; font-style: italic;">SUSTAINABLE GOAL 8</h3>
+                    <p class="show-on-scroll inline-photo">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, deleniti! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, aliquid.</p>
+                </div>
+                <div class="col-6 show-on-scroll inline-photo" style="font-size: larger; padding-left: 50px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z"/>
+                      </svg>
+                </div>
+                <p style="z-index: 99;" class="show-on-scroll inline-photo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui enim quas aliquid molestias dolorum sint consequuntur tenetur ipsum saepe laudantium non vero eos impedit quasi esse suscipit perspiciatis velit labore mollitia molestiae, fuga nobis laborum quod quaerat. Earum debitis error eius harum minus aliquid sunt, fugiat, in, ducimus voluptates nostrum.</p>
+                <p style="z-index: 99;" class="show-on-scroll inline-photo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui enim quas aliquid molestias dolorum sint consequuntur tenetur ipsum saepe laudantium non vero eos impedit quasi esse suscipit perspiciatis velit labore mollitia molestiae, fuga nobis laborum quod quaerat. Earum debitis error eius harum minus aliquid sunt, fugiat, in, ducimus voluptates nostrum.</p>
+            </div>
+        </div>
+        <div class="col-6" style="padding: 10% 100px; border: 2px solid black; height: 100vh;">
+          <div class="circle-filler" style="background-color: #F5A25D;"></div>
+          <div class="row" style="text-align: justify;">
+            <div class="col-6" style="text-align: justify; padding: 0;">
+              <h3 class="show-on-scroll inline-photo" style="padding-bottom: 30px; z-index: 99; font-size: 2.5rem; font-weight: 200; font-style: italic;">SUSTAINABLE GOAL 9</h3>
+                    <p class="show-on-scroll inline-photo">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium, deleniti! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab, aliquid.</p>
+                </div>
+                <div class="col-6 show-on-scroll inline-photo" style="font-size: larger; padding-left: 50px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="black" class="bi bi-boxes" viewBox="0 0 16 16">
+                        <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z"/>
+                      </svg>
+                </div>
+                <p style="z-index: 99;" class="show-on-scroll inline-photo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui enim quas aliquid molestias dolorum sint consequuntur tenetur ipsum saepe laudantium non vero eos impedit quasi esse suscipit perspiciatis velit labore mollitia molestiae, fuga nobis laborum quod quaerat. Earum debitis error eius harum minus aliquid sunt, fugiat, in, ducimus voluptates nostrum.</p>
+                <p style="z-index: 99;" class="show-on-scroll inline-photo">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui enim quas aliquid molestias dolorum sint consequuntur tenetur ipsum saepe laudantium non vero eos impedit quasi esse suscipit perspiciatis velit labore mollitia molestiae, fuga nobis laborum quod quaerat. Earum debitis error eius harum minus aliquid sunt, fugiat, in, ducimus voluptates nostrum.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="padding: 100px 0; border: 2px solid black;">
+<h1 class="show-on-scroll inline-photo" style="padding: 10px 0; font-size: 4rem; font-weight: 100; font-style: italic;">Job Titles</h1>
+<p class="show-on-scroll inline-photo" style="margin-bottom: 50px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, suscipit!</p>
+<div id="carouselExampleControls" class="carousel slide show-on-scroll inline-photo" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="cards-wrapper" style="text-align: center;">
+      <div class="card positions-card-about">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="card-img-top" alt="...">
+        <div class="overlay"></div>
+        <div class="card-body">
+            <p class="options-header">StartUp Project</p>
+        </div>
+      </div>
+      <div class="card d-none d-md-block positions-card-about">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" class="card-img-top" alt="...">
+        <div class="overlay"></div>
+        <div class="card-body">
+            <p class="options-header">Mentor</p>
+        </div>
+      </div>
+      <div class="card d-none d-md-block positions-card-about">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="card-img-top" alt="...">
+        <div class="overlay"></div>
+        <div class="card-body">
+            <p class="options-header">Validator</p>
+        </div>
+      </div>
+      <div class="card d-none d-md-block positions-card-about">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="card-img-top" alt="...">
+        <div class="overlay"></div>
+        <div class="card-body">
+            <p class="options-header">Legal Advisor</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="carousel-item">
+      <div class="cards-wrapper">
+        <div class="card positions-card-about">
+          <img src="https://images.unsplash.com/photo-1674574124792-3be232f1957f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" class="card-img-top" alt="...">
+          <div class="overlay"></div>
+          <div class="card-body">
+            <p class="options-header">Funding Agent</p>
+          </div>
+        </div>
+        <div class="card d-none d-md-block positions-card-about">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" class="card-img-top" alt="...">
+          <div class="overlay"></div>
+          <div class="card-body">
+            <p class="options-header">Job Seeker</p>
+          </div>
+        </div>
+        <div class="card d-none d-md-block positions-card-about">
+          <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80" class="card-img-top" alt="...">
+          <div class="overlay"></div>
+          <div class="card-body">
+            <p class="options-header">Advertiser</p>
+          </div>
+        </div>
+        <div class="card d-none d-md-block positions-card-about">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80" class="card-img-top" alt="...">
+          <div class="overlay"></div>
+          <div class="card-body">
+            <p class="options-header">Linkage Agent</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+
+<div class="app">
+	<div id="bound-one" class="scroll-bound">
+		<div class="content">
+      <div class="row">
+        <div class="col-4" style="padding-left: 150px; text-align: left;">
+          <h1 class="show-on-scroll inline-photo" style="padding: 10px 0; margin-bottom: 40px; font-size: 3.25rem; font-weight: 100; font-style: italic;">All About EDA</h1>
+          <p id="eda-content" class="show-on-scroll inline-photo" style="font-weight: 200; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p id="eda-content2" class="show-on-scroll inline-photo" style="font-weight: 200; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p id="eda-content3" class="show-on-scroll inline-photo" style="font-weight: 200; font-size: medium;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+          </svg>
+        </div>
+        <div class="col-8 show-on-scroll inline-photo">
+          <video width="600" muted preload>
+           <source src="../static/img/dashboard-10847.mp4" type="video/webm">
+         </video>
+        </div>
+      </div>
+		</div>
+	</div>
+	
+	<!-- <div id="bound-three" class="scroll-bound">
+		<div class="content">
+ 			<video width="600" muted preload>
+   			<source src="../static/img/marketing-22130.mp4" type="video/mp4">
+      </video>
+		</div>
+	</div> -->
+	
+</div>
+
+<div class="container-fluid" style="background-color: #F37878;">
+  <h1 class="show-on-scroll inline-photo" style="padding: 100px 0 0px; font-size: 4rem; font-weight: 100; font-style: italic; color: white;">Added Features</h1>
+  <p class="show-on-scroll inline-photo" style="margin-bottom: 80px; color: white;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, suscipit!</p>
+  <div class="row">
+    <div class="col-6 added-feature show-on-scroll inline-photo">
+      <img style="height: 400px; width: 80%; object-fit: cover;" src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="">
+      <div class="overlay"></div>
+      <div class="added-feature-body">
+        <p>TRENDING STARTUPS</p>
+      </div>
+    </div>
+    <div class="col-6 added-feature show-on-scroll inline-photo">
+      <img style="height: 400px; width: 80%; object-fit: cover;" src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80" alt="">
+      <div class="overlay"></div>
+      <div class="added-feature-body">
+        <p>BRAND-NAME GENERATOR</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- <script>
+    $(function () {
+    var header = $(".header");
+    $(window).scroll(function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 1) {
+            header.removeClass('header').addClass("header-alt");
+        } else {
+            header.removeClass("header-alt").addClass('header');
+        }
+    });
+});
+</script> -->
+<script>
+    const registerVideo = (bound, video) => {
+	bound = document.querySelector(bound);
+	video = document.querySelector(video);
+	const scrollVideo = ()=>{
+		if(video.duration) {
+			const distanceFromTop = window.scrollY + bound.getBoundingClientRect().top;
+			const rawPercentScrolled = (window.scrollY - distanceFromTop) / (bound.scrollHeight - window.innerHeight);
+			const percentScrolled = Math.min(Math.max(rawPercentScrolled, 0), 1);
+      console.log(percentScrolled)
+			
+			video.currentTime = video.duration * percentScrolled;
+      if(percentScrolled < 0.3) {
+        content = document.getElementById("eda-content").innerHTML = 'First Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content2").innerHTML = 'First Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content3").innerHTML = 'First Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content").style.color = '#F37878'
+        content = document.getElementById("eda-content2").style.color = '#F37878'
+        content = document.getElementById("eda-content3").style.color = '#F37878'
+      }
+      else if(percentScrolled >= 0.3 && percentScrolled < 0.6) {
+        content = document.getElementById("eda-content").innerHTML = 'Second Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content2").innerHTML = 'Second Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content3").innerHTML = 'Second Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content").style.color = '#F5A25D'
+        content = document.getElementById("eda-content2").style.color = '#F5A25D'
+        content = document.getElementById("eda-content3").style.color = '#F5A25D'
+      } 
+      else {
+        content = document.getElementById("eda-content").innerHTML = 'Third Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content2").innerHTML = 'Third Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content3").innerHTML = 'Third Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+        content = document.getElementById("eda-content").style.color = '#87BCC9'
+        content = document.getElementById("eda-content2").style.color = '#87BCC9'
+        content = document.getElementById("eda-content3").style.color = '#87BCC9'
+      }
+		}
+		requestAnimationFrame(scrollVideo);
+	}
+	requestAnimationFrame(scrollVideo);
+}
+
+
+registerVideo("#bound-one", "#bound-one video");
+
+registerVideo("#bound-two", "#bound-two video")
+
+registerVideo("#bound-three", "#bound-three video")
+</script>
+{% endblock %}

@@ -1,0 +1,147 @@
+.row {
+    justify-content: space-between;
+}
+
+.pagination {
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+}
+
+.underline-small{
+    display:inline-block;
+    position:relative;
+}
+
+.underline-small::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: black;
+    position:absolute;
+    right: 30%;
+    bottom:-7px;
+}
+
+.underline-small-footer{
+    margin-bottom: 50px;
+    display:inline-block;
+    position:relative;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.underline-small-footer::after{
+    content:'';
+    height:3px;
+    width:70%;
+    background: #af7352;
+    position:absolute;
+    right: 30%;
+    bottom:-15px;
+}
+
+.tvw_filter {
+    margin: 20px 30px 20px 0;
+}
+
+.year_of_experience {
+    position: absolute;
+    top: 35%;
+    background-color: white;
+    padding: 10px;
+    margin: auto;
+    border: 1px solid gray;
+}
+
+.cm_name {
+    padding-top: 30px;
+}
+
+.cm_desc {
+    padding: 10px 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.tag {
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+    top: -20px;
+    right: -20px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 50px;
+}
+
+.tag-mentor {
+    background-color: #F37878;
+}
+
+.tag-counsellor {
+    background-color: #4C8492;
+}
+
+.book-btn {
+    width: 100%;
+    background-color: #F09C67;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 0;
+}
+
+.book-btn:hover {
+    background-color: #c0713f;
+}
+
+.linkedin-cm-link {
+    height: 40px;
+    width: 40px;
+}
+
+.linkedin-mentor {
+    color: #F37878;
+}
+
+.linkedin-counsellor {
+    color: #4C8492;
+}
+
+.cm-apply {
+    text-decoration: none; 
+    color: black; 
+    float: right;
+}
+
+.cm-apply:hover {
+    color: #F37878;
+    text-decoration: none;
+}
+
+.team_filter {
+    display: flex;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.team-dropdown {
+    width: 500px;
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.team-dropdown:hover, .team-dropdown:active {
+    background-color: #F37878;
+    color: white;
+}
+
+.team-social-icon {
+    height: 25px;
+    width: 25px;
+}

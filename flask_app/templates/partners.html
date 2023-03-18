@@ -1,0 +1,177 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<style>
+.container {
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  font-family: "Open Sans", sans-serif;
+  min-height: 100vh;
+  font-size: 16px;
+}
+.card-box {
+  width: 320px;
+  background: #fff;
+  border-radius: 7px;
+}
+.partner-img {
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+a {
+  text-decoration: none;
+  color: #848b8c;
+}
+.card-box .card-img {
+  width: calc(100% - 0.8rem);
+  height: 300px;
+  margin: auto;
+  margin-top: 5px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.2s;
+  box-shadow: 2px 4px 11px rgba(0, 0, 0, 0.6);
+
+}
+.card-box .card-img:hover {
+  transform: scale(1.04) rotate(-4deg);
+  box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.4), 5px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+  padding: 0.7rem 2rem 3rem 2rem;
+}
+.card-box span {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: blue;
+  font-weight: bold;
+
+}
+.card-box span:hover {
+  opacity: 0.8;
+}
+
+.card-box p a {
+  font-size: 0.8rem;
+
+}
+.card-box p a:hover {
+  opacity: 0.9;
+  font-weight: semi-bold;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Partners
+  </h3>
+
+  <div class="container" style="padding-top: 200px;">
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://upload.wikimedia.org/wikipedia/en/3/3b/Indian_Institute_of_Science_2019_logo.svg" alt="">
+      </div>
+      <div class="card-content">
+        <span>IISC Bangalore</span>
+        <p><a href="#">A public institute for research & higher education in science and engineering, located in Bangalore, Karnataka. It aims to be among the world’s foremost academic institutions through promotion of innovation via world-class education to train future leaders in science and technology.</a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Indian_Institute_of_Technology_Bombay_Logo.svg/1200px-Indian_Institute_of_Technology_Bombay_Logo.svg.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>Sine, IIT Mumbai</span>
+        <p><a href="">Society for Innovation and Entrepreneurship, established in 2004 at IIT Bombay, is one of the earliest incubators in academia with proven track-record of creating economic growth, strategic value and social relevance. Over 140+ startups and 380+ innovators supported by SINE have created 3600+ jobs.<a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/1200px-Indian_Institute_of_Technology_Delhi_Logo.svg.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>FIIT, IIT Delhi</span>
+        <p><a href="#">An industrial interface organization, established at IIT Delhi as a Registered Society on 9th July 1992 to provide an effective interface with the Industry to foster, promote and sustain commercialization of Science and Technology in the Institute for mutual benefits.</a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>American Express</span>
+        <p><a href="#">A leading issuer of personal, small business, and corporate credit cards. The company's travel-related offerings include traveler's checks, credit cards, corporate and personal travel planning services, tour packages, and agencies for hotel & car-rental reservations.</a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://storage.googleapis.com/twg-content/images/2560x1152_Google_MarketingPlatform.width-1200.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>Google Marketing Platform</span>
+        <p><a href="">An integrated ad-technology platform that enables agencies to effectively create, manage and grow high-impact digital marketing campaigns. It integrates world-class solutions to help buyers run holistic campaigns across multiple channels.<a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://assets.stickpng.com/images/6297a2f1e01809629f113598.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>LinkedIn</span>
+        <p><a href="#">LinkedIn is a social networking site designed specifically for the business community. The goal of the site is to enable registered members to establish and document networks of people they know and trust professionally.</a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Financial_Times_corporate_logo.svg/477px-Financial_Times_corporate_logo.svg.png?20140612120807" alt="">
+      </div>
+      <div class="card-content">
+        <span>The Financial Times</span>
+        <p><a href="#">The Financial Times is one of the world's leading business news organisations, recognised internationally for its authority, integrity and accuracy. The FT has a record paying readership of one million, three-quarters of which are digital subscriptions.</a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://lavca.org/app/uploads/2019/10/aws-logo-square.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>Amazon Web Services</span>
+        <p><a href="">The world’s most broadly adopted cloud platform, offering 200+ fully featured services from data centers globally; used by fast-growing startups, large enterprises, leading govt. agencies etc. to lower costs, become more agile, and innovate faster.<a></p>
+      </div>
+  
+    </div>
+    <div class="card-box">
+      <div class="card-img">
+        <img class="partner-img" src="https://uploads.concordia.net/2021/05/09135648/Salesforce-square.png" alt="">
+      </div>
+      <div class="card-content">
+        <span>Salesforce</span>
+        <p><a href="#">Salesforce is a customer company which makes cloud-based software designed to help businesses connect to their customers in a whole new way, so they can find more prospects, close more deals, and wow customers with amazing service.</a></p>
+      </div>
+  
+    </div>
+  </div>
+{% endblock %}

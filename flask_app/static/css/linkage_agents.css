@@ -1,0 +1,243 @@
+.delivery-header {
+    font-weight: lighter;
+    color: #F37878;
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.ship-para {
+    color: gray;
+}
+
+.linkage-img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.project-content p{
+  font-size: small;
+  color: gray;
+  margin: 5px 10px;
+}
+
+.row {
+    justify-content: space-around;
+}
+
+.linkage-dropdown {
+    width: 500px;
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    float: right;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.linkage-dropdown:hover, .linkage-dropdown:active {
+    background-color: #F37878;
+    color: white;
+}
+
+.wrapper {
+    transform: skewY(5deg);
+    color: white;
+  }
+  .block {
+    transform: skewY(-5deg);
+    background-color: #f37878;
+    margin: 50px 0;
+    height: 90vh;
+  }
+
+  .track-header {
+    font-weight: 400; 
+    font-style: italic; 
+    font-size: 3rem; 
+    text-align: right;
+    padding-top: 80px;
+    color: white;
+    padding-right: 100px;
+}
+
+.analysis-header {
+    font-size: 60px;
+    font-weight: lighter;
+    font-style: italic;
+}
+
+.analysis-para {
+    color: gray;
+    letter-spacing: 1px;
+    text-align: justify;
+    margin: 30px 0;
+}
+
+.explore-btn {
+    width: 100%;
+    background-color: #F37878;
+    color: white;
+    font-weight: bold;
+    border: none;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.oneh {
+    float: right !important;
+    position: relative;
+    height: 75vh;
+    margin-right: -40% !important;
+    width: fit-content;
+}
+
+.meet01 {
+    width:100%;
+    overflow:hidden;
+}
+.container{
+    max-width:960px; margin:0 auto; position:relative;
+ }
+ 
+ .step-wrapper{
+   margin:30px; margin-bottom:200px;  position:relative;
+   width: 80vw;
+    margin-left: 10%;
+ }
+ 
+ .linestep{ 
+    text-align:center;  max-width:250px; position:absolute;
+ }
+ .linestep .num {
+    color:#4C8492; border-radius:100px;
+    display:inline-block;
+    width: 40px;
+    height: 40px; text-align:center;
+    line-height:40px; font-weight:bold;
+    background: white;
+}
+.linestep p{
+    width: 250px;
+    position: absolute;
+    margin-top:7px;
+    font-weight: 500;
+    line-height: normal;
+    font-size: 18px;
+}
+.linestep p.top{	bottom:50px; left: -110px;	}
+.linestep p.bottom{	left: -110px;	}
+.linestep p.left{ width: 200px;   right: 34px;		top: -17px;	}
+.linestep p.right{ width: 200px;  left: 34px; 		top: -17px;	}
+ 
+ .linestep{ visibility:hidden;  }
+ .path{ visibility:hidden; }
+ 
+   
+     
+
+    .move-line .linestep2 {animation-delay:.8s; }
+    .move-line .linestep3 {animation-delay:1.2s; }
+    .move-line .linestep4 {animation-delay:1.6s; }
+    .move-line .linestep5 {animation-delay:2s; }
+
+ .move-line .path{
+    visibility:visible;
+        stroke-dasharray: 3700;
+        stroke-dashoffset: 3700;
+        animation: moveline 4s linear forwards;
+    }
+
+    .move-line .linestep{
+        animation-name: show-step-item;
+        animation-duration:.2s;
+        animation-fill-mode: forwards;
+    }
+
+    .move-line .linestep1{ animation-delay:.4s; }
+ 
+ 
+ @keyframes show-step-item{
+     from {  transform: scale(.2); opacity: 0}
+     to{ visibility:visible; transform: scale(1); opacity: 1 }
+ }
+ 
+ @keyframes moveline {
+       to {
+         stroke-dashoffset: 0;
+       }
+ }
+
+ svg{
+    margin: auto;
+  }
+  
+  .frame{
+    stroke: white;
+    stroke-width: 18px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .description{
+    fill: white;
+    text-transform: uppercase;
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: 900;
+  }
+  
+  .small_circle{
+    fill: #666;
+  }
+  
+  .bolt{
+    fill: #fff;
+  }
+  
+  .wheel{
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: torsion 10s linear infinite;
+  }
+  
+  .tyre{
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4px;
+    stroke-dasharray: 11.5px 11.5px;
+  }
+  
+  .anim{
+    animation: draq 4s linear infinite;
+  }
+  
+  .track{
+    animation: diing 4s linear forwards ;
+  }
+  
+  
+  @keyframes torsion{
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes diing{
+    0%{
+      transform: translateX(-100%);
+    }
+    100%{
+     transform: translateX(500px); 
+    }
+  }
+  
+  @keyframes draq{
+    40%{
+      transform: translateY(-10px);
+    }
+    60%{
+     transform: translateY(10px); 
+    }
+  }

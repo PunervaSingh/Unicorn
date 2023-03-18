@@ -1,0 +1,239 @@
+{%extends "layout.html"%} 
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/mc_apply.css')}}"
+/>
+<style>
+    footer {
+      display: none;
+    }
+  </style>
+{% endblock %} 
+
+{% block content %}
+<div class="container" style="padding-top: 150px">
+  <h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+    Available Positions in StartUp
+  </h3>
+  <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 5px 30px;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
+  {% for project in projects %}
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+  <div id="Apply" class="tabcontent" style="display: block">
+    <div class="row">
+            <div class="col-4 cm-apply-div">
+                <!-- <img
+                class="cm_apply-img"
+                src={{ project.pic }}
+                alt=""
+                /> -->
+                <div class="form-group">
+                    <label for="Name">Project Name</label>
+                    <input type="text" name="Name" id="" placeholder={{ project.name }} readonly />
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.total_workforce.label(class="form-control-label") }}
+                    {% if form.total_workforce.errors %}
+                    {{ form.total_workforce(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.total_workforce.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.total_workforce(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.female_workforce.label(class="form-control-label") }}
+                    {% if form.female_workforce.errors %}
+                    {{ form.female_workforce(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.female_workforce.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.female_workforce(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.category_workforce.label(class="form-control-label") }}
+                    {% if form.category_workforce.errors %}
+                    {{ form.category_workforce(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.category_workforce.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.category_workforce(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </div>
+          <div class="col-4 cm-apply-div">
+            <div class="form-group">
+                {{ form.phone.label(class="form-control-label") }}
+                {% if form.phone.errors %}
+                {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.phone.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.phone(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.job_title.label(class="form-control-label") }}
+                {% if form.job_title.errors %}
+                {{ form.job_title(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.job_title.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.job_title(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.job_description.label(class="form-control-label") }}
+                {% if form.job_description.errors %}
+                {{ form.job_description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.job_description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.job_description(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.number_open.label(class="form-control-label") }}
+                {% if form.number_open.errors %}
+                {{ form.number_open(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.number_open.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.number_open(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.duration.label(class="form-control-label") }}
+                {% if form.duration.errors %}
+                {{ form.duration(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.duration.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.duration(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-4 cm-apply-div">
+            <div class="form-group">
+                {{ form.stipend.label(class="form-control-label") }}
+                {% if form.stipend.errors %}
+                {{ form.stipend(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.stipend.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.stipend(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.paid_unpaid.label(class="form-control-label") }}
+                {% if form.paid_unpaid.errors %}
+                {{ form.paid_unpaid(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.paid_unpaid.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.paid_unpaid(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.inoffice_wfh.label(class="form-control-label") }}
+                {% if form.inoffice_wfh.errors %}
+                {{ form.inoffice_wfh(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.inoffice_wfh.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.inoffice_wfh(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.location.label(class="form-control-label") }}
+                {% if form.location.errors %}
+                {{ form.location(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.location.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.location(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="Name">Project Page Link</label>
+                <input type="text" name="Name" id="" placeholder="/individual_idea/{{ project.id }}" readonly />
+            </div>
+            <!--  -->
+            <div style="text-align: center">
+              {{ form.submit(class="btn btn-dark") }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</fieldset>
+</form>
+{% endfor %}
+</div>
+{% endblock %}

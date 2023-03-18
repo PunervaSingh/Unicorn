@@ -1,0 +1,160 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/individual_idea.css')}}"
+/>
+{% endblock %} {% block content %}
+<!-- <h1>Idividual Idea page</h1> -->
+
+<div class="individual_idea_div container">
+  <h1 class="center-content">{{ project.name }}</h1>
+  <p class="center-content author-para"><a href="{{url_for('profile', user_id=project.user)}}"> Visit Author Profile </a></p>
+  <div class="row" style="margin: 30px 0;">
+    <div class="col-6">
+      <h6>Email Id
+        <span style="font-weight: 300; color: #f37878;">
+          {{ project.email }}
+        </span>
+      </h6>
+    </div>
+    <div class="col-6" style="text-align: right;">
+      <h6>Contact No.
+        <span style="font-weight: 300; color: #f37878;">
+          {{ project.phone }}  
+        </span>
+      </h6>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9">
+      {% if project.pic %}
+      <img
+      class="project_img"
+      src={{ url_for('static', filename='img/' + project.pic) }}
+      alt=""
+      />
+      {% else %} 
+      <img
+      class="project_img"
+      src={{ project.pic }}
+      alt=""
+      />
+      {% endif %}
+      <br>
+      <h4>Idea Proposal</h4>
+      <p>
+        {{ project.idea }}
+      </p>
+      <br>
+      <h4>Extras</h4>
+      <p>
+        {{ project.extra }}
+      </p>
+      {% if project.user == current_user.id and project.validated == 1 and not project.rnd %} 
+      <a class="btn btn-success" href="{{url_for('profit', project_id=project.id)}}"> Add project projection & generate profit </a>
+      {% endif %}
+    </div>
+    <div class="col-3">
+      <h6>Industry Type
+      <p style="font-weight: 200; float: right;">{{ project.industry }}</p>
+      </h6>
+      <br>
+      <h6>Project Category
+      <p style="font-weight: 200; float: right;">
+        {{ project.category }}  
+      </p>
+      </h6>
+      <br>
+      <h6>Country of Origin
+      <p style="font-weight: 200; float: right;">
+        {{ project.country }}
+      </p>
+      </h6>
+      <br>
+      <h6>Validation Status
+      <p style="font-weight: 200; float: right;">
+        {{ project.validated }}
+      </p>
+      </h6>
+      <br>
+      {% if project.rnd %} 
+      <h6>Research & Development
+      <p style="font-weight: 200; float: right;">
+        {{ project.rnd }}
+      </p>
+      </h6>
+      <br>
+      {% endif %}
+      {% if project.marketing %} 
+      <h6>Marketing
+      <p style="font-weight: 200; float: right;">
+        {{ project.marketing }}
+      </p>
+      </h6>
+      <br>
+      {% endif %}
+      {% if project.administration %} 
+      <h6>Administration
+      <p style="font-weight: 200; float: right;">
+        {{ project.administration }}
+      </p>
+      </h6>
+      <br>
+      {% endif %}
+      {% if project.profit %} 
+      <h6>Profit
+      <p style="font-weight: 200; float: right;">
+        {{ project.profit }}
+      </p>
+      </h6>
+      {% endif %}
+
+      {% if project.village %} 
+        <br><span style="padding: 10px; background-color: #f37878; border-radius: 10px; width: 200px; margin:0px; color: white;">Village Based</span><br>
+      {% endif %}
+      {% if project.women %} 
+        <br><span style="padding: 10px; background-color: #f37878; border-radius: 10px; width: 200px; margin:0px; color: white;">Women Oriented</span><br>
+      {% endif %}
+      {% if project.tier %} 
+        <br><span style="padding: 10px; background-color: #f37878; border-radius: 10px; width: 200px; margin:0px; color: white;">From Tier I / II</span><br>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+    <div class="button-div">
+      {% if current_user.position == 'Validator' and not project.validated %}
+      <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+          <div class="form-group">
+            {{ form.submit(class="btn btn-dark") }}
+          </div>
+        </fieldset>
+      </form>
+      {% elif current_user.position == 'Mentor' and not project.mentor and not current_user.requested %}
+      <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+          <div class="form-group">
+            {{ form.submit(class="btn btn-dark") }}
+          </div>
+        </fieldset>
+      </form>
+      {% elif current_user.position == 'Mentor' and project.mentor==current_user.id %}
+      <button class="btn individual-idea-btn" style="cursor: not-allowed;">Your Project</button>
+      {% elif current_user.position == 'Mentor' and not project.mentor and current_user.requested==1 %}
+      <button class="btn individual-idea-btn" style="cursor: not-allowed;">One request pending</button>
+      {% elif current_user.position == 'Mentor' and project.mentor %}
+      <button class="btn individual-idea-btn" style="cursor: not-allowed;">Already have a mentor assigned</button>
+      {% elif current_user.position == 'Funding Agent' or current_user.position == 'Investor' %}
+        <!-- <button class="btn individual-idea-btn" ></button> -->
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LPAYGcfWkP5bdY" async> </script> </form>
+      {% endif %}
+    </div>
+</div>
+{% endblock %} 

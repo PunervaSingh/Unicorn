@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 150px 0;">
+        <div>
+            <h1 style="padding: 30px 0;">Send a customized gift</h1>
+            <div class="content-section">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="row">
+                        <div class="form-group col-6">
+                            {% if form.item.errors %} 
+                            {{ form.item(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.item.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.item(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.customization.errors %} 
+                            {{ form.customization(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.customization.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.customization(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.name.errors %} 
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.name(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.address.errors %} 
+                            {{ form.address(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.address.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.address(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.phone.errors %} 
+                            {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.phone(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.msg.errors %} 
+                            {{ form.msg(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.msg.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.msg(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6">
+                            {% if form.email.errors %} 
+                            {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %} {{ form.email(class="form-control form-control-lg") }} {%
+                            endif %}
+                        </div>
+                        <div class="form-group col-6" style="text-align: end;">
+                            {{ form.submit(class="btn btn-dark submit-btn") }}
+                        </div>
+                    </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{%extends "layout.html"%} {% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/profile.css')}}"
+/>
+{% endblock %} {% block content %}
+<form method="POST" action="" enctype="multipart/form-data">
+    {{ account_form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class="profile-div container">
+        <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">UPDATE PROFILE DETAILS</h1>
+        <div class="row">
+            <div class="col-7">
+                <div class="form-group">
+                    {{ account_form.name.label(class="form-control-label") }}
+                    
+                    {% if account_form.name.errors %}
+                    {{ account_form.name(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in account_form.name.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ account_form.name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>      <div class="form-group">
+                    {{ account_form.email.label(class="form-control-label") }}
+                    {% if account_form.email.errors %}
+                    {{ account_form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in account_form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ account_form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>      
+                <div class="form-group">
+                    {{ account_form.phone.label(class="form-control-label") }}
+                    {% if account_form.phone.errors %}
+                    {{ account_form.phone.label(class="form-control-label") }}
+                    {{ account_form.phone(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in account_form.phone.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ account_form.phone(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>    
+                <div class="form-group">
+                    {{ account_form.address.label(class="form-control-label") }}
+                    {% if account_form.address.errors %}
+                    {{ account_form.address(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in account_form.address.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ account_form.address(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>  
+                <div class="col-5">
+                    {{ account_form.profile_pic.label(class="form-label") }}
+                    {{ account_form.profile_pic(class="form-control") }}
+                    <!-- <img
+                    class="profile-img"
+                    src={{ current_user.profile_pic }}
+                    alt=""
+                    /> -->
+                    <!-- <div style="display: flex; justify-content: center; margin-top: 20px">
+                        <a href="#" style="position: absolute; top: 55%; right: 15%;">
+                            <svg class="profile-change-btn" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                        </a>
+                    </div> -->
+                </div>
+                <!-- <input type="text" name="positions" id="" placeholder="Position: {{ current_user.position }}" readonly/>
+                <input type="text" name="validation" id="" placeholder="Validation Status: {{ current_user.validated }}" readonly/> -->
+                <div class="form-group">
+                    {{ account_form.submit(class="btn btn-dark") }}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</fieldset>
+</form>
+{% endblock %}
