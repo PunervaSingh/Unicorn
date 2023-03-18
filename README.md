@@ -1,4 +1,4 @@
-# Unicorn - Rise From The Ashes
+# Unicorn
 ### One-Stop Platform For Budding Entrepreneurs.
 * An integrated platform for guiding aspiring entrepreneurs, idea nurturing, connecting with incubators, extending mentoring and handholding support, creating financial and marketing linkages, and complying with legal and statutory compliances for starting a business. 
 * This single-window platform for entrepreneurs will bring all the stakeholders under one umbrella.
