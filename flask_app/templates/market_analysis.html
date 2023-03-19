@@ -83,6 +83,7 @@
         left: -30%;
         top: 40px;
     }
+
     .big-card2 {
         float: right !important;
         position: relative;
@@ -104,7 +105,7 @@
 {% endblock %}
 
 {% block content %}
-<div style="margin: 0; padding: 0;padding-top: 200px;  height: 280vh;">
+<div style="margin: 0; padding: 0;padding-top: 200px;  height: 580vh;">
     <h3 class="underline-small" style="
         position: absolute;
         top: 50px;
@@ -115,74 +116,150 @@
         StartUp Exploratory Data Analysis
     </h3>
     <img style="position: absolute; right: 0; top: 50px; height: 50vh;" src="../static/img/eda_illustration.png" alt="">
+    <h1 class="analysis-header" style="text-align: center;">Market Analysis</h1>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-8" >
+            <div class="col-8">
                 <div class="card big-card" onclick="togglePopup(3, '../static/img/newplot (1).png');">
                     <img src="../static/img/newplot (1).png" alt="Card 3 Image">
                 </div>
             </div>
-                <div class="col-4" style="padding-top: 100px; left: -170px; text-align: justify;">
-                    <h1 class="analysis-header" style="text-align: left;">Market Trend Analysis</h1>
-                    <p class="analysis-para">
-                      A business owner's job is not complete without analysing
-                      the market's reception towards their services/goods. In
-                      fact, the real business starts from there. Head over to
-                      the Market Trend Analysis to analyse how well your product
-                      is doing.
-                    </p>
-                    <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
-                  </div>
+            <div class="col-4" style="padding-top: 100px; left: -170px; text-align: justify;">
+                <h1 class="analysis-header" style="text-align: left;">Top 10 most expensive markets</h1>
+                <p class="analysis-para">
+                    Capital expenditure is the money that a company spends on acquiring an asset needed to operate its
+                    business. Capital expenditures also include the money spent on sustaining these assets. Common
+                    capital expenditures include property, plant, and equipment, such as machines, trucks, factories,
+                    office furniture, computers, computer software, and warehouses.
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
+            </div>
         </div>
     </div>
     <div class="container-fluid" style="position: relative; overflow: hidden; top: 200px;">
         <div class="row">
             <div class="col-6" style="padding: 70px 150px; text-align: justify;">
-                    <h1 class="analysis-header" style="text-align: left;">Market Trend Analysis</h1>
-                    <p class="analysis-para">
-                      A business owner's job is not complete without analysing
-                      the market's reception towards their services/goods. In
-                      fact, the real business starts from there. Head over to
-                      the Market Trend Analysis to analyse how well your product
-                      is doing and tweak your business functions accordingly by
-                      consulting the mentors you've found at Unicorn!
-                    </p>
-                    <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+                <h1 class="analysis-header" style="text-align: left;">Top 20 markets where startup close</h1>
+                <p class="analysis-para">
+                    Starting a business is a lot harder than most people think. Rarely is a business so in tune with its
+                    niche that it can float along with minimal effort. But why do so many businesses fail? For that
+                    matter, how many of them actually do fail? The reasons run deep, but here is what you should know
+                    before starting your own business.
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
             </div>
             <div class="col-6">
-                <div class="card big-card2" style="overflow: hidden;" onclick="togglePopup(1, '../static/img/newplot (2).png');">
+                <div class="card big-card2" style="overflow: hidden;"
+                    onclick="togglePopup(1, '../static/img/newplot (2).png');">
                     <img src="../static/img/newplot (2).png" alt="Card 1 Image">
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="position: relative; top: 350px;">
+    <h1 class="analysis-header" style="text-align: center; padding-top: 250px;">Women Diversity EDA</h1>
+    <div class="container-fluid" style="position: relative; top: 50px;">
         <div class="row" style="margin: 0 auto;">
-            <div class="card col-5" style="margin: 0 auto; box-shadow: none;" onclick="togglePopup(2, '../static/img/newplot (4).png');">
-                <img src="../static/img/newplot (4).png" alt="Card 2 Image">
-                <h1 >Market Trend Analysis</h1>
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;"
+                onclick="togglePopup(2, '../static/img/entreindex.png');">
+                <img src="../static/img/entreindex.png" alt="Card 2 Image">
+                <h1>Women in Entrepreneur index vs Aggregate Entrepreneur Index</h1>
                 <p class="analysis-para">
-                  A business owner's job is not complete without analysing
-                  the market's reception towards their services/goods. In
-                  fact, the real business starts from there. Head over to
-                  the Market Trend Analysis to analyse how well your product
-                  is doing and tweak your business functions accordingly by
-                  consulting the mentors you've found at Unicorn!
+                    The Entrepreneurship Index (EI) serves as a measurement tool that effectively determines if one
+                    possesses the prospect of becoming a successful entrepreneur by assessing several essential aspects,
+                    such as entrepreneurial orientation, personality, leadership, motivation and knowledge, pertaining
+                    to
+                    functional skills.
                 </p>
-                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
             </div>
-            <div class="card col-5" style="margin: 0 auto; box-shadow: none;" onclick="togglePopup(3, '../static/img/newplot (3).png');">
-                <img src="../static/img/newplot (3).png" alt="Card 3 Image">
-                <h1 >Market Trend Analysis</h1>
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;"
+                onclick="togglePopup(3, '../static/img/devwomen.png');">
+                <img src="../static/img/devwomen.png" alt="Card 3 Image">
+                <h1>Level of women entrepreneur index in developed countries</h1>
                 <p class="analysis-para">
-                  A business owner's job is not complete without analysing
-                  the market's reception towards their services/goods. In
-                  fact, the real business starts from there. Head over to
-                  the Market Trend Analysis to analyse how well your product
-                  is doing and tweak your business functions accordingly by
-                  consulting the mentors you've found at Unicorn!
+                    Woman-owned businesses are more likely to operate in sectors that require in-person interactions,
+                    such as service industries, retail and tourism, and many have lost income or were forced to close.
+                    In regions including North America, Latin America, Asia and Oceania, businesses owned by women were
+                    more than 10 percent more likely to have closed due to the pandemic than those owned by men.
                 </p>
-                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="padding-top: 100px;">
+        <div class="row">
+            <div class="col-8">
+                <div class="card big-card" onclick="togglePopup(3, '../static/img/mapwomen.png');">
+                    <img src="../static/img/mapwomen.png" alt="Card 3 Image">
+                </div>
+            </div>
+            <div class="col-4" style="padding-top: 100px; left: -170px; text-align: justify;">
+                <h1 class="analysis-header" style="text-align: left; font-size: 2.5rem;">Country Wise Women Entrepreneurship index</h1>
+                <p class="analysis-para">
+                    In the face of all these challenges, successful women entrepreneurs persist — with millions
+                    developing new business models, carving out new pathways to funding, and devising new ways to keep
+                    their businesses afloat. Supporting women entrepreneurs is not only the right thing to do, but it’s
+                    also an opportunity to help communities around the world build resilience in the face of crisis.
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="position: relative; overflow: hidden; top: 100px;">
+        <div class="row">
+            <div class="col-6" style="padding: 70px 150px; text-align: justify;">
+                <h1 class="analysis-header" style="text-align: left;">Gender Wise Diversity in Companies</h1>
+                <p class="analysis-para">
+                    Gender diversity in companies refers to the representation of men and women across all levels and
+                    departments within an organization. It is important because it can lead to better decision-making,
+                    improved financial performance, and a more inclusive and equitable workplace.
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
+            </div>
+            <div class="col-6">
+                <div class="card big-card2" style="overflow: hidden;"
+                    onclick="togglePopup(1, '../static/img/gendercompany.png');">
+                    <img src="../static/img/gendercompany.png" alt="Card 1 Image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="position: relative; top: 150px;">
+        <div class="row" style="margin: 0 auto;">
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;"
+                onclick="togglePopup(2, '../static/img/genderdistri.png');">
+                <img src="../static/img/genderdistri.png" alt="Card 2 Image" style="width: 250px;
+                height: 250px;">
+                <h1>All the number of employees Gender Wise</h1>
+                <p class="analysis-para">
+                    Overall, promoting gender diversity in companies requires a commitment to equity and inclusivity, as
+                    well as ongoing effort and attention to ensure that all employees have equal opportunities to
+                    succeed and thrive in their careers
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
+            </div>
+            <div class="card col-5" style="margin: 0 auto; box-shadow: none;"
+                onclick="togglePopup(3, '../static/img/raceemployee.png');">
+                <img src="../static/img/raceemployee.png" alt="Card 3 Image">
+                <h1>Race Diversity vs number of employees</h1>
+                <p class="analysis-para">
+                    A business owner's job is not complete without analysing
+                    the market's reception towards their services/goods. In
+                    fact, the real business starts from there. Head over to
+                    the Market Trend Analysis to analyse how well your product
+                    is doing and tweak your business functions accordingly by
+                    consulting the mentors you've found at Unicorn!
+                </p>
+                <button class="explore-btn"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more
+                        :)</a></button>
             </div>
         </div>
     </div>
@@ -219,4 +296,4 @@
 
 </div>
 
-    {% endblock %}
+{% endblock %}
