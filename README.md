@@ -52,6 +52,16 @@
 - Track delivery of products on the go 
 - [Add more features](#feature-request)...
 
+<a id="features"></a>
+## 🚀 Additional Features
+- Translate Feature for global access
+- StartUp Market Analysis and Diversity Hiring Analysis
+- Brand Name Generator
+- Motivational Corner
+- Bulk Mail Promotional Services
+- Chatbot
+- Profit projection using ML Model
+
 <a id="resources"></a>
 ## 📚 Resources
 - [HTML Documentation](https://developer.mozilla.org/en-US/docs/Web/HTML)
