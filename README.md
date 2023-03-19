@@ -1,4 +1,4 @@
-# Unicorn - Rise From The Ashes
+# Unicorn
 ### One-Stop Platform For Budding Entrepreneurs.
 * An integrated platform for guiding aspiring entrepreneurs, idea nurturing, connecting with incubators, extending mentoring and handholding support, creating financial and marketing linkages, and complying with legal and statutory compliances for starting a business. 
 * This single-window platform for entrepreneurs will bring all the stakeholders under one umbrella.
@@ -51,6 +51,16 @@
 - Linkage with various Government sponsored schemes for finance, and loans.
 - Track delivery of products on the go 
 - [Add more features](#feature-request)...
+
+<a id="features"></a>
+## 🚀 Additional Features
+- Translate Feature for global access
+- StartUp profit projection using Machine Learning Model (Accuracy - 94.99)
+- StartUp Market Analysis and Diversity Hiring Analysis
+- Brand Name Generator
+- Motivational Corner
+- Bulk Mail Promotional Services
+- Chatbot
 
 <a id="resources"></a>
 ## 📚 Resources
