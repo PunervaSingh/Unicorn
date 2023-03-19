@@ -12,8 +12,17 @@ from flask_mail import Message
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+# import numpy as np
+# import pandas as pd
+# import seaborn as sns
+# import matplotlib.pyplot as plt
+import pickle
+import sklearn
 
-app.config['UPLOAD_FOLDER'] = '/Users/punerva/Desktop/Unicorn/flask_app/static/img'
+
+model = pickle.load(open("D:/github/Devcation/Unicorn/flask_app/model.pkl", 'rb'))
+
+app.config['UPLOAD_FOLDER'] = 'D:/github/Devcation/Unicorn/flask_app/static/img'
 
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home/', methods=('GET', 'POST'))
@@ -1150,3 +1159,19 @@ def profit(project_id):
         db.session.commit()
         return redirect(url_for('idea_validation'))
     return render_template("profit.html", project=project, form=form)
+
+
+@app.route("/profit_prediction", methods = ['GET', 'POST'])
+def profit_prediction():
+    if request.method == 'POST':
+        RnD = float(request.form['RnD'])
+        administration = float(request.form['administration'])
+        marketing = float(request.form['marketing'])
+        prediction = model.predict([[RnD, administration, marketing]])
+        output = round(prediction[0], 2)
+        if output < 0:
+            return render_template('profit_prediction.html', prediction_texts="Sorry you are on loss")
+        else:
+            return render_template('profit_prediction.html', prediction_text="The total profit comes out to be ${:.2f}".format((output)))
+    else:
+        return render_template('profit_prediction.html')

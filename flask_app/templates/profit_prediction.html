@@ -1,0 +1,136 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+<!-- Link to respective CSS stylesheet -->
+<!-- <link rel="stylesheet" href="{{url_for('static', filename='css/raw_material.css')}}"> -->
+<style>
+    .container1 {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .left {
+        width: 50%;
+        height: 100px;
+
+    }
+
+    .right {
+        width: 50%;
+        height: 100px;
+
+    }
+
+    .form-control-input {
+        display: block;
+        width: 120%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container" style="padding-top: 60px">
+    <h3 class="underline-small" style="
+        position: absolute;
+        top: 50px;
+        left: 40%;
+        font-weight: 400;
+        letter-spacing: 1px;
+      ">
+        Profit Projection
+    </h3>
+    <div id="profits" class="container tabcontent" style=" 
+    color: rgb(31, 8, 8);
+    margin-top: 15vh;
+    padding: 50px;
+    width: 900px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    height: 500px;
+">
+        <div class="container1">
+
+
+            <div class="left">
+                <form name="ProfitForm" id="ProfForm" method="POST" action="{{ url_for('profit_prediction')}}">
+                    <!-- <h1 class="head" style="text-align: center; font-weight: bolder; font-family: 'exo'; color: rgb(2, 78, 78);">
+      Profit Projection
+    </h1> -->
+                    <div class="form-group">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="col-md-10 form-group">
+                                    <span style="    display: inline-block;
+                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on Research and
+                                        Development</span><br>
+                                    <input class="spec form-control-input" name="RnD" type="number "
+                                        placeholder="eg. 165349.20">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-10 form-group">
+                                    <span style="    display: inline-block;
+                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on the admin
+                                        panel</span><br>
+                                    <input class="spec form-control-input" name="administration" type="number "
+                                        placeholder="eg. 136897.80">
+                                </div>
+                            </li>
+                            <li>
+                                <div class="col-md-10 form-group">
+                                    <span style="    display: inline-block;
+                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on marketing
+                                        strategies</span><br>
+                                    <input class="spec form-control-input" name="marketing" required="required"
+                                        placeholder="eg. 471784.10">
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <center>
+                        <button type="submit" class="btn"
+                            style="padding: 10px; background-color: #f37878;; color: white; font-weight: bold;"
+                            name=form>Calculate Profit</button>
+                    </center>
+                </form>
+            </div>
+            <div class="right">
+
+                <h3 style="    color: red;
+                    padding: 10px;
+                    margin-left: 50px;
+                    width: 370px;
+                    height: 90px;
+                    margin-right: 90px;
+                    ">{{ prediction_text }}</h3>
+
+                <img src="../static/img/corr.png" alt="alternative">
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}
