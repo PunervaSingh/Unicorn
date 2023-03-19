@@ -55,12 +55,12 @@
 <a id="features"></a>
 ## 🚀 Additional Features
 - Translate Feature for global access
+- StartUp profit projection using Machine Learning Model (Accuracy - 94.99)
 - StartUp Market Analysis and Diversity Hiring Analysis
 - Brand Name Generator
 - Motivational Corner
 - Bulk Mail Promotional Services
 - Chatbot
-- Profit projection using ML Model
 
 <a id="resources"></a>
 ## 📚 Resources
