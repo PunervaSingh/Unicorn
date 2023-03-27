@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/community.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Community Page
+  </h3>
+  <div class="conatiner-fluid" style="width: 100%; margin: auto;">
+    <section id="welcome-section">
+        <div class="bg-image" style="height: 80vh; background-image: url(https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80);"></div>
+        <div class="bg-text">
+            <div class="hero-content" style="padding-top: 20px;"> 
+                <h1 class="welcome-text2" style="font-size: 4rem;">Community</h1> 
+                <h6 style="margin: 40px 0;">
+                    We encourage you to share your knowledge, ask questions, participate in discussions and become an integral part of this little community. Together we can become better community leaders and provide our members with a much better experience.
+                </h6> 
+                <div class="container search-field col-lg-12 col-md-6 col-sm-12">
+                    <form class="form-inline my-2 my-lg-0" method="GET">
+                        <input class = "form-control mr-sm-2"
+                        type="search" placeholder="Search your Query..." name="ques" style="width: 90%;">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Search</button>
+                      </form>
+                    <br><br>
+                  </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- All  Posts -->
+    <div class="container" style="margin-bottom: 4%; margin-top: 100px;">
+        <h2 class="comm-ques-heading">Discussions</h2>
+        {% include '_posts.html' %}
+        
+        <center style="margin-top: 2%;">
+            <!-- Pagination  -->
+            {% if pagination %}
+            
+            {% import "_macros.html" as macros %}
+            <div class="pagination justify-content-center">{{ macros.pagination_widget(pagination, 'community') }}
+            </div>
+            {% endif %}
+        </div>
+    </center>
+    
+<div  class="container mb-2" style="margin-top:4%;">
+{% if current_user.is_authenticated %}
+    <form method="POST" class="ques-post">
+    <h2 class="comm-ques-heading">Have Questions ?</h2>
+    <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+        {{ form.header.label(class="form-control-label") }}
+        {% if form.header.errors %}
+        {{ form.header(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.header.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.header(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.text.label(class="form-control-label") }}
+        {% if form.text.errors %}
+        {{ form.text(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.text.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.text(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+        <center>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info login-btn") }}
+        </div>
+        </center>
+    </form>
+    </form>
+{% endif %} 
+</div>
+{% endblock %}

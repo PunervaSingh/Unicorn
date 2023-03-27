@@ -56,6 +56,36 @@
       {% if project.user == current_user.id and project.validated == 1 and not project.rnd %} 
       <a class="btn btn-success" href="{{url_for('profit', project_id=project.id)}}"> Add project projection & generate profit </a>
       {% endif %}
+      <div class="button-div">
+        {% if current_user.position == 'Validator' and not project.validated %}
+        <form method="POST" action="" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <div class="form-group">
+              {{ form.submit(class="btn btn-dark") }}
+            </div>
+          </fieldset>
+        </form>
+        {% elif current_user.position == 'Mentor' and not project.mentor and not current_user.requested %}
+        <form method="POST" action="" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <div class="form-group">
+              {{ form.submit(class="btn btn-dark") }}
+            </div>
+          </fieldset>
+        </form>
+        {% elif current_user.position == 'Mentor' and project.mentor==current_user.id %}
+        <button class="btn individual-idea-btn" style="cursor: not-allowed;">Start Mentoring</button>
+        {% elif current_user.position == 'Mentor' and not project.mentor and current_user.requested==1 %}
+        <button class="btn individual-idea-btn" style="cursor: not-allowed;">One request pending</button>
+        {% elif current_user.position == 'Mentor' and project.mentor %}
+        <button class="btn individual-idea-btn" style="cursor: not-allowed;">Already have a mentor assigned</button>
+        {% elif current_user.position == 'Funding Agent' or current_user.position == 'Investor' %}
+          <!-- <button class="btn individual-idea-btn" ></button> -->
+          <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LPAYGcfWkP5bdY" async> </script> </form>
+        {% endif %}
+      </div>
     </div>
     <div class="col-3">
       <h6>Industry Type
@@ -124,37 +154,5 @@
     </div>
   </div>
 </div>
-
-
-    <div class="button-div">
-      {% if current_user.position == 'Validator' and not project.validated %}
-      <form method="POST" action="" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-          <div class="form-group">
-            {{ form.submit(class="btn btn-dark") }}
-          </div>
-        </fieldset>
-      </form>
-      {% elif current_user.position == 'Mentor' and not project.mentor and not current_user.requested %}
-      <form method="POST" action="" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-          <div class="form-group">
-            {{ form.submit(class="btn btn-dark") }}
-          </div>
-        </fieldset>
-      </form>
-      {% elif current_user.position == 'Mentor' and project.mentor==current_user.id %}
-      <button class="btn individual-idea-btn" style="cursor: not-allowed;">Your Project</button>
-      {% elif current_user.position == 'Mentor' and not project.mentor and current_user.requested==1 %}
-      <button class="btn individual-idea-btn" style="cursor: not-allowed;">One request pending</button>
-      {% elif current_user.position == 'Mentor' and project.mentor %}
-      <button class="btn individual-idea-btn" style="cursor: not-allowed;">Already have a mentor assigned</button>
-      {% elif current_user.position == 'Funding Agent' or current_user.position == 'Investor' %}
-        <!-- <button class="btn individual-idea-btn" ></button> -->
-        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_LPAYGcfWkP5bdY" async> </script> </form>
-      {% endif %}
-    </div>
 </div>
 {% endblock %} 

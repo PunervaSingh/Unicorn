@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<!-- Link to respective CSS stylesheet -->
+
+{% endblock %}
+
+{% block content %}
+<div style="padding-top:100px"class="page-header container col-lg-6 col-md-6 col-sm-12 main-con">
+    <h1>Edit Post</h1>
+
+    <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.header.label(class="form-control-label") }}
+            {% if form.header.errors %}
+            {{ form.header(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.header.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.header(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.text.label(class="form-control-label") }}
+            {% if form.text.errors %}
+            {{ form.text(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.text.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.text(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info login-btn") }}
+                </div>
+            </div>
+            <div class="col-9"></div>
+            <div class="col-1">
+                <div class="form-group">
+                    {{ form.delete(class="btn btn-danger delete-btn") }}
+                </div>
+            </div>
+        </div>
+      </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ pagedown.include_pagedown() }}
+{% endblock %}

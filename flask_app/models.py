@@ -4,6 +4,7 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
 from flask_app import db, login_manager,app
+from datetime import datetime
 from flask_login import UserMixin
 # from sqlalchemy.dialects.postgresql import ARRAY
 
@@ -28,11 +29,47 @@ class User(db.Model, UserMixin):
     mentor = db.Column(db.Integer)
     requested = db.Column(db.Boolean , default= False)
     assigned = db.Column(db.Boolean , default= False)
+    posts = db.relationship('Post', backref='author', lazy='dynamic',passive_deletes=True)
+    comments = db.relationship('Comment', backref='author', lazy='dynamic',passive_deletes=True)
+    post_liked = db.relationship('PostLike',foreign_keys='PostLike.user_id',backref='user', lazy='dynamic',passive_deletes=True)
+    comment_liked = db.relationship('CommentLike',foreign_keys='CommentLike.user_id',backref='user', lazy='dynamic',passive_deletes=True)
     # village_based = db.Column(db.Boolean , default= False)
     # tier_based = db.Column(db.Boolean , default= False)
     # location = db.Column(db.String(100))
-
     # project = db.relationship('Projects',backref='user',lazy=True)
+
+    def like_post(self, post):
+        if not self.has_liked_post(post):
+            like = PostLike(user_id=self.id, post_id=post.id)
+            db.session.add(like)
+
+    def unlike_post(self, post):
+        if self.has_liked_post(post):
+            PostLike.query.filter_by(
+                user_id=self.id,
+                post_id=post.id).delete()
+
+    def has_liked_post(self, post):
+        return PostLike.query.filter(
+            PostLike.user_id == self.id,
+            PostLike.post_id == post.id).count() > 0
+
+    def like_comment(self, comment):
+        if not self.has_liked_comment(comment):
+            like = CommentLike(user_id=self.id, comment_id=comment.id)
+            db.session.add(like)
+
+    def unlike_comment(self, comment):
+        if self.has_liked_comment(comment):
+            CommentLike.query.filter_by(
+                user_id=self.id,
+                comment_id=comment.id).delete()
+
+    def has_liked_comment(self, comment):
+        return CommentLike.query.filter(
+            CommentLike.user_id == self.id,
+            CommentLike.comment_id == comment.id).count() > 0
+
     def get_reset_token(self, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
@@ -280,3 +317,38 @@ class Gift(db.Model):
 
     def __repr__(self):
         return f"Program('{self.name}','{self.customization}','{self.address}','{self.item}','{self.phone}','{self.email}','{self.msg}')"
+    
+class PostLike(db.Model):
+    __tablename__ = 'post_like'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"),nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"),nullable=False)
+
+class CommentLike(db.Model):
+    __tablename__ = 'comment_like'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"),nullable=False)
+    comment_id = db.Column(db.Integer, db.ForeignKey('comments.id', ondelete="CASCADE"),nullable=False)
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(5000))
+    header = db.Column(db.String(500))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"),nullable=False)
+    comments = db.relationship('Comment', backref='post', lazy='dynamic', passive_deletes=True )
+    posts_like = db.relationship('PostLike', backref='like', lazy='dynamic',passive_deletes=True)
+    profile_pic = db.Column(db.String(), nullable=True, default='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+    views = db.Column(db.Integer)
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(5000))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete="CASCADE"),nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"),nullable=False)
+    comments_like = db.relationship('CommentLike', backref='like', lazy='dynamic',passive_deletes=True)
+    profile_pic = db.Column(db.String(), nullable=True, default='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+

@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from flask_app.models import User
 from flask_login import current_user
 import string
+# from flask_pagedown.fields import PageDownField
 
 
 class RegistrationForm(FlaskForm):
@@ -399,3 +400,14 @@ class Profit_Projection(FlaskForm):
     profit = IntegerField('Profit')
     administration = IntegerField('Administration')
     submit = SubmitField('Produce Profit Projection')
+
+class PostForm(FlaskForm):
+    header = StringField("Write header here", validators=[DataRequired()])
+    text = StringField("Write your query here", validators=[DataRequired()])
+    delete =  SubmitField("Delete")
+    submit = SubmitField('Post')
+
+class CommentForm(FlaskForm):
+    body = StringField('Enter your answer', validators=[DataRequired()])
+    delete =  SubmitField("Delete")
+    submit = SubmitField('Submit')

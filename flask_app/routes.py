@@ -1,15 +1,16 @@
 from flask_app import app
 import secrets
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request, current_app, jsonify
-from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection
-from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift
+from flask import render_template, url_for, flash, redirect, request, make_response, abort, current_app, jsonify
+from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm
+from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_app import db, bcrypt, admin, mail
 from flask_admin.contrib.sqla import ModelView
 from flask_app.decorators import admin_required
 from flask_mail import Message
 from werkzeug.utils import secure_filename
+from datetime import datetime, timedelta, date
 import uuid as uuid
 import os
 # import numpy as np
@@ -17,12 +18,14 @@ import os
 # import seaborn as sns
 # import matplotlib.pyplot as plt
 import pickle
-import sklearn
+# import sklearn
 
 
-model = pickle.load(open("D:/github/Devcation/Unicorn/flask_app/model.pkl", 'rb'))
+model = pickle.load(open("/Users/punerva/Downloads/Unicorn/flask_app/model.pkl", 'rb'))
 
-app.config['UPLOAD_FOLDER'] = 'D:/github/Devcation/Unicorn/flask_app/static/img'
+app.config['UPLOAD_FOLDER'] = '/Users/punerva/Downloads/Unicorn/flask_app/static/img'
+app.config['POSTS_PER_PAGE'] = 9
+app.config['FLASKY_COMMENTS_PER_PAGE'] = 9
 
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home/', methods=('GET', 'POST'))
@@ -305,7 +308,7 @@ def mentorship_counsellor():
     form = Mentor_Request() 
     if form.validate_on_submit():
         notification = Notification(
-            user_id = current_user.id, 
+            user_id = current_user._get_current_object(), 
             recipient_id = request.form['text'],
             project_id = request.form['txt'],
             message = f'''A startUp wants you to be their mentor. Click on the following link to visit project link: '''
@@ -853,6 +856,10 @@ def special_offers():
 def partners():
     return render_template('partners.html')
 
+@app.route("/guide")
+def guide():
+    return render_template('guide.html')
+
 @app.route("/trending_startups", methods=['GET', 'POST'])
 def trending_startups():
     origin = request.args.get('country')
@@ -879,9 +886,21 @@ def brand_name():
         output = query({
             "inputs": input,
         })
-        print(output[0]["generated_text"])
+        print(output)
         output = output[0]["generated_text"]
-        return render_template('brand_name.html', output=output, form=form)
+
+        r = requests.post(
+            "https://api.deepai.org/api/logo-generator",
+            data={
+                "text": input,
+            },
+            headers={'api-key': 'quickstart-QUdJIGlzIGNvbWluZy4uLi4K'}
+        )
+        output_img = r.json()
+        output_img = output_img['output_url']
+        print(output_img)
+
+        return render_template('brand_name.html', output=output, form=form, output_img=output_img)
     return render_template('brand_name.html', form=form)
 
 @app.route("/gifting", methods=['GET', 'POST'])
@@ -927,6 +946,139 @@ def market_analysis():
 @app.route("/about")
 def about():
     return render_template('about.html')
+
+# Community Page
+@app.route('/community', methods=['GET', 'POST'])
+def community():
+    user = User.query.all()
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(
+            text=form.text.data,
+            header=form.header.data,
+            views=0,
+            user_id=current_user.id,
+            profile_pic = current_user.profile_pic,
+            timestamp = datetime.now()
+        )
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('community'))
+    ques = request.args.get('ques')
+    if ques:
+        query = Post.query.filter(Post.header.contains(ques) | Post.text.contains(ques))
+    else:
+        query = Post.query
+    pagination = query.order_by(Post.timestamp.desc()).paginate(
+                per_page=current_app.config['POSTS_PER_PAGE'],error_out=False)
+    posts = pagination.items
+
+    return render_template('community.html', form=form, posts=posts, pagination=pagination, user=user)
+
+# Post page
+@app.route('/post/<int:id>', methods=['GET', 'POST'])
+def post(id):
+    post = Post.query.get_or_404(id)
+    user = User.query.all()
+    post_upvote=PostLike.query.filter_by(post_id=id).count()
+    post.views += 1
+    db.session.commit()
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(text = form.body.data,
+                            post_id = id,
+                            author_id = current_user.id,
+                            profile_pic = current_user.profile_pic,
+                            timestamp = datetime.now()
+                        )
+        db.session.add(comment)
+        db.session.commit()
+        flash('Your comment has been published.')
+        return redirect(url_for('community', id=post.id))
+    page = request.args.get('page', 1, type=int)
+    if page == -1:
+        page = (post.comments.count() - 1) // \
+            current_app.config['FLASKY_COMMENTS_PER_PAGE'] + 1
+    pagination = post.comments.order_by(Comment.timestamp.asc()).paginate(
+        page=page, per_page=current_app.config['FLASKY_COMMENTS_PER_PAGE'],
+        error_out=False)
+
+    comments = pagination.items
+    
+    return render_template('post.html', posts=[post], form=form,
+                           comments=comments, pagination=pagination, post_upvote=post_upvote,
+                           user=user)
+
+# Edit Post page
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    post = Post.query.get_or_404(id)
+    form = PostForm()
+    if form.validate_on_submit():
+        if form.submit.data:
+                post.text = form.text.data
+                post.header = form.header.data
+                db.session.add(post)
+                db.session.commit()
+                flash('The post has been updated.')
+                return redirect(url_for('post', id=post.id))
+        elif form.delete.data:
+                Post.query.filter_by(id=post.id).delete()
+                db.session.commit()
+                flash('The post has been Deleted.')
+                return redirect(url_for('community'))
+    form.text.data = post.text
+    form.header.data = post.header
+    return render_template('edit_post.html', form=form)
+
+@app.route('/like-post/<int:post_id>/<action>')
+@login_required
+def like_post_action(post_id, action):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    if action == 'like':
+        current_user.like_post(post)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unlike_post(post)
+        db.session.commit()
+    return redirect(request.referrer)
+
+@app.route('/like-comment/<int:comment_id>/<action>')
+@login_required
+def like_comment_action(comment_id, action):
+    comment = Comment.query.filter_by(id=comment_id).first_or_404()
+    if action == 'like':
+        current_user.like_comment(comment)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unlike_comment(comment)
+        db.session.commit()
+    return redirect(request.referrer)
+
+# Edit Comment page
+@app.route('/edit-comment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_comment(id):
+    comment = Comment.query.get_or_404(id)
+    if current_user != comment.author :
+        abort(403)
+    form = CommentForm()
+    if form.validate_on_submit():
+        if form.submit.data:
+                comment.text = form.body.data
+                db.session.add(comment)
+                db.session.commit()
+                flash('The Answer has been updated.')
+                return redirect(url_for('.post', id=comment.post_id))
+        elif form.delete.data:
+                Comment.query.filter_by(id=comment.id).delete()
+                db.session.commit()
+                flash('The Answer has been Deleted.')
+                return redirect(url_for('.post', id=comment.post_id))
+    
+    form.body.data = comment.text
+    return render_template('edit_comment.html', form=form)
 
 @app.route('/mentor_profile/<int:user_id>', methods=['GET', 'POST'])
 @login_required

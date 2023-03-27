@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<!-- Link to respective CSS stylesheet -->
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Post Page
+  </h3>
+<div class="container col-lg-6 col-md-6 col-sm-12 main-con" style="padding: 2%; padding-top: 150px;">
+    <h2 id="comments text-success">Post</h2>
+    {% include '_posts.html' %}
+    <h3 id="comments text-success">Answers</h3>
+
+    {% include '_comments.html' %}
+    {% if current_user.is_authenticated %}
+    <div class="comment-form" style="margin-right: 32px;">
+    <form class="form form-horizontal" method="post" role="form">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.body.label(class="form-control-label") }}
+            {% if form.body.errors %}
+            {{ form.body(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.body.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.body(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <center>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info login-btn") }}
+            </div>
+        </center>
+      </form>
+
+    </div>
+    {% endif %}
+
+    {% if pagination %}
+    <div class="pagination justify-content-center" style="margin-top: 4%;">
+        {% import "_macros.html" as macros %}
+
+        {{ macros.pagination_widget(pagination, 'post', fragment='#comments', id=posts[0].id) }}
+    </div>
+
+</div>
+{% endif %}
+{% endblock %}

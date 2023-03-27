@@ -6,11 +6,68 @@
   rel="stylesheet"
   href="{{url_for('static', filename='css/profile.css')}}"
 />
+<style>
+  .tab {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+}
+.tab button {
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px;
+    transition: 0.3s;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 50px;
+    border: 1px solid gray;
+}
+.tab button:hover {
+  background-color: #d16060;
+  color: white;
+}
+.tab button.active {
+  background-color: #000000;
+  color: white;
+}
+.tabcontent {
+    display: none;
+    padding: 25px 15px 5px 15px;
+    border-top: none;
+}
+.tablinks {
+  border-radius: 25px;
+}
+.hr {
+    color: black;
+    /* z-index: 99; */
+    border: 2px dotted #000;
+    width: 10%;
+    border-style: none none solid; 
+    margin-top: 30px;
+    margin-left: 30px;
+}
+.hr2 {
+    color: black;
+    /* z-index: 99; */
+    border: 4px dotted #000;
+    width: 15%;
+    border-style: none none dotted; 
+    margin-top: 30px;
+    margin-left: 30px;
+}
+.gree {
+  background-color: #28a745; 
+  color: white;
+}
+</style>
 {% endblock %} {% block content %}
 <div class="profile-div container">
   <div style="float: right; display: flex">
     <!-- <p class="tierI-II-tag">Tier I/ Tier II</p> -->
-    <p class="location-tag">
+    <p class="location-tag show-on-scroll inline-photo">
       <svg
         class="location-icon"
         xmlns="http://www.w3.org/2000/svg"
@@ -30,32 +87,32 @@
       Location - {{ user.address }}
     </p>
   </div>
-  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">PROFILE</h1>
+  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem" class="show-on-scroll inline-photo">PROFILE</h1>
   <div class="row">
     <div class="col-7">
-      <input type="text" name="Name" id="" placeholder="Name: {{ user.name }}" readonly/>
-      <input type="text" name="email" id="" placeholder="Email: {{ user.email }}" readonly/>
-      <!-- <input type="text" name="profile" id="" placeholder="link" /> -->
-      <input type="text" name="positions" id="" placeholder="Position: {{ user.position }}" readonly/>
-      <input type="text" name="phone" id="" placeholder="Phone: {{ user.phone }}" readonly/>
-      <input type="text" name="validation" id="" placeholder="Validation Status: {{ user.validated }}" readonly/>
-      <!-- <input type="text" placeholder={{ user.profile_pic }}> -->
+      <input class="show-on-scroll inline-photo" type="text" name="Name" id="" placeholder="Name: {{ user.name }}" readonly/>
+      <input class="show-on-scroll inline-photo" type="text" name="email" id="" placeholder="Email: {{ user.email }}" readonly/>
+      <!-- <input class="show-on-scroll inline-photo" type="text" name="profile" id="" placeholder="link" /> -->
+      <input class="show-on-scroll inline-photo" type="text" name="positions" id="" placeholder="Position: {{ user.position }}" readonly/>
+      <input class="show-on-scroll inline-photo" type="text" name="phone" id="" placeholder="Phone: {{ user.phone }}" readonly/>
+      <input class="show-on-scroll inline-photo" type="text" name="validation" id="" placeholder="Validation Status: {{ user.validated }}" readonly/>
+      <!-- <input class="show-on-scroll inline-photo" type="text" placeholder={{ user.profile_pic }}> -->
       <!-- <label for="">Gender</label> -->
-      <!-- <input type="text" name="positions" id="" placeholder={{ user.gender }} /> -->
+      <!-- <input class="show-on-scroll inline-photo" type="text" name="positions" id="" placeholder={{ user.gender }} /> -->
       {% if user.id == current_user.id %}
       {% if not current_user.open_to_work and not current_user.position %}
-      <a class="underline-small work-apply" href="{{url_for('open_to_work')}}">Open to work?
+      <a class="underline-small work-apply show-on-scroll inline-photo" href="{{url_for('open_to_work')}}">Open to work?
         <svg style="height: 20px; width: 20px; color: #F37878; font-weight: bold;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
         </svg>
       </a>
       {% endif %}
       {% if current_user.open_to_work %}
-        <input type="text" name="work" id="" placeholder="Work Status: Open to work" readonly/>
+        <input class="show-on-scroll inline-photo" type="text" name="work" id="" placeholder="Work Status: Open to work" readonly/>
       {% endif %}
       {% endif %}
     </div>
-    <div class="col-5">
+    <div class="col-5 show-on-scroll inline-photo">
       {% if current_user.profile_pic.startswith('http') %}
       <img class="profile-img" src={{current_user.profile_pic}} alt="">
       {% else %} 
@@ -73,19 +130,162 @@
       {% endif %}
     </div>
   </div>
+  
+  {% if user.id == current_user.id %} 
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem; margin-right: 30px; margin-top: 100px; margin-bottom: 50px;">UNICORN Walkthrough for {{ user.position }}</h1>
 
+  <div class="tab">
+    <button class="tablinks show-on-scroll inline-photo gree" id="One">Register</button>
+    <hr class="hr show-on-scroll inline-photo"/>
+    <button class="tablinks show-on-scroll inline-photo gree" id="Two">Login</button>
+    <hr class="hr show-on-scroll inline-photo"/>
+    <button class="tablinks show-on-scroll inline-photo gree" id="Three">Choose Position</button>
+    <hr class="hr2 show-on-scroll inline-photo"/>
+    <button class="tablinks  active show-on-scroll inline-photo" style="background-color: #d16060; color: white;" id="Four">Features Unlocked</button>
+  </div>
+  
+  <div id="One" class="tabcontent show-on-scroll inline-photo">
+    <h3>Register</h3>
+    <p>Register by entering the required details.</p>
+  </div>
+  
+  <div id="Two" class="tabcontent show-on-scroll inline-photo">
+    <h3>Login</h3>
+    <p>Loggin to your account by entering the registered email and password.</p> 
+  </div>
+  
+  <div id="Three" class="tabcontent show-on-scroll inline-photo">
+    <h3>Choose Position</h3>
+    <p>As a newly registered user, options will be provided, choose one of them and fill the required application in order to access features available on the platform.</p> 
+  </div>
+  
+  <div id="Four" class="tabcontent show-on-scroll inline-photo">
+    <h3>Features Unlocked</h3>
+    {% if current_user.position == 'Admin' %}
+    <p>- All the pages are available to Admin. 
+      <br>
+      - As an admin, you will have to validate mentors, counsellor and validator registered on UNICORN. 
+      <br>
+      - You can edit/moderate discussions on the community page. 
+      <br>
+      - You can edit/restrict different users on the platform, if they are found violating the terms and conditions of UNICORN. </p> 
+    {% elif current_user.position == 'Mentor' %}
+    <p>COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      STARTUPS - You can see all the startup idea registered on the platform here. Visit any individual page of the startup of your interest to request them for mentoring. You have to be validated by Admin in order to start mentoring.
+      <br>
+      MENTOR/COUNSELLOR - All the registered mentor and counsellor are enlisted here, including your public mentoring profile. To edit information visit profile page, by clicking on your profile image on top right corner.
+      <br>
+      WOMEN ENTREPRENEUR - Women centric schemes, programs and policies are provided on this page.
+      <br>
+      TIER / VILLAGES - Projects/startups from Tier I / Tier II / villages and women oriented can be filtered on this page.
+    </p> 
+    {% elif current_user.position == 'Counsellor' %}
+    <p>COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      STARTUPS - You can see all the startup idea registered on the platform here. Wait for the notifification and email which you will receive when a startup books you for counselling.
+      <br>
+      MENTOR/COUNSELLOR - All the registered mentor and counsellor are enlisted here, including your public mentoring profile. To edit information visit profile page, by clicking on your profile image on top right corner.
+      <br>
+      WOMEN ENTREPRENEUR - Women centric schemes, programs and policies are provided on this page.
+      <br>
+      TIER / VILLAGES - Projects/startups from Tier I / Tier II / villages and women oriented can be filtered on this page.
+    </p> 
+    {% elif current_user.position == 'Validator' %}
+    <p>COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      STARTUPS - You can see all the startup idea registered on the platform here. Visit any individual page of the startup of your interest to validate the idea. You have to be validated by Admin in order to start validating startup ideas.
+      <br>
+      TIER / VILLAGES - Projects/startups from Tier I / Tier II / villages and women oriented can be filtered on this page.
+    </p> 
+    {% elif current_user.position == 'Legal Advisor' %}
+    <p>COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      LEGAL ISSUES - All the leagl advisors registered on the page can be viewed here, including your public legal profile. To edit information visit profile page, by clicking on your profile image on top right corner.
+      <br>
+      ADVERTISEMENT - You can view all the advertisement agents and e-advertisement guideline on this page.
+    </p> 
+    {% elif current_user.position == 'StartUp' %}
+    <p>
+      COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      IDEA GENERATION - You can submit your million dollar idea on this page, and get that validated by professional validators.
+      <br>
+      STARTUPS - You can see all the startup idea registered on the platform here, including you idea. You can visit your idea's individual page to get all the information regarding it, and it's current status. To edit the information, visit your profile page by clicking on your profile pic given on the top right corner.
+      <br>
+      MENTOR/COUNSELLOR - All the registered mentor and counsellor are enlisted here, send a request to mentor of your choice.
+      <br>
+      LEGAL ISSUES - All the leagl advisors registered on the page can be viewed here. Connect with them to get legal advices.
+      <br>
+      WOMEN ENTREPRENEUR - Women centric schemes, programs and policies are provided on this page.
+      <br>
+      TIER / VILLAGES - Projects/startups from Tier I / Tier II / villages and women oriented can be filtered on this page.
+      <br>
+      LINKAGE AGENTS - All the linkage agents / suppliers are listed on this page.
+      <br>
+      TEAM BUILDING HIRING - View all the available people for work, or brodcast open position in your startup.
+      <br>
+      ADVERTISEMENT - You can view all the advertisement agents and e-advertisement guideline on this page.
+      <br>
+      SPONSORSHIP / INVESTMENT - Connect with investors and view government sponsored scheme on this page.
+      <br>
+    </p>
+    {% elif current_user.position == 'Funding Agent' %}
+    <p>
+      COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      STARTUPS - You can see all the startup idea registered on the platform here. You can visit individual page of startup of your interest and invest by clicking 'Invest Now' button.
+      <br>
+      TIER / VILLAGES - Projects/startups from Tier I / Tier II / villages and women oriented can be filtered on this page.
+      <br>
+      ADVERTISEMENT - You can view all the advertisement agents and e-advertisement guideline on this page.
+      <br>
+      SPONSORSHIP / INVESTMENT - Connect with investors and view government sponsored scheme on this page. Your public job profile can be viewed here, to edit it visit your profile page by clicking on your profile pic given in top right corner.
+      <br>
+    </p> 
+    {% elif current_user.position == 'Linkage Agent' %}
+    <p>
+      COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      LINKAGE AGENTS - All the linkage agents / suppliers are listed on this page. Your public job profile can be viewed here, to edit it visit your profile page by clicking on your profile pic given in top right corner.
+      <br>
+      ADVERTISEMENT - You can view all the advertisement agents and e-advertisement guideline on this page.
+      <br>
+    </p> 
+    {% elif current_user.position == 'Advertisement Agent' %}
+    <p>
+      COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      ADVERTISEMENT - You can view all the advertisement agents and e-advertisement guideline on this page. Your public advertisement profile is also visible. To edit it visit your profile page by clicking on your profile pi given on top right corner.
+      <br>
+    </p> 
+    {% elif current_user.position == 'Job Seeker' %}
+    <p>
+      COMMUNITY - Connect and discuss with people from around the world through community page.
+      <br>
+      WOMEN ENTREPRENEUR - Women centric schemes, programs and policies are provided on this page.
+      <br>
+      TEAM BUILDING HIRING - Visit this page, to view all the available positions in the startups registered on our platform.
+      <br>
+    </p> 
+    {% else %} 
+    <p>Please get assigned a position first.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+  
   {% if user.id == current_user.id and current_user.position=='StartUp' %}
   {% for project in projects %}
   {% if project.user==current_user.id %}
-  <div class="tab" style="display: flex; margin-top: 80px">
-    <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">
+  <div  style="display: flex; margin-top: 80px">
+    <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem">
       STARTUP STATUS
     </h1>
   </div>
-  <div id="Received" class="tabcontent" style="display: block">
+  <div id="Received" style="display: block">
     <table>
       <tbody>
-        <tr>
+        <tr class="show-on-scroll inline-photo">
           <th scope="row">Idea Validation</th>
           {% if project.validated == 1 %}
           <td>Validated</td>
@@ -93,7 +293,7 @@
           <td>Not Validated</td>
           {% endif %}
         </tr>
-        <tr>
+        <tr class="show-on-scroll inline-photo">
           <th scope="row">Mentors / Counsellor</th>
           <td><a class="name-tag" href="{{url_for('profile', user_id=project.mentor)}}">Name</a></td>
         </tr>
@@ -140,24 +340,24 @@
   <!-- projects -->
   {% for project in projects %}
   {% if project.user==current_user.id %}
-  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">STARTUP</h1>
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('project_profile', user_id=project.id)}}">Update Details</a>
-  <input type="text" placeholder="Profile link: {{ project.profile }}"></input>
-  <input type="text" placeholder="Project Name: {{ project.name }}"></input>
-  <input type="text" placeholder="Phone: {{ project.phone }}"></input>
-  <input type="text" placeholder="Idea: {{ project.idea }}"></input>
-  <input type="text" placeholder="Validation Status: {{ project.validated }}"></input>
-  <input type="text" placeholder="Category: {{ project.category }}"></input>
-  <input type="text" placeholder="Industry: {{ project.industry }}"></input>
-  <input type="text" placeholder="Country: {{ project.country }}"></input>
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">STARTUP</h1>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('project_profile', user_id=project.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Profile link: {{ project.profile }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Project Name: {{ project.name }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Phone: {{ project.phone }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Idea: {{ project.idea }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Validation Status: {{ project.validated }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Category: {{ project.category }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Industry: {{ project.industry }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Country: {{ project.country }}"></input>
   {% if project.village %}
-  <input type="text" placeholder="Village Based"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Village Based"></input>
   {% endif %}
   {% if project.tier %}
-  <input type="text" placeholder="Belong to TierI / TierII"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Belong to TierI / TierII"></input>
   {% endif %}
   {% if project.women %}
-  <input type="text" placeholder="Women Oriented"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Women Oriented"></input>
   {% endif %}
   {% endif %}
   {% endfor %}
@@ -168,10 +368,10 @@
   <br>
   <br>
   <br>
-  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">POSITIONS</h1>
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('positions_profile', user_id=position.id)}}">Update Details</a>
-  <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
-  <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">POSITIONS</h1>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('positions_profile', user_id=position.id)}}">Update Details</a>
+  <div class="msg show-on-scroll inline-photo" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
+  <div class="msg show-on-scroll inline-photo" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 0;">
   {% if (0.1*(position.total_workforce + position.number_open)) > position.female_workforce %} 
   {% if ((0.1*(position.total_workforce + position.number_open)) - position.female_workforce) >= 1 %} 
   <span style="font-weight: bold;">Therefore, for this position currently, female employees required: {{ ((0.1*(position.total_workforce + position.number_open)) - position.female_workforce) | round }}</span>
@@ -183,17 +383,17 @@
   {% endif %} 
   {% endif %} 
   </div>
-  <input type="text" placeholder="Project Name: {{ position.project_name }}"></input>
-  <input type="text" placeholder="Job Title: {{ position.job_title }}"></input>
-  <input type="text" placeholder="Job Description: {{ position.job_description }}"></input>
-  <input type="text" placeholder="No of positions open: {{ position.number_open }}"></input>
-  <input type="text" placeholder="Duration: {{ position.duration }}"></input>
-  <input type="text" placeholder="Stipend: {{ position.stipend }}"></input>
-  <input type="text" placeholder="Paid/Unpaid option: {{ position.paid_unpaid }}"></input>
-  <input type="text" placeholder="Inoffice/Work from home office: {{ position.inoffice_wfh }}"></input>
-  <input type="text" placeholder="Location: {{ position.location }}"></input>
-  <input type="text" placeholder="Email: {{ position.email }}"></input>
-  <input type="text" placeholder="Conatnt no.: {{ position.phone }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Project Name: {{ position.project_name }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Job Title: {{ position.job_title }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Job Description: {{ position.job_description }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="No of positions open: {{ position.number_open }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Duration: {{ position.duration }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Stipend: {{ position.stipend }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Paid/Unpaid option: {{ position.paid_unpaid }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Inoffice/Work from home office: {{ position.inoffice_wfh }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Location: {{ position.location }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Email: {{ position.email }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Conatnt no.: {{ position.phone }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -202,20 +402,20 @@
   <br>
   <br>
   
-  {% if user.id == current_user.id and not current_user.position=='StartUp' %}
-  <h1 style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">JOB PROFILE</h1>
+  {% if user.id == current_user.id and not current_user.position=='StartUp' and not current_user.position=='Admin' %}
+  <h1 class="show-on-scroll inline-photo" style="font-weight: 400; font-style: italic; font-size: 3rem; float: left; margin-right: 30px;">JOB PROFILE</h1>
   {% endif %}
 
   {% if user.id == current_user.id and ( current_user.position=='Mentor' or current_user.position=='Counsellor') %}
   {% for mentor in mentors %}
   {% if mentor.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('mentor_profile', user_id=mentor.id)}}">Update Details</a>
-  <input type="text" placeholder="year of experience: {{ mentor.year }}"></input>
-  <input type="text" placeholder="cost per session: {{ mentor.cost }}"></input>
-  <input type="text" placeholder="Choice(Mentor / Counsellor): {{ mentor.choice }}"></input>
-  <input type="text" placeholder="Area of expertise: {{ mentor.expertise }}"></input>
-  <input type="text" placeholder="availability: {{ mentor.availability }}"></input>
-  <input type="text" placeholder="profile link: {{ mentor.profile }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('mentor_profile', user_id=mentor.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="year of experience: {{ mentor.year }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="cost per session: {{ mentor.cost }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Choice(Mentor / Counsellor): {{ mentor.choice }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="Area of expertise: {{ mentor.expertise }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="availability: {{ mentor.availability }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="profile link: {{ mentor.profile }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -223,8 +423,8 @@
   {% if user.id == current_user.id and current_user.position=='Validator' %}
   {% for v in validator %}
   {% if v.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('validator_profile', user_id=v.id)}}">Update Details</a>
-  <input type="text" placeholder="profile link: {{ v.profile }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('validator_profile', user_id=v.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="profile link: {{ v.profile }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -232,17 +432,17 @@
   {% if user.id == current_user.id and current_user.position=='Legal Advisor' %}
   {% for legal in legals %}
   {% if legal.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('legal_profile', user_id=legal.id)}}">Update Details</a>
-  <input type="text" placeholder="profile link: {{ legal.profile  }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('legal_profile', user_id=legal.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="profile link: {{ legal.profile  }}"></input>
   <textarea style="width: 100%; height: 50px;" type="text" placeholder="description: {{ legal.description }}"></textarea>
-  <input type="text" placeholder="city: {{ legal.city }}"></input>
-  <input type="text" placeholder="country: {{ legal.country }}"></input>
-  <input type="text" placeholder="role: {{ legal.role }}"></input>
-  <input type="text" placeholder="awards: {{ legal.awards }}"></input>
-  <input type="text" placeholder="cases: {{ legal.cases }}"></input>
-  <input type="text" placeholder="advises: {{ legal.advised }}"></input>
-  <input type="text" placeholder="union: {{ legal.union }}"></input>
-  <input type="text" placeholder="year_of_experience: {{ legal.year }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="city: {{ legal.city }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="country: {{ legal.country }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="role: {{ legal.role }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="awards: {{ legal.awards }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="cases: {{ legal.cases }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="advises: {{ legal.advised }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="union: {{ legal.union }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="year_of_experience: {{ legal.year }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -250,13 +450,13 @@
   {% if user.id == current_user.id and current_user.position=='Funding Agent' %}
   {% for funding in fundings %}
   {% if funding.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('funding_profile', user_id=funding.id)}}">Update Details</a>
-  <input type="text" placeholder="profile link: {{ funding.profile }}"></input>
-  <input type="text" placeholder="country: {{ funding.country }}"></input>
-  <input type="text" placeholder="description: {{ funding.description }}"></input>
-  <input type="text" placeholder="investment: {{ funding.investment }}"></input>
-  <input type="text" placeholder="role: {{ funding.role }}"></input>
-  <input type="text" placeholder="open_to: {{ funding.open_to }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('funding_profile', user_id=funding.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="profile link: {{ funding.profile }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="country: {{ funding.country }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="description: {{ funding.description }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="investment: {{ funding.investment }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="role: {{ funding.role }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="open_to: {{ funding.open_to }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -264,14 +464,14 @@
   {% if user.id == current_user.id and current_user.position=='Linkage Agent' %}
   {% for agent in linkages %}
   {% if agent.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('linkage_profile', user_id=agent.id)}}">Update Details</a>
-  <input type="text" placeholder="company name: {{ agent.name }}"></input>
-  <input type="text" placeholder="link: {{ agent.link }}"></input>
-  <input type="text" placeholder="description: {{ agent.description }}"></input>
-  <input type="text" placeholder="state: {{ agent.state }}"></input>
-  <input type="text" placeholder="country: {{ agent.country }}"></input>
-  <input type="text" placeholder="service: {{ agent.service }}"></input>
-  <input type="text" placeholder="open_to: {{ agent.open_to }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('linkage_profile', user_id=agent.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="company name: {{ agent.name }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="link: {{ agent.link }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="description: {{ agent.description }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="state: {{ agent.state }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="country: {{ agent.country }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="service: {{ agent.service }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="open_to: {{ agent.open_to }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -279,12 +479,12 @@
   {% if user.id == current_user.id and current_user.position=='Advertisement Agent' %}
   {% for advertiser in advertisers %}
   {% if advertiser.user==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('advertiser_profile', user_id=advertiser.id)}}">Update Details</a>
-  <input type="text" placeholder="city: {{ advertiser.city }}"></input>
-  <input type="text" placeholder="country: {{ advertiser.country }}"></input>
-  <input type="text" placeholder="state: {{ advertiser.state }}"></input>
-  <input type="text" placeholder="service: {{ advertiser.service }}"></input>
-  <input type="text" placeholder="availability: {{ advertiser.availability }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('advertiser_profile', user_id=advertiser.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="city: {{ advertiser.city }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="country: {{ advertiser.country }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="state: {{ advertiser.state }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="service: {{ advertiser.service }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="availability: {{ advertiser.availability }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
@@ -292,23 +492,43 @@
   {% if user.id == current_user.id and current_user.position=='Job Seeker' %}
   {% for seeker in seekers %}
   {% if seeker.user_id==current_user.id %}
-  <a class="btn btn-success" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('open_to_work_profile', user_id=seeker.id)}}">Update Details</a>
-  <input type="text" placeholder="gender: {{ seeker.gender }}"></input>
-  <input type="text" placeholder="profession: {{ seeker.profession }}"></input>
-  <input type="text" placeholder="linkedin_link: {{ seeker.linkedin_link }}"></input>
-  <input type="text" placeholder="resume_link: {{ seeker.resume_link }}"></input>
-  <input type="text" placeholder="year_of_experience: {{ seeker.year_of_experience }}"></input>
-  <input type="text" placeholder="portfolio_link: {{ seeker.portfolio_link }}"></input>
-  <input type="text" placeholder="about: {{ seeker.about }}"></input>
-  <input type="text" placeholder="past_experience: {{ seeker.past_experience }}"></input>
-  <input type="text" placeholder="projects: {{ seeker.projects }}"></input>
-  <input type="text" placeholder="courses: {{ seeker.courses }}"></input>
-  <input type="text" placeholder="relocate: {{ seeker.relocate }}"></input>
+  <a class="btn btn-success show-on-scroll inline-photo" style="margin-top: 10px; margin-bottom: 40px;" href="{{url_for('open_to_work_profile', user_id=seeker.id)}}">Update Details</a>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="gender: {{ seeker.gender }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="profession: {{ seeker.profession }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="linkedin_link: {{ seeker.linkedin_link }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="resume_link: {{ seeker.resume_link }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="year_of_experience: {{ seeker.year_of_experience }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="portfolio_link: {{ seeker.portfolio_link }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="about: {{ seeker.about }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="past_experience: {{ seeker.past_experience }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="projects: {{ seeker.projects }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="courses: {{ seeker.courses }}"></input>
+  <input class="show-on-scroll inline-photo" type="text" placeholder="relocate: {{ seeker.relocate }}"></input>
   {% endif %}
   {% endfor %}
   {% endif %}
 </div>
-{% endblock %}
-"
+<script>
+  const buttonElement = document.querySelectorAll('.tablinks');
+const tabContent = document.querySelectorAll(".tabcontent");
 
-: 
+tabContent[3].style.display = "block";
+
+buttonElement.forEach(function (i) {
+    i.addEventListener('click', function (event) {
+
+        for (let x = 0; x < buttonElement.length; x++) {
+            if (event.target.id == buttonElement[x].id) {
+                buttonElement[x].className = buttonElement[x].className.replace(" active", "");
+                tabContent[x].style.display = "block";
+                event.currentTarget.className += " active";
+            } else {
+                tabContent[x].style.display = "none";
+                buttonElement[x].className = buttonElement[x].className.replace(" active", "");
+            }
+        }
+        
+    });
+});
+</script>
+{% endblock %}

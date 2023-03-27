@@ -72,6 +72,7 @@
             <a class="nav-link login-nav-link" href="{{url_for('login')}}">Login</a>
             <a class="nav-link register-nav-link" href="{{url_for('register')}}">Register</a>
             <a class="nav-link register-nav-link" style="right: 22%;" href="{{url_for('about')}}">About Us</a>
+            
             </li>
             <ul id="slidein-list" style="list-style: none; margin: 0;">
               <li class="side-slidein-div" style="top: 30%; ">
@@ -136,6 +137,9 @@
                 <a class="nav-link" href="{{url_for('about')}}"
                 >About Us</a
                 >
+              </li>
+              <li>
+              <a class="nav-link"href="{{url_for('community')}}">Community</a>
               </li>
               {% if current_user.position=='StartUp' or current_user.is_admin == 1 %}
               <li>
@@ -263,6 +267,7 @@
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('bulk_mail')}}">Bulk Mail Promotion Service</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('gifting_service')}}">Gifting service</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('success_stories')}}">Success Stories</a></li>
+              <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('community')}}">Community</a></li>
             </ul>
           </div>
           <div class="col-3">
@@ -270,6 +275,7 @@
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('motivational_corner')}}">Motivational Corner</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('free_resources')}}">Free resource center</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('faq_tnc')}}">FAQs - Terms & Conditions</a></li>
+              <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('guide')}}">Guide</a></li>
             </ul>
           </div>
           <div class="col-3">
@@ -296,10 +302,13 @@
               <div class="col-6" style="display: flex; vertical-align: bottom;">
                 <a class="footer-link" href="https://www.linkedin.com">LinkedIn</a>
                 <a class="footer-link" rel="nofollow noreferrer" href="mailto:punerva21@gmail.com"> Email us </a>
-                <a class="footer-link" href="https://github.com/samya02/WE-Project-Disease-Predictor"> Github Repository </a>
+                <a class="footer-link" href="#"> Github Repository </a>
               </div>
               <div class="col-6" style="text-align: right; right: 140px; font-weight: lighter;">
                 <p style="color:white;margin-top: 30px; color: rgb(95, 91, 91);" class="copyright">© 2023 Unicorn.</p>
+                <a href="https://assistant.google.com/services/invoke/uid/0000000443518a8f/alm/CgS0Yl7HEgIQAQ==?hl=en">
+                  🅖 Link Title
+              </a>
               </div>
             </div>
         </div>
@@ -339,6 +348,9 @@
               'google_translate_element'
           );
       }
+  </script>
+  <script async
+  src="https://actions.google.com/api/assist.js?projectId=medisphere-diagnosis&dev=true">
   </script>
 <script src="../static/js/show.js"></script>
   <script type="text/javascript"

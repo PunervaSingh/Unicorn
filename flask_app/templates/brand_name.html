@@ -15,7 +15,7 @@
       letter-spacing: 1px;
     "
   >
-  Brand Name Generator
+  Brand Name and Logo Generator
   </h3>
   <div class="conatiner" style="padding-top: 200px; width: 70%; margin: auto;">
   <form method="POST" action="" enctype="multipart/form-data">
@@ -44,6 +44,11 @@
   {% if output %} 
   <div class="conatiner" style="padding-top: 20px; width: 70%; margin: auto;">
     <p style="font-size: large;"><b>Output:</b> {{ output }}</p>
+  </div>
+  {% endif %} 
+  {% if output_img %} 
+  <div class="conatiner" style="padding-top: 20px; width: 70%; margin: auto;">
+    <img style="height: 500px; width: 500px;" src={{ output_img }} alt="">
   </div>
   {% endif %} 
 
