@@ -132,18 +132,12 @@ section.card:nth-of-type(odd) {
   border-radius:24px;
 } 
 section.card .text-content h3 { 
-  max-width:calc(100% - 150px);
-  font-size:1em
+  width: 90%;
 }
 section.card .text-content p,a {
   font-size:0.8em
 }
-.visual:nth-of-type(odd) .visual {
-  width:150px;
-  height:150px; 
-  right:16px;left:auto;
+.visual {
+  display: none;
 }
-.visual:nth-of-type(odd) .visual img {
-  width:100%;
-  height:auto
-}}
+}

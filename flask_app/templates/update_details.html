@@ -13,7 +13,7 @@
         <div class="profile-div container">
         <h1 style="font-weight: 400; font-style: italic; font-size: 3rem">UPDATE PROFILE DETAILS</h1>
         <div class="row">
-            <div class="col-7">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="form-group">
                     {{ account_form.name.label(class="form-control-label") }}
                     
@@ -54,6 +54,8 @@
                     {{ account_form.phone(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>    
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="form-group">
                     {{ account_form.address.label(class="form-control-label") }}
                     {% if account_form.address.errors %}
@@ -67,9 +69,10 @@
                     {{ account_form.address(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>  
-                <div class="col-5">
+                <div>
                     {{ account_form.profile_pic.label(class="form-label") }}
                     {{ account_form.profile_pic(class="form-control") }}
+                </div>
                     <!-- <img
                     class="profile-img"
                     src={{ current_user.profile_pic }}
@@ -83,12 +86,12 @@
                             </svg>
                         </a>
                     </div> -->
+                    <div class="form-group" style="margin: 30px 0;">
+                        {{ account_form.submit(class="btn btn-dark") }}
+                    </div>
                 </div>
                 <!-- <input type="text" name="positions" id="" placeholder="Position: {{ current_user.position }}" readonly/>
                 <input type="text" name="validation" id="" placeholder="Validation Status: {{ current_user.validated }}" readonly/> -->
-                <div class="form-group">
-                    {{ account_form.submit(class="btn btn-dark") }}
-                </div>
                 
             </div>
         </div>

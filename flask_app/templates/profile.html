@@ -89,7 +89,7 @@
   </div>
   <h1 style="font-weight: 400; font-style: italic; font-size: 3rem" class="show-on-scroll inline-photo">PROFILE</h1>
   <div class="row">
-    <div class="col-7">
+    <div class="col-lg-7 col-md-12 col-sm-12">
       <input class="show-on-scroll inline-photo" type="text" name="Name" id="" placeholder="Name: {{ user.name }}" readonly/>
       <input class="show-on-scroll inline-photo" type="text" name="email" id="" placeholder="Email: {{ user.email }}" readonly/>
       <!-- <input class="show-on-scroll inline-photo" type="text" name="profile" id="" placeholder="link" /> -->
@@ -112,7 +112,7 @@
       {% endif %}
       {% endif %}
     </div>
-    <div class="col-5 show-on-scroll inline-photo">
+    <div class="col-lg-5 col-md-12 col-sm-12 show-on-scroll inline-photo">
       {% if current_user.profile_pic.startswith('http') %}
       <img class="profile-img" src={{current_user.profile_pic}} alt="">
       {% else %} 

@@ -284,6 +284,14 @@ footer {
     cursor: pointer;
 }
 
+.apply-head {
+    position: absolute;
+    top: 50px;
+    left: 35%;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
 @keyframes example {
     from {left: -150px;}
     to {left: 0px;}
@@ -300,4 +308,63 @@ footer {
 .inline-photo.is-visible {
     opacity: 1;
     transform: rotateY(0);
+}
+
+.ham-log {
+    display: none;
+}
+
+@media (min-width: 789px) and (max-width: 1100px){
+    footer {
+        padding: 50px 50px 10px;
+    }
+    .underline-small {
+        display: none;
+    }
+}
+
+@media (max-width: 800px){ 
+    .apply-head {
+      display: none;
+    }
+
+}
+
+@media (max-width: 768px){
+    footer {
+        padding: 50px 50px 10px;
+    }
+    .underline-small {
+        display: none;
+    }
+    .website-logo {
+        position: absolute;
+    }
+    .navbar {
+        width: 70%;
+    }
+}
+
+@media (max-width: 600px){
+    .header-profile-pic {
+        display: none;
+    }
+    .normal-log {
+        display: none;
+    }
+    .ham-log {
+        display: initial;
+    }
+    .navbar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px){ 
+    .hamburger-menu{
+        right: 20px;
+    }
+    .navbar {
+        width: 100%;
+    }
 }

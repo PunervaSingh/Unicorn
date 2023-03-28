@@ -6,15 +6,7 @@
 
 {% block content %}
 <h3
-    class="underline-small"
-    style="
-      position: absolute;
-      top: 50px;
-      left: 35%;
-      font-weight: 400;
-      letter-spacing: 1px;
-    "
-  >
+    class="underline-small apply-head">
   Update Job Seeker's Details
   </h3>
 <div class="container" style="padding-top: 150px;">
@@ -23,7 +15,7 @@
         <fieldset>
       <div id="Apply" class="tabcontent" style="display: block">
         <div class="row">
-              <div class="col-6 cm-apply-div">
+              <div class="col-lg-6 col-md-12 col-sm-12 cm-apply-div">
                 <div class="form-group">
                     {{ form.profession.label(class="form-control-label") }}
                     {% if form.profession.errors %}
@@ -103,7 +95,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-6 cm-apply-div">
+            <div class="col-lg-6 col-md-12 col-sm-12 cm-apply-div">
                 <div class="form-group">
                     {{ form.year_of_experience.label(class="form-control-label") }}
                     {% if form.year_of_experience.errors %}

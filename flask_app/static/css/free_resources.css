@@ -10,7 +10,7 @@
 }
 .card {
     position: relative;
-    overflow: hidden;
+    overflow: hidden; 
     aspect-ratio: 0.75;
     display: flex;
     flex-direction: column;

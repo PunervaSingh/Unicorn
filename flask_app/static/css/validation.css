@@ -36,7 +36,7 @@
     letter-spacing: 3px;
 }
 
-.underline-small-footer::after{
+.underline-small-footer::after{ 
     content:'';
     height:3px;
     width:70%;
@@ -57,4 +57,53 @@
 .industry-type-dropdown:hover, .industry-type-dropdown:active {
     background-color: #e64c4c;
     color: white;
+}
+
+.validation-filter-div {
+    background-color: #f37878; 
+    height: 100vh; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+}
+
+.project-show-div {
+    padding: 40px 50px; 
+    margin-left: 25vw;
+}
+
+.filter-heading {
+    text-align: center; 
+    padding-top: 125px; 
+    font-weight: bold; 
+    color: white;
+}
+
+.apply-head {
+    position: absolute; 
+    top: 50px; 
+    left: 51.5%; 
+    font-weight: 400; 
+    letter-spacing: 1px;
+}
+
+@media (max-width: 993px){ 
+    .validation-filter-div {
+        position: relative; 
+        top: 0; 
+        left: 0;
+        height: fit-content;
+    }
+
+    .project-show-div {
+        margin-left: 0;
+    }
+
+    .filter-heading {
+        padding-top: 20px;
+    }
+    
+    .apply-head {
+        display: none;
+    }
 }

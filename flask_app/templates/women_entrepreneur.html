@@ -1121,7 +1121,7 @@
 </div>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3" style="background-color: #f37878; height: 80vh; margin-top: 80px;">
+    <div class="col-lg-3 col-md-12 col-sm-12 women-filter-col">
       <h4 style="text-align: center; padding-top: 125px; font-weight: bold; color: white;">FILTER</h4>
       <form class="form">
         <!-- <label for="country">Countries</label> -->
@@ -1161,13 +1161,13 @@
       </form>
 
     </div>
-    <div class="col-9">
+    <div class="col-lg-9 col-md-12 col-sm-12">
       <h1 class="program-header">
         Programs & Initiatives
       </h1>
       <div class="row program-div">
         {% for program in programs %}
-        <div class="col-4 show-on-scroll inline-photo">
+        <div class="col-lg-4 col-md-6 col-sm-12 show-on-scroll inline-photo">
           <p class="shadow-div">
             <span>
               <img src={{ program.pic }} alt="" class="program-img">

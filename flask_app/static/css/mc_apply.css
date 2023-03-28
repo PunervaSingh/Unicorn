@@ -204,6 +204,26 @@ input[type="radio"] {
   border: none;
   border-bottom: 1px solid #F37878;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; 
   outline: none;
+}
+
+.apply-head {
+  position: absolute;
+  top: 50px;
+  left: 35%;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 800px){ 
+  .apply-head {
+    display: none;
+  }
+  .tabcontent {
+    margin: 50px 0 150px;
+  }
+  .m-tab {
+    display: none;
+  }
 }

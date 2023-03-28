@@ -122,3 +122,9 @@ input[type=checkbox], input[type=radio] {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
+
+@media (max-width: 992px){ 
+  .lrv-img-col {
+    display: none;
+  }
+}

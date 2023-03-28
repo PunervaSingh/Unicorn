@@ -5,14 +5,29 @@
 <title>Unicorn</title>
 <!-- Link to respective CSS stylesheet -->
 <link rel="stylesheet" href="{{url_for('static', filename='css/villages.css')}}">
+<style>
+  .myForm {
+    display: flex;
+  }
+  @media (max-width: 1200px){
+    .underline-small {
+      display: none;
+    }
+  }
+  @media (max-width: 600px){ 
+    .myForm {
+      display: block;
+    }
+  }
+</style>
 {% endblock %}
 
 {% block content %}
+<h3 class="underline-small apply-head">Tier I / II, Villages & Women Proj</h3>
 <div class="container" style="padding-top: 150px">
-    <h3 class="underline-small" style="position: absolute; top: 50px; left: 20%; font-weight: 400; letter-spacing: 1px;">Tier I / II, Villages & Women Entrepreneur Project Lists</h3>
     <h1 style="font-weight: 400; font-style: italic; font-size: 3rem;">SUPPORT</h1>
     <div class="validation-status">
-      <form name="myForm" action="" style="display: flex;" method="post" onsubmit="">
+      <form name="myForm" class="myForm" action="" method="post" onsubmit="">
         <div class="form-check tvw_filter">
           <input class="form-check-input" type="radio" name="options" id="flexRadioDefault1" value="tier">
           <label class="form-check-label" for="flexRadioDefault1">
@@ -38,7 +53,7 @@
       </div>
     <div class="row">
       {% for project in projects %}
-        <div class="col-3 show-on-scroll inline-photo" style="background-color: #f37878; padding: 20px; margin: 10px;">
+        <div class="col-lg-3 col-md-12 col-sm-12  show-on-scroll inline-photo" style="background-color: #f37878; padding: 20px; margin: 10px;">
           {% if project.pic %}
           <img
             class="project_img" style="height: 200px; object-fit: cover;"

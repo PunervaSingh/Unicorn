@@ -3,18 +3,18 @@
     <li class="post" style="padding: 5%; border: 2px solid gray;">
         <div class="post-content">
             <div class="row">
-                <div class="col-1">
+                <div class="col-2">
                     <img style="border-radius: 50%; object-fit: cover;" width=40px height=40px class="img-rounded profile-thumbnail"
                         src={{ post.profile_pic }}>
                 </div>
-                <div class="col-7">
+                <div class="col-6">
                     {% for u in user %}
                     {% if u.id == post.user_id %}
                     <div class="post-author"><a href="{{ url_for('profile', user_id=post.user_id ) }}">{{ u.name }}</a></div>
                     {% endif %}
                     {% endfor %}
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-12">
                     <div class="post-date">{{ post.timestamp }}</div>
                 </div>
             </div>
@@ -26,16 +26,8 @@
                 <h5>{{ post.text }}</h5>
                 {% endif %}
             </div>
-
             
-
-
-            
-
-
-
-            
-            <div class="container" style="width: 100%;display: flex;margin-bottom: 15px; padding: 0;">
+            <div class="container ucvl">
                 {% if current_user.is_authenticated %}
                 <div class="post-footer">
                     <p style="float: left;vertical-align: bottom;margin-bottom: 8px;">Upvotes
@@ -46,8 +38,10 @@
                     {% endif %}
                 </p>
                 </div>
+                <br>
+                <br>
                 {% endif %}
-                <a class="btn btn-success post-btn" href="{{ url_for('.post', id=post.id) }}#comments" style="margin-left: auto; margin-right: 10px;">
+                <a class="btn btn-success post-btn" href="{{ url_for('.post', id=post.id) }}#comments" style="margin-right: 10px;">
                     <span class="label label-primary post-button">Comments: {{ post.comments.count() }}</span>
                 </a>
                 <a class="btn btn-success post-btn" style="margin-right: 10px;">

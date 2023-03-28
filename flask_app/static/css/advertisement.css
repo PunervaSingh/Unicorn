@@ -522,3 +522,23 @@
     z-index:999;
     filter: grayscale(0);
   }
+
+  .ad-filter-input {
+    width: 400px; 
+    padding: 10px 30px;
+  }
+
+  @media (max-width: 1340px){ 
+    .advertisement-img {
+      display: none;
+    }
+    .bc-container {
+      display: none;
+    }
+  }
+
+  @media (max-width: 620px){ 
+    .ad-filter-input {
+      width: 150px;
+    }
+  }

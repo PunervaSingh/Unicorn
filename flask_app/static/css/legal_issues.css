@@ -196,3 +196,30 @@
   color: #F37878;
   text-decoration: none;
 }
+
+@media (max-width: 456px){ 
+  .card {
+    width: 100%;
+  }
+
+  .card:hover .additional {
+    width: 100%;
+  }
+
+  .card .additional {
+    width: 5px;
+  }
+
+  .card .additional .user-card {
+    display: none;
+  }
+
+  .card .additional .more-info {
+    left: 0;
+    width: 100%;
+  }
+
+  .col-sm-12 {
+    margin-right: 20px;
+  }
+}

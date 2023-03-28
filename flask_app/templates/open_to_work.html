@@ -18,15 +18,7 @@
 {% block content %}
 <div class="container" style="padding-top: 150px">
   <h3
-    class="underline-small"
-    style="
-      position: absolute;
-      top: 50px;
-      left: 35%;
-      font-weight: 400;
-      letter-spacing: 1px;
-    "
-  >
+    class="underline-small apply-head">
     Open to Work Application
   </h3>
   <form method="POST" action="" enctype="multipart/form-data">
@@ -34,7 +26,7 @@
     <fieldset>
   <div id="Apply" class="tabcontent" style="display: block">
     <div class="row">
-            <div class="col-4 cm-apply-div">
+            <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
                 <div class="form-group">
                     {{ form.pic.label(class="form-label") }}
                     {{ form.pic(class="form-control") }}
@@ -48,7 +40,7 @@
                     <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly />
                 </div>
             </div>
-          <div class="col-4 cm-apply-div">
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 <label for="Name">Phone</label>
                     <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
@@ -119,7 +111,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-4 cm-apply-div">
+        <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.past_experience.label(class="form-control-label") }}
                 {% if form.past_experience.errors %}

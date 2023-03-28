@@ -63,11 +63,11 @@
             />
             {% endif %}
           </a>
-          <a class="nav-link" style="color: black; text-align: right; right: 150px; top: 45px; position: absolute;" href="{{ url_for('logout') }}">Logout</a>
+          <a class="nav-link normal-log" style="color: black; text-align: right; right: 150px; top: 45px; position: absolute;" href="{{ url_for('logout') }}">Logout</a>
           <!-- <li> -->
             <!-- </li> -->
           {% elif current_user.is_authenticated and not current_user.position %}
-            <a class="nav-link" style="color: black; text-align: right; right: 150px; top: 45px; position: absolute;" href="{{ url_for('logout') }}">Logout</a>
+            <a class="nav-link normal-log" style="color: black; text-align: right; right: 150px; top: 45px; position: absolute;" href="{{ url_for('logout') }}">Logout</a>
           {% else %}
             <a class="nav-link login-nav-link" href="{{url_for('login')}}">Login</a>
             <a class="nav-link register-nav-link" href="{{url_for('register')}}">Register</a>
@@ -227,6 +227,7 @@
                 >
               </li>
               {% endif %}
+              <a class="nav-link ham-log" style="color: black; text-align: right; right: 150px; top: 45px; position: absolute;" href="{{ url_for('logout') }}">Logout</a>
               <!-- {% if current_user.is_admin==1 or current_user.position=='Validator' %}
               <li>
                 <a class="nav-link" href="{{url_for('validator_apply')}}"
@@ -257,12 +258,12 @@
       {%block content%} {%endblock%}
       <footer>
         <div class="row">
-          <div class="col-3">
+          <div class="col-lg-3 col-md-6 col-sm-12">
             <h1 style="font-family: cursive;">Unicorn</h1>
             <p class="company-desc">Want to start a business but have no idea how to? We have your back! We guide aspiring entrepreneurs, facilitate idea nurturing, connect start-ups with incubators, extend mentoring and much more
               to enable you to start your very own business.</p>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-6 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('bulk_mail')}}">Bulk Mail Promotion Service</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('gifting_service')}}">Gifting service</a></li>
@@ -270,7 +271,7 @@
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('community')}}">Community</a></li>
             </ul>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-6 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('motivational_corner')}}">Motivational Corner</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('free_resources')}}">Free resource center</a></li>
@@ -278,7 +279,7 @@
               <li class="footer-list-item"><a class="footer-anchor" href="{{url_for('guide')}}">Guide</a></li>
             </ul>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-md-6 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><span style="color: #f37878;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -299,16 +300,16 @@
           </div>
           <div class="bottom-container">
             <div class="row">
-              <div class="col-6" style="display: flex; vertical-align: bottom;">
+              <div class="col-lg-6 col-md-6 col-sm-12" style="display: flex; vertical-align: bottom;">
                 <a class="footer-link" href="https://www.linkedin.com">LinkedIn</a>
                 <a class="footer-link" rel="nofollow noreferrer" href="mailto:punerva21@gmail.com"> Email us </a>
                 <a class="footer-link" href="#"> Github Repository </a>
-              </div>
-              <div class="col-6" style="text-align: right; right: 140px; font-weight: lighter;">
-                <p style="color:white;margin-top: 30px; color: rgb(95, 91, 91);" class="copyright">© 2023 Unicorn.</p>
-                <a href="https://assistant.google.com/services/invoke/uid/0000000443518a8f/alm/CgS0Yl7HEgIQAQ==?hl=en">
-                  🅖 Link Title
+                <a class="footer-link" target="_blank" href="https://assistant.google.com/services/invoke/uid/0000000443518a8f/alm/CgS0Yl7HEgIQAQ==?hl=en">
+                  🅖 Pegsy - Unicorn Assistant
               </a>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12" style="text-align: right; right: 140px; font-weight: lighter;">
+                <p style="color:white;margin-top: 30px; color: rgb(95, 91, 91);" class="copyright">© 2023 Unicorn.</p>
               </div>
             </div>
         </div>

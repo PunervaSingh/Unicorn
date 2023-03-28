@@ -36,3 +36,10 @@
     border-radius: 20px;
     margin-bottom: 20px;
 }
+
+@media screen and (max-width: 950px) {
+    .individual_idea_div {
+        padding: 30px;
+        padding-top: 150px;
+    }
+}

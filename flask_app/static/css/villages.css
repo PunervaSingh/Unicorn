@@ -35,7 +35,7 @@
     letter-spacing: 3px;
 }
 
-.underline-small-footer::after{
+.underline-small-footer::after{ 
     content:'';
     height:3px;
     width:70%;

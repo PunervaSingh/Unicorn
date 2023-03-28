@@ -2,20 +2,20 @@
     {% for comment in comments %}
     <li class="comment" style="margin-left: 0; padding: 3%; border: 1px solid gray;">
         <div class="row">
-            <div class="col-1">
+            <div class="col-lg-2 col-md-4 col-sm-6">
                 <a href="{{ url_for('profile', user_id=comment.author_id) }}">
                     <img style="border-radius: 50%; object-fit: cover;" width=40px height=40px class="img-rounded profile-thumbnail"
                             src={{ comment.profile_pic }}>
                 </a>
             </div>
-            <div class="col-7">
+            <div class="col-lg-6 col-md-4 col-sm-6">
                 {% for u in user %}
                     {% if u.id == comment.author_id %}
                     <div class="comment-author"><a href="{{ url_for('profile', user_id=comment.author_id ) }}">{{ u.name }}</a></div>
                     {% endif %}
                     {% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="comment-date">{{ comment.timestamp }}</div>
             </div>
         </div>

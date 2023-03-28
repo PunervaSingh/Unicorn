@@ -18,15 +18,7 @@
 {% block content %}
 <div class="container" style="padding-top: 150px">
   <h3
-    class="underline-small"
-    style="
-      position: absolute;
-      top: 50px;
-      left: 35%;
-      font-weight: 400;
-      letter-spacing: 1px;
-    "
-  >
+    class="underline-small apply-head">
     Available Positions in StartUp
   </h3>
   <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 5px 30px;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
@@ -36,7 +28,7 @@
     <fieldset>
   <div id="Apply" class="tabcontent" style="display: block">
     <div class="row">
-            <div class="col-4 cm-apply-div">
+            <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
                 <!-- <img
                 class="cm_apply-img"
                 src={{ project.pic }}
@@ -99,7 +91,7 @@
                     {% endif %}
                 </div>
             </div>
-          <div class="col-4 cm-apply-div">
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.phone.label(class="form-control-label") }}
                 {% if form.phone.errors %}
@@ -166,7 +158,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-4 cm-apply-div">
+        <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.stipend.label(class="form-control-label") }}
                 {% if form.stipend.errors %}

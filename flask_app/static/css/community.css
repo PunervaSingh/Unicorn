@@ -15,7 +15,7 @@
     background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     color: white;
     font-weight: bold;
-    border: 3px solid #f1f1f1;
+    border: 3px solid #f1f1f1; 
     position: absolute;
     top: 180px;
     left: 150px;
@@ -24,3 +24,25 @@
     padding: 20px;
     text-align: center;
   }
+
+  .ucvl {
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px; 
+    padding: 0;
+  }
+
+  @media (max-width: 780px){ 
+    .bg-text {
+      left: 20px;
+    }
+  }
+
+  @media (max-width: 500px){ 
+    .hamburger-menu{
+        right: 20px;
+    }
+    .ucvl {
+      display: table-caption;
+    }
+}

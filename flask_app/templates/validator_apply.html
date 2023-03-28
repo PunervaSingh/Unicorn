@@ -14,15 +14,7 @@
 {% endblock %} {% block content %}
 <div class="container" style="padding-top: 150px">
   <h3
-    class="underline-small"
-    style="
-      position: absolute;
-      top: 50px;
-      left: 35%;
-      font-weight: 400;
-      letter-spacing: 1px;
-    "
-  >
+    class="underline-small apply-head">
     Validator
   </h3>
   <p><a href="{{ url_for('options') }}" class="back-para underline-small">Back</a></p>
@@ -30,7 +22,7 @@
     Become a Validator
   </h1>
 
-  <div class="tab">
+  <div class="tab m-tab">
     {% if current_user.position and current_user.validated %}
     <button class="tablinks" style="cursor: not-allowed;">Apply</button>
     <hr />
@@ -70,14 +62,14 @@
     <fieldset>
   <div id="Apply" class="tabcontent" style="display: block">
     <div class="row">
-      <div class="col-4 cm-apply-div">
+      <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
         <div class="form-group">
           {{ form.pic.label(class="form-label") }}
           {{ form.pic(class="form-control") }}
       </div>
       </div>
       
-          <div class="col-4 cm-apply-div">
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 <label for="Name">Name</label>
                 <input type="text" name="Name" id="" placeholder={{ current_user.name }}  readonly/>
@@ -95,11 +87,8 @@
             {{ form.profile(class="form-control form-control-lg") }}
             {% endif %}
         </div>
-        <div style="text-align: center">
-          {{ form.submit(class="btn btn-dark") }}
-        </div>
       </div>
-        <div class="col-4 cm-apply-div">
+        <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
       <div class="form-group">
         <label for="Email">Email</label>
         <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly/>
@@ -107,6 +96,9 @@
     <div class="form-group">
         <label for="Phone">Phone</label>
         <input type="text" name="Phone" id="" placeholder={{ current_user.phone }}  readonly/>
+    </div>
+    <div style="text-align: center">
+      {{ form.submit(class="btn btn-dark") }}
     </div>
   </div>
 </div>

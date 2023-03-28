@@ -228,6 +228,56 @@
 	bottom: 120px;
 }
 
+.position-flex {
+	display: flex; 
+	list-style: none; 
+	padding: 0; 
+	margin: 20px 0;
+}
+
+.yt-video-walk {
+	width: 140%;
+	height: 60%;
+}
+
+.video-div {
+	padding-left: 150px;
+}
+
+.page-chapter {
+	float: left; 
+	color: gray; 
+	margin-right: 80px;
+}
+
+@media (max-width: 1200px) {
+    svg {
+		display: none;
+	}
+	.position-flex {
+		display: inline;
+	}
+
+	.yt-video-walk {
+		width: 100%;
+		height: 50%;
+	}
+}
+@media (max-width: 780px) {
+	.container {
+		padding: 0;
+		margin: 0;
+	}
+	.video-div {
+		padding-left: 50px;
+	}
+	.anime2 {
+		display: none;
+	}
+	.img-guide-scroll-open {
+		margin-top: 50vh;
+	}
+}
 </style>
 {% endblock %} {% block content %}
 <h3
@@ -289,7 +339,7 @@
             <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
           </svg>
         <p style="font-weight: 400; font-size: small;">Pages available to different job tracks/positions are enlisted below: </p>
-        <ul style="display: flex; list-style: none; padding: 0; margin: 20px 0;">
+        <ul class="position-flex">
             <li style="margin-right: 5px; border: 1px solid gray; padding: 10px;">Mentor / Counsellor
             <ul style=" text-align: left; font-size: small; padding: 10px;">
                 <li>Profile</li>
@@ -363,13 +413,13 @@
 
     <div class="container-fluid" style="padding: 0; margin: 0;">
       <div class="row">
-        <div class="col-6" style="padding-left: 150px;">
+        <div class="col-lg-6 col-md-12 col-sm-12 video-div">
         <h1 style="margin-top: 100px; margin-bottom: 50px;">Video WalkThrough</h1>
-        <iframe width="750" height="450"
+        <iframe class="yt-video-walk"
         src="https://www.youtube.com/embed/x0tke23Wcuo">
         </iframe>
       </div>
-      <div class="col-6" style="width: 100%; overflow: hidden;">
+      <div class="col-lg-6 col-md-12 col-sm-12" style="width: 100%; overflow: hidden;">
         <svg style="float: right !important; position: relative; height: 800px; margin-right: -40% !important; width: fit-content;" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
  viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
 <g id="jjperezaguinaga">
@@ -3086,207 +3136,207 @@
     <h1 style="margin-top: 100px; margin-bottom: 50px;">Pages Description</h1>
     <ol style="list-style: none;">
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 1</p>
+            <p class="page-chapter">Page 1</p>
             <a class="guide-page-link" href="#" style="padding: 0">Profile</a>
             <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Mentor / Counsellor, Validator, Legal Advisor, StartUp, Funding Agent, Linkage Agent, Advertisement Agent, Job Seeker</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Profile.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Profile', 'https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2400&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Profile.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Profile', 'https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2400&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Profile.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 2</p>
+            <p class="page-chapter">Page 2</p>
           <a class="guide-page-link" href="{{url_for('idea_generation')}}"
             >Idea Generation</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: StartUp</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Idea Generation.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Idea Generation', 'https://plus.unsplash.com/premium_photo-1676585567118-3b252570f001?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Idea Generation.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Idea Generation', 'https://plus.unsplash.com/premium_photo-1676585567118-3b252570f001?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Idea Generation.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 3</p>
+            <p class="page-chapter">Page 3</p>
           <a class="guide-page-link" href="{{url_for('idea_validation')}}"
           >StartUps</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Mentor / Counsellor, Validator, StartUp, Funding Agent</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Idea validation.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'StartUps', 'https://images.unsplash.com/photo-1582005450386-52b25f82d9bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Idea validation.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'StartUps', 'https://images.unsplash.com/photo-1582005450386-52b25f82d9bb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Idea validation.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 4</p>
+            <p class="page-chapter">Page 4</p>
           <a class="guide-page-link" href="{{url_for('mentorship_counsellor')}}"
           >Mentor/Counsellor</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Mentor / Counsellor, StartUp</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Counselling option.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Mentor/Counsellor', 'https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Counselling option.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Mentor/Counsellor', 'https://images.unsplash.com/photo-1578574577315-3fbeb0cecdc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Counselling option.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 5</p>
+            <p class="page-chapter">Page 5</p>
           <a class="guide-page-link" href="{{url_for('legal_issues')}}"
           >Legal Issues</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Legal Advisor, StartUp</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Legal Issues.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Legal Issues', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Legal Issues.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Legal Issues', 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Legal Issues.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 6</p>
+            <p class="page-chapter">Page 6</p>
           <a class="guide-page-link" href="{{url_for('women_entrepreneur')}}"
           >Women Entrepreneur</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Mentor / Counsellor, StartUp, Job Seeker</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Women Entrepreneur.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Women Entrepreneur', 'https://images.unsplash.com/photo-1607748838605-ebcbe8f15772?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Women Entrepreneur.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Women Entrepreneur', 'https://images.unsplash.com/photo-1607748838605-ebcbe8f15772?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Women Entrepreneur.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 7</p>
+            <p class="page-chapter">Page 7</p>
           <a class="guide-page-link" href="{{url_for('tierI_tierII_villages')}}"
           >Tier / Villages</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Mentor / Counsellor, Validator, StartUp, Funding Agent</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Tier I & II.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Tier / Villages', 'https://images.unsplash.com/photo-1523760957528-55d1d540360d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Tier I & II.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Tier / Villages', 'https://images.unsplash.com/photo-1523760957528-55d1d540360d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Tier I & II.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 8</p>
+            <p class="page-chapter">Page 8</p>
           <a class="guide-page-link" href="{{url_for('linkage_agent')}}"
           >Linkage Agents</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: StartUp, Linkage Agent</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/customers & delivers.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Linkage Agents', 'https://images.unsplash.com/photo-1606954736404-22c88d83a2f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/customers & delivers.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Linkage Agents', 'https://images.unsplash.com/photo-1606954736404-22c88d83a2f8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/customers & delivers.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 9</p>
+            <p class="page-chapter">Page 9</p>
           <a class="guide-page-link" href="{{url_for('team_building_hiring')}}"
           >Team Building Hiring</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: StartUp, Job Seeker</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Team building & hiring labors.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Team Building Hiring', 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Team building & hiring labors.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Team Building Hiring', 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Team building & hiring labors.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 10</p>
+            <p class="page-chapter">Page 10</p>
           <a class="guide-page-link" href="{{url_for('advertisement')}}"
           >Advertisement</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: Legal Advisor, StartUp, Funding Agent, Linkage Agent, Advertisement Agent</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/Advertisement.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Advertisement', 'https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/Advertisement.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Advertisement', 'https://images.unsplash.com/photo-1541535650810-10d26f5c2ab3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/Advertisement.png') }} alt="">
                 </div>
             </div>
         </li>
         <li>
-            <p style="float: left; color: gray; margin-right: 80px;">Page 11</p>
+            <p class="page-chapter">Page 11</p>
           <a class="guide-page-link" href="{{url_for('sponsorship_investment')}}"
           >Sponsorship / Investment</a
           >
           <div class="row">
-                <div class="col-10" style="padding: 0">
+                <div class="col-lg-10 col-md-12 col-sm-12" style="padding: 0">
                     <p>Available to positions: StartUp, Funding Agent</p>
                     <div class="anime2" style="color: #F37878;">
                     Click on image
                     <i class="fa fa-arrow-right"></i>
                 </div>
                 </div>
-                <div class="col-2" onclick="togglePopup(1, '../static/img/investment.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Sponsorship / Investment', 'https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
+                <div class="col-lg-2 col-md-12 col-sm-12" onclick="togglePopup(1, '../static/img/investment.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam asperiores earum sit facilis ullam tenetur eos voluptas blanditiis aliquam sed provident ut cupiditate esse amet, dolores praesentium quasi iure mollitia unde quibusdam ipsa exercitationem eaque, minima perspiciatis. Quo, iure voluptates.', 'Sponsorship / Investment', 'https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');">
                     <img style="height: 100px;"
                     src={{ url_for('static', filename='img/investment.png') }} alt="">
                 </div>
@@ -4007,7 +4057,7 @@
 <div class="modal" id="modal">
     <div class="modal-content">
         <div class="row">
-            <div class="col-4" style="position: fixed; top: 0; padding: 100px 70px;">
+            <div class="col-lg-4 col-md-12 col-sm-12" style="position: fixed; top: 0; padding: 100px 70px;">
                 <span class="close" onclick="togglePopup();">&times;</span>
                 <svg viewBox="0 0 1366 768" height="300px" id="alphasvg">
                     <clipPath id="mask">
@@ -4024,7 +4074,7 @@
                     <i class="fa fa-arrow-right"></i>
                 </div>
             </div>
-            <div class="col-8" style="margin-left: auto;">
+            <div class="col-lg-8 col-md-12 col-sm-12 img-guide-scroll-open" style="margin-left: auto;">
                 <img id="modal-image">
             </div>
         </div>

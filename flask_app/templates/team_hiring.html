@@ -24,6 +24,19 @@
   .job-apply-placeholder {
     font-size: 15px;
   }
+  .myForm {
+    display: flex;
+  }
+  @media (max-width: 1200px){
+    .underline-small {
+      display: none;
+    }
+  }
+  @media (max-width: 600px){ 
+    .myForm {
+      display: block;
+    }
+  }
 </style>
 {% endblock %} {% block content %}
 <div class="container" style="padding-top: 150px">
@@ -53,7 +66,7 @@
   </a>
   {% endif %}
   {% if positions %}
-  <form name="myForm" action="" style="display: flex;" method="post" onsubmit="">
+  <form name="myForm" class="myForm" action="" method="post" onsubmit="">
     <div class="form-check tvw_filter">
       <input class="form-check-input" type="radio" name="options" id="flexRadioDefault2" value="startups" checked>
       <label class="form-check-label" for="flexRadioDefault2">
@@ -71,7 +84,7 @@
     </div>
   </form>
   {% else %}
-  <form name="myForm" action="" style="display: flex;" method="post" onsubmit="">
+  <form name="myForm" class="myForm" action="" method="post" onsubmit="">
     <div class="form-check tvw_filter">
       <input class="form-check-input" type="radio" name="options" id="flexRadioDefault2" value="startups">
       <label class="form-check-label" for="flexRadioDefault2">
@@ -101,7 +114,7 @@
   <div class="msg" style="font-weight: bold; font-style: italic; font-size: small; color: #f37878; margin: 5px;">According to out policies in accordance to United Nation's Sustainable Goal 8, all the startups related to our platform are advised to fulfil the diversity quota - workforce should cosisit of 10% women employees, 10% SC/ST/OBC employees, and the rest is upto the recruiting company's policies.</div>
   <div class="row">
     {% for position in positions %}
-    <div class="col-3 show-on-scroll inline-photo" style="border: 1px solid gray; padding: 0; margin: 30px">
+    <div class="col-lg-3 col-md-6 col-sm-12  show-on-scroll inline-photo" style="border: 1px solid gray; padding: 0; margin: 30px">
       <div class="cm_desc">
         <p class="year_of_experience" style="top: -5%;">
           <span style="color: #f37878; font-size: 20px">{{ position.project_name }}</span>
@@ -201,7 +214,7 @@
     </div>
     {% endfor %}
     {% for people in open %}
-    <div class="col-3 show-on-scroll inline-photo" style="border: 1px solid gray; padding: 0; margin: 30px">
+    <div class="col-lg-3 col-md-6 col-sm-12  show-on-scroll inline-photo" style="border: 1px solid gray; padding: 0; margin: 30px">
       <div class="cm_desc">
         <p class="year_of_experience" style="top: -5%;">
           <span style="color: #f37878; font-size: 20px">{{ people.name }}</span>

@@ -1060,3 +1060,79 @@ a:hover{
 .side-slidein-div {
     display: none;
 }
+
+.about-mod-desc {
+    margin-top: 30px; 
+    width: 30vw;
+}
+
+.sdg-col {
+    height: 100vh;
+}
+
+.square1 {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top: -25%;
+    left: -25%;
+    opacity: 0.1;
+    background-color: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    transform: rotate3d(1, 2, 1, -60deg);
+}
+
+.square2 {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    opacity: 0.1;
+    border: 2px solid white;
+    border-radius: 5px;
+    transform: rotate3d(1, 2, 1, -60deg);
+}
+
+.square3 {
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    border: 2px solid white;
+    border-radius: 5px;
+    transform: rotate3d(1, 2, 1, -60deg);
+    opacity: 0.1;
+}
+
+@media (max-width: 1200px){ 
+    .header-alt{
+        width: 0;
+    }
+    #wrapper {
+        display: none;
+    }
+
+    .bg {
+        width: 80%;
+        text-align: left;
+    }
+
+    .about-mod-head {
+        width: 90%;
+        text-align: left;
+    }
+
+    .about-mod-desc {
+        width: 100%;
+    }
+
+    .sdg-col {
+        height: 200vh;
+    }
+    .square1, .square2, .square3 {
+        display: none;
+    }
+}

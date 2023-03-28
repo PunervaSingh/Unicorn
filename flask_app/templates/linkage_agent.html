@@ -52,7 +52,7 @@
   <div class="row">
     {% for agent in agents %}
     <div
-      class="col-3 show-on-scroll inline-photo"
+      class="col-lg-3 col-md-6 col-sm-12 show-on-scroll inline-photo"
       style="background-color: #f37878; padding: 20px; margin: 10px"
     >
       {% if agent.pic.startswith('http') %}
@@ -146,6 +146,38 @@
 <div class="block">
   <div class="wrapper">
     <h1 class="track-header">Track Your Order</h1>
+    <div class="small-track">
+        <span class="num"> 1
+        <p class="bottom">
+          Order retrieved from the warehouse
+        </p>
+        </span>
+
+        <span class="num"> 2
+        <p class="left">
+          Goods packed using material appropriate to their nature to enable safe & efficient delivery
+        </p>
+        </span>
+
+        <span class="num"> 3
+        <p class="bottom">
+          Order dispatched from the packing station
+        </p>
+        </span>
+
+        <span class="num">4
+        <p class="top">
+          Delivery agent with your good is out for delivery
+        </p>
+        </span>
+
+        <span class="num"> 5
+        <p class="right">
+          Goods delivered in excellent condition!
+        </p>
+        </span>
+    </div>
+    <div class="track-svg">
     <svg style="position: absolute;width: 45vw;height: 150px;" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" class="anim" width="400px">
         <g class="track">
           <path d="M20,20 600,20 600,150 700,150 750,200 750,300 718,300" class="frame"/>
@@ -229,9 +261,10 @@
     </div>
   </div>
 </div>
+</div>
 <div class="container-fluid" style="margin-top: 200px">
   <div class="row">
-    <div class="col-6" style="padding: 100px 80px 0">
+    <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 100px 80px 0">
       <h1 class="analysis-header show-on-scroll inline-photo">Market Trend Analysis</h1>
       <p class="analysis-para show-on-scroll inline-photo">
         A business owner's job is not complete without analysing
@@ -243,7 +276,7 @@
       </p>
       <button class="explore-btn show-on-scroll inline-photo"><a href="{{url_for('market_analysis')}}" style="color: white;">Explore more :)</a></button>
     </div>
-    <div class="col-6 meet01 show-on-scroll inline-photo">
+    <div class="col-lg-6 col-md-12 col-sm-12 meet01 show-on-scroll inline-photo">
       <img
         class="oneh"
         src="https://brightdata.com/wp-content/uploads/2022/10/BInsights-Hero_Image.svg"

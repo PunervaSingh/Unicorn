@@ -216,3 +216,40 @@
     font-size: 1.5rem; 
     padding: 10px 0;
   }
+
+  .hidden-home-page {
+    display: none;
+  }
+
+@media (max-width: 1200px){ 
+  .nav-right-side {
+    display: none;
+  }
+  .notification {
+    display: none;
+  }
+  .home-top-div, .second, .third, .fourth, .fifth {
+    height: 50vh;
+    width: 50vh;
+    top: 30%;
+    left: 15%;
+  }
+}
+
+@media (max-width: 800px){  
+  .home-top-div, .second, .third, .fourth, .fifth {
+    height: 50vh;
+    width: 50vh;
+    top: 30%;
+    left: 15%;
+  }
+}
+
+@media (max-width: 800px){  
+  .home-page {
+    display: none;
+  }
+  .hidden-home-page {
+    display: initial;
+  }
+}

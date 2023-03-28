@@ -241,3 +241,21 @@
      transform: translateY(10px); 
     }
   }
+
+  .small-track {
+    display: none;
+  }
+
+
+@media (max-width: 768px){ 
+  .track-svg {
+    display: none;
+  }
+  .small-track {
+    display: block;
+  }
+  .block {
+    height: fit-content;
+    padding: 0 50px 50px;
+  }
+}

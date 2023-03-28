@@ -6,37 +6,8 @@
 <!-- Link to respective CSS stylesheet -->
 <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/raw_material.css')}}"> -->
 <style>
-    .container1 {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .left {
-        width: 50%;
-        height: 100px;
-
-    }
-
-    .right {
-        width: 50%;
-        height: 100px;
-
-    }
-
     .form-control-input {
-        display: block;
-        width: 120%;
-        height: calc(1.5em + .75rem + 2px);
-        padding: .375rem .75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #495057;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        width: 100%;
     }
 </style>
 {% endblock %}
@@ -54,19 +25,11 @@
       ">
         Profit Projection
     </h3>
-    <div id="profits" class="container tabcontent" style=" 
-    color: rgb(31, 8, 8);
-    margin-top: 15vh;
-    padding: 50px;
-    width: 900px;
-    background-color: #ffffff;
-    border-radius: 25px;
-    height: 500px;
-">
-        <div class="container1">
+    <div id="profits" class="container tabcontent" style="margin-top: 150px;">
+        <div class="container">
 
-
-            <div class="left">
+            <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <form name="ProfitForm" id="ProfForm" method="POST" action="{{ url_for('profit_prediction')}}">
                     <!-- <h1 class="head" style="text-align: center; font-weight: bolder; font-family: 'exo'; color: rgb(2, 78, 78);">
       Profit Projection
@@ -75,8 +38,7 @@
                         <ul class="list-unstyled">
                             <li>
                                 <div class="col-md-10 form-group">
-                                    <span style="    display: inline-block;
-                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on Research and
+                                    <span>Enter the amount you are spending on Research and
                                         Development</span><br>
                                     <input class="spec form-control-input" name="RnD" type="number "
                                         placeholder="eg. 165349.20">
@@ -84,8 +46,7 @@
                             </li>
                             <li>
                                 <div class="col-md-10 form-group">
-                                    <span style="    display: inline-block;
-                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on the admin
+                                    <span>Enter the amount you are spending on the admin
                                         panel</span><br>
                                     <input class="spec form-control-input" name="administration" type="number "
                                         placeholder="eg. 136897.80">
@@ -93,8 +54,7 @@
                             </li>
                             <li>
                                 <div class="col-md-10 form-group">
-                                    <span style="    display: inline-block;
-                            margin-bottom: .5rem; text-align: left;">Enter the amount you are spending on marketing
+                                    <span>Enter the amount you are spending on marketing
                                         strategies</span><br>
                                     <input class="spec form-control-input" name="marketing" required="required"
                                         placeholder="eg. 471784.10">
@@ -110,24 +70,23 @@
                     </center>
                 </form>
             </div>
-            <div class="right">
+            <div class="col-lg-6 col-md-12 col-sm-12">
 
                 <h3 style="    color: red;
                     padding: 10px;
-                    margin-left: 50px;
-                    width: 370px;
+                    margin-left: 10px;
                     height: 90px;
-                    margin-right: 90px;
+                    width: 100%;
                     ">{{ prediction_text }}</h3>
 
-                <img src="../static/img/corr.png" alt="alternative">
+                <img style="height: 80%; width: 80%;" src="../static/img/corr.png" alt="alternative">
 
 
             </div>
         </div>
 
 
-
+    </div>
     </div>
 </div>
 

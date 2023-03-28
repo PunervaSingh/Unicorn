@@ -13,14 +13,14 @@
   <h1 class="center-content">{{ project.name }}</h1>
   <p class="center-content author-para"><a href="{{url_for('profile', user_id=project.user)}}"> Visit Author Profile </a></p>
   <div class="row" style="margin: 30px 0;">
-    <div class="col-6">
+    <div class="col-lg-6 col-md-12 col-sm-12">
       <h6>Email Id
         <span style="font-weight: 300; color: #f37878;">
           {{ project.email }}
         </span>
       </h6>
     </div>
-    <div class="col-6" style="text-align: right;">
+    <div class="col-lg-6 col-md-12 col-sm-12" style="text-align: right;">
       <h6>Contact No.
         <span style="font-weight: 300; color: #f37878;">
           {{ project.phone }}  
@@ -29,7 +29,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-9">
+    <div class="col-lg-9 col-md-12 col-sm-12">
       {% if project.pic %}
       <img
       class="project_img"
@@ -87,7 +87,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-lg-3 col-md-12 col-sm-12">
       <h6>Industry Type
       <p style="font-weight: 200; float: right;">{{ project.industry }}</p>
       </h6>

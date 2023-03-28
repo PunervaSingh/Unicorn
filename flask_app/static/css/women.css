@@ -190,3 +190,21 @@ input[type="radio"] {
     right: 100px;
     height: 200px;
   }
+
+  .women-filter-col {
+    background-color: #f37878; 
+    height: 80vh; 
+    margin-top: 80px;
+  }
+
+  @media (max-width: 992px){ 
+    .chronicle-girl-svg {
+      display: none;
+    }
+    .block {
+      height: fit-content;
+    }
+    .women-filter-col {
+      height: fit-content;
+    }
+  }

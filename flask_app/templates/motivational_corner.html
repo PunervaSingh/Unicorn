@@ -326,20 +326,23 @@ button.loading {
   text-decoration: none;
 } 
 
+@media (max-width: 600px){ 
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  } 
+  .buttons .features {
+    display: block;
+  }
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
 <h3
-    class="underline-small"
-    style="
-      position: absolute;
-      top: 50px;
-      left: 35%;
-      font-weight: 400;
-      letter-spacing: 1px;
-    "
-  >
+    class="underline-small apply-head">
   Motivational Corner
   </h3>
 <div class="motivationa-div container" style="padding-top: 200px;">

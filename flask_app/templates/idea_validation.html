@@ -13,10 +13,10 @@
 </style>
 {% endblock %} {% block content %}
 <div class="container-fluid" style="padding-top: 140px">
-  <h3 class="underline-small" style="position: absolute; top: 50px; left: 51.5%; font-weight: 400; letter-spacing: 1px;">Idea Validation</h3>
+  <h3 class="underline-small apply-head">Idea Validation</h3>
   <div class="row">
-    <div class="col-3" style="background-color: #f37878; height: 100vh; position: fixed; bottom: 0; left: 0;">
-      <h4 style="text-align: center; padding-top: 125px; font-weight: bold; color: white;">FILTER</h4>
+    <div class="col-lg-3 col-md-12 col-sm-12 validation-filter-div" >
+      <h4 class="filter-heading">FILTER</h4>
       <form class="form" method="post" onsubmit="" style="margin-top: 20px;">
         <div class="form__group">
           <select class="program-dropdown" id="industry" name="industry" style="width: 100%; padding: 10px;" data-dropdown>
@@ -79,10 +79,10 @@
       <button class="btn btn-light my-2 my-sm-0" style="width: 100%;" type="submit">Search</button>
     </form>
     </div>
-    <div class="col-9" style="padding: 40px 50px; margin-left: 25vw;">
+    <div class="col-lg-9 col-md-12 col-sm-12 project-show-div">
       <div class="row">
         {% for project in projects %}
-        <div class="col-3 show-on-scroll inline-photo" style="background-color: #4C8492; padding: 20px; margin: 10px 30px;">
+        <div class="col-lg-3 col-md-6 col-sm-12 show-on-scroll inline-photo" style="background-color: #4C8492; padding: 20px; margin: 10px 30px;">
           {% if project.pic %}
           <img
             class="project_img"
@@ -148,23 +148,23 @@
         </ul>
       </nav>
       <br>
-      <div style="background-color: #fae6e6; padding: 50px;">
+      <div style="background-color: #fae6e6; padding: 50px 0;">
       <div class="row">
-          <div class="col-4">
+          <div class="col-lg-4 col-md-12 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><a class="footer-anchor" href="#">Bulk Mail Promotion Service</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="#">Gifting service</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="#">Success Stories</a></li>
             </ul>
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-md-12 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><a class="footer-anchor" href="#">Motivational Corner</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="#">Free resource center</a></li>
               <li class="footer-list-item"><a class="footer-anchor" href="#">FAQs - Terms & Conditions</a></li>
             </ul>
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-md-12 col-sm-12">
             <ul style="list-style: none;">
               <li class="footer-list-item"><span style="color: #f37878;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
