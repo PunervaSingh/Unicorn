@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}">
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Advertisement Recommendation
+  </h3>
+  <div class="conatiner" style="padding-top: 200px; width: 70%; margin: auto;">
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset>
+      <div class="form-group">
+        {{ form.input.label(class="form-control-label") }}
+        {% if form.input.errors %}
+        {{ form.input(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.input.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.input(class="form-control form-control-lg") }}
+        {% endif %}
+    </div>
+      <div>
+        {{ form.submit(class="btn btn-dark book-btn") }}
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+  {% if output %} 
+  <div class="conatiner" style="padding-top: 20px; width: 70%; margin: auto;">
+    <p style="font-size: large;"><b>Output:</b> {{ output|safe }}
+    </p>
+  </div>
+  {% endif %} 
+
+{% endblock %}

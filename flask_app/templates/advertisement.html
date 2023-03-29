@@ -276,6 +276,34 @@
         </div>
       </ul>
     </div>
+
+
+    {% if current_user.position=='StartUp' or current_user.is_admin==1 %}
+
+    <div class="container-fluid" style="margin-top: 200px">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12" style="padding: 100px 80px 0">
+          <h1 class="analysis-header show-on-scroll inline-photo">Advertisement Recommendation</h1>
+          <p class="analysis-para show-on-scroll inline-photo">
+            A business owner's job is not complete without analysing
+            the market's reception towards their services/goods. In
+            fact, the real business starts from there. Head over to
+            the Market Trend Analysis to analyse how well your product
+            is doing and tweak your business functions accordingly by
+            consulting the mentors you've found at Unicorn!
+          </p>
+          <button class="btn btn-success show-on-scroll inline-photo"><a href="{{url_for('ad_recommend')}}" style="color: white;">Explore more :)</a></button>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 meet01 show-on-scroll inline-photo">
+          <img
+            class="oneh"
+            src="https://brightdata.com/wp-content/uploads/2022/10/BInsights-Hero_Image.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+    {% endif %}
 </div>
 
 <!-- <div class="newspaper-ad container-fluid">

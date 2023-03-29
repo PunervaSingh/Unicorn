@@ -79,5 +79,12 @@
   {{ form.submit(class="btn btn-dark") }}
 </div>
 </form>
+{% if answer %}
+<h3 style="    color: red;
+padding: 10px;
+margin-left: 10px;
+height: 90px;
+width: 100%;"> {{ answer }}</h3>
+{% endif %}
 </div>
 {% endblock %}

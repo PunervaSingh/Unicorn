@@ -395,9 +395,9 @@ class Update_Project_Detail(FlaskForm):
     submit = SubmitField('Update Project Detail')
 
 class Profit_Projection(FlaskForm):
-    rnd = IntegerField('Research and Development')
-    marketing = IntegerField('Marketing')
-    profit = IntegerField('Profit')
+    rnd = IntegerField('Relationships')
+    marketing = IntegerField('Milestones')
+    profit = IntegerField('Is_top500')
     administration = IntegerField('Administration')
     submit = SubmitField('Produce Profit Projection')
 
@@ -414,3 +414,8 @@ class CommentForm(FlaskForm):
 
 class Google_Assistant(FlaskForm):
     submit = SubmitField('Ask')
+
+class Ad_recommend(FlaskForm):
+    input = StringField('Input a word regarding your advertisement idea',
+                        validators=[DataRequired()])
+    submit = SubmitField('Recommend')

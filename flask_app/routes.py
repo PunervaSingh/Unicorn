@@ -2,7 +2,7 @@ from flask_app import app
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, make_response, abort, current_app, jsonify
-from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant
+from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant, Ad_recommend
 from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_app import db, bcrypt, admin, mail
@@ -15,7 +15,7 @@ import uuid as uuid
 import os
 import subprocess
 # import numpy as np
-# import pandas as pd
+import pandas as pd
 # import seaborn as sns
 # import matplotlib.pyplot as plt
 import pickle
@@ -24,6 +24,8 @@ import pickle
 # to run google assitant,run this command first in terminal - export GOOGLE_CLOUD_PROJECT=project_id
 
 model = pickle.load(open("/Users/punerva/Downloads/Unicorn/flask_app/model.pkl", 'rb'))
+success = pickle.load(open("/Users/punerva/Downloads/Unicorn/flask_app/success.pkl", 'rb'))
+adata = pd.read_csv("/Users/punerva/Downloads/Unicorn/flask_app/cleaned_ads.csv")
 
 app.config['UPLOAD_FOLDER'] = '/Users/punerva/Downloads/Unicorn/flask_app/static/img'
 app.config['POSTS_PER_PAGE'] = 9
@@ -1310,6 +1312,7 @@ def project_profile(user_id):
 def profit(project_id):
     project = Project.query.get_or_404(project_id)
     form = Profit_Projection()
+    answer = ""
     if form.validate_on_submit():
         project.administration = form.administration.data,
         project.rnd = form.rnd.data,
@@ -1320,7 +1323,17 @@ def profit(project_id):
         project.marketing = int(project.marketing[0])
         project.profit = int(project.profit[0])
         db.session.commit()
-        return redirect(url_for('idea_validation'))
+        relationship = project.rnd
+        milestone = project.marketing
+        istop500 = project.profit
+        prediction = success.predict([[relationship, milestone, istop500]])
+
+        if prediction == 0:
+            answer += "Your chances of failing is quite high!!"
+        else:
+            answer += "According to our prediction, you have high chances of succeeding"
+
+        return render_template("profit.html", answer = answer, form = form)
     return render_template("profit.html", project=project, form=form)
 
 
@@ -1338,3 +1351,24 @@ def profit_prediction():
             return render_template('profit_prediction.html', prediction_text="The total profit comes out to be ${:.2f}".format((output)))
     else:
         return render_template('profit_prediction.html')
+
+
+@app.route("/ad_recommend", methods = ['GET', 'POST'])
+def ad_recommend():
+    form = Ad_recommend()
+    if form.validate_on_submit():
+        input = form.input.data
+        output = ""
+        def find(dec,k):
+            r=[]
+            for i in dec.index:
+                if k in dec['Meta Description 1'][i]:
+                    r.append(dec['Original Url'][i])
+            return r
+
+        result=set(find(adata, input)) 
+        for i in result:
+            output += "<a target = '_blank' href = '" + i + "'>" + i +  "</a> <br>"
+            print(" Url Link ",i)
+        return render_template('ad_recommend.html', form=form, output = output)
+    return render_template('ad_recommend.html', form=form)
