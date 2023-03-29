@@ -411,3 +411,6 @@ class CommentForm(FlaskForm):
     body = StringField('Enter your answer', validators=[DataRequired()])
     delete =  SubmitField("Delete")
     submit = SubmitField('Submit')
+
+class Google_Assistant(FlaskForm):
+    submit = SubmitField('Ask')

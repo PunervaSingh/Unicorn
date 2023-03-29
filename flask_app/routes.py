@@ -2,7 +2,7 @@ from flask_app import app
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, make_response, abort, current_app, jsonify
-from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm
+from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant
 from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_app import db, bcrypt, admin, mail
@@ -13,6 +13,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta, date
 import uuid as uuid
 import os
+import subprocess
 # import numpy as np
 # import pandas as pd
 # import seaborn as sns
@@ -20,11 +21,7 @@ import os
 import pickle
 # import sklearn
 
-# to run google assitant sdk in terminal, pass following command
-# export GOOGLE_CLOUD_PROJECT=project_id
-# googlesamples-assistant-pushtotalk
-# otherwise, it works by using the assistant link given in fotter, on mobile phone
-# (provided assistant is on)
+# to run google assitant,run this command first in terminal - export GOOGLE_CLOUD_PROJECT=project_id
 
 model = pickle.load(open("/Users/punerva/Downloads/Unicorn/flask_app/model.pkl", 'rb'))
 
@@ -873,6 +870,15 @@ def trending_startups():
     else:
         trendings = Trending.query.all()
     return render_template('trending_startups.html', trendings=trendings)
+
+@app.route("/google_assistant", methods=['GET', 'POST'])
+def google_assistant():
+    form = Google_Assistant()
+    if form.validate_on_submit():
+        # uncomment the following code to run google assistant, for better result use headphones.
+        # subprocess.run(['googlesamples-assistant-pushtotalk'], capture_output=True, text=True)
+        return render_template('google_assistant.html', form=form)
+    return render_template('google_assistant.html', form=form)
 
 @app.route("/brand_name", methods=['GET', 'POST'])
 def brand_name():

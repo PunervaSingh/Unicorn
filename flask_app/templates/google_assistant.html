@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<!-- <link rel="stylesheet" href="{{url_for('static', filename='css/success_stories.css')}}"> -->
+{% endblock %}
+
+{% block content %}
+<h3
+    class="underline-small"
+    style="
+      position: absolute;
+      top: 50px;
+      left: 35%;
+      font-weight: 400;
+      letter-spacing: 1px;
+    "
+  >
+  Google Assistant
+  </h3>
+  <div class="conatiner" style="padding-top: 35vh; width: 70%; margin: auto;">
+    <h1>Supported on both mobile phones and web</h1>
+    <h6>Assiatant for mobile phone - 
+        <a class="footer-link" target="_blank" href="https://assistant.google.com/services/invoke/uid/0000000443518a8f/alm/CgS0Yl7HEgIQAQ==?hl=en">
+            🅖 Pegsy - Unicorn Assistant (Run while using app on mobile)
+        </a>
+    </h6>
+    <h6>Assistant for the web - 
+    <span style="color: #f37878;">Start speaking after clicking the button below, ensure your microphone and speaker are working properly.</span>
+    </h6>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div>
+                {{ form.submit(class="btn btn-dark book-btn") }}
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+{% endblock %}
