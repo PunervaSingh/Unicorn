@@ -20,6 +20,11 @@ import os
 import pickle
 # import sklearn
 
+# to run google assitant sdk in terminal, pass following command
+# export GOOGLE_CLOUD_PROJECT=project_id
+# googlesamples-assistant-pushtotalk
+# otherwise, it works by using the assistant link given in fotter, on mobile phone
+# (provided assistant is on)
 
 model = pickle.load(open("/Users/punerva/Downloads/Unicorn/flask_app/model.pkl", 'rb'))
 
