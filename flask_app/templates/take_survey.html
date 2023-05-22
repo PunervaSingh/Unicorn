@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="survey-main-div container" style="padding-top: 150px;">
+    <h3>Survey Details</h3>
+    <div class="row">
+        {% for survey in surveys %}
+        {% if survey.sheet==sheet_no %}
+        <div class="col-4">
+            <h4>Survey No.: {{ survey.id }}</h4>
+            <p>user: {{ survey.user }}</p>
+            <p>survey_name: {{ survey.survey_name }}</p>
+            <p>startup: {{ survey.startup }}</p>
+            <p>done: {{ survey.done }}</p>
+            <p>required: {{ survey.required }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <h3>Fill Survey Below</h3>
+    <div>
+        <form method="POST">
+            <div id="form-fields">
+                {% for row in result['values'] %}
+                    <ul>
+                    {% for item in row %}
+                        <label style="width: 80%;">{{ item }}</label>
+                        <input style="width: 100%" type="text" name="field_label" value="{{ item }}">
+                    {% endfor %}
+                    </ul>
+                {% endfor %}
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

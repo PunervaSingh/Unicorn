@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<style>
+  footer {
+    display: none;
+  }
+  .program-dropdown {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="test-main-div container-fluid" style="padding-top: 150px;">
+  <div class="row">
+    <div class="col-3" style="padding-top: 150px; position: fixed; left: 0; top: 0; background-color: #f37878; height: 100vh; z-index: 10;">
+      <form class="form">
+        <!-- <label for="location">Countries</label> -->
+        <div class="form__group">
+          <select class="program-dropdown" id="location" name="location" data-dropdown>
+            <option value>location</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Europe">Europe</option>
+            <option value="South Asi">South Asia</option>
+            <option value="Africa">Africa</option>
+            <option value="East Asia">East Asia</option>
+            <option value="Middle East">Middle East</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <!-- <label for="industry">Industry Type</label> -->
+        <div class="form__group">
+          <select class="program-dropdown" id="industry" name="industry" data-dropdown>
+            <option value>Industry Type</option>
+            <option value="Tech">Tech</option>
+            <option value="Non-Tech">Non-Tech</option>
+          </select>
+        </div>
+
+        <label for="">Age Range</label>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault1" value="below 18">
+          <label class="form-check-label" for="flexRadioDefault1">
+            below 18
+          </label>
+        </div>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault2" value="18-40">
+          <label class="form-check-label" for="flexRadioDefault2">
+            18-40
+          </label>
+        </div>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault3" value="40 above">
+          <label class="form-check-label" for="flexRadioDefault3">
+            40 above
+          </label>
+        </div>
+        <br>
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-11" style="padding-left: 30vw;">
+      {% if current_user.position == 'StartUp' %}
+      <a class="btn btn-primary" style="float: right;" href="{{url_for('test_apply')}}">New product test registration</a>
+      {% endif %}  
+      <h1 style="margin-bottom: 80px;">All available tests</h1>
+    <div class="row">
+        {% for test in tests %} 
+        {% if test.status is false %}
+        <div class="col-lg-12 col-md-6 col-sm-12" style="background-color: ghostwhite; padding: 30px; height: 50vh;">
+          <div class="row">
+            <div class="col-4">
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 10px; color: white; width: 300px;"><b>Name: </b>{{ test.name }}</p>
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 60px; color: white; width: 300px;"><b>Email: </b>{{ test.email }}</p>
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 110px; color: white; width: 300px;"><b>Startup Name: </b>{{ test.startup_name }}</p>
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 160px; color: white; width: 300px;"><b>Location: </b>{{ test.location }}</p>
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 210px; color: white; width: 300px;"><b>Industry: </b>{{ test.industry }}</p>
+              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 260px; color: white; width: 300px;"><b>Age Range: </b>{{ test.age_range }}</p>
+            </div>
+            <div class="col-8" style="background-color: #f37878; color: white; position: absolute; right: -30px; top: -30px; padding: 30px;">
+              <div class="row">
+                <div class="col-6">
+                  <p><b>Test Details: </b>{{ test.test_details }}</p>
+                  <p><b>Credits Given: </b>{{ test.credits_given }}</p>
+                  <p><b>Link: </b>{{ test.link }}</p>
+                  <p><b>Total Registrations: </b>{{ test.total_reg }}</p>
+                  <p><b>Start Date: </b>{{ test.start_date }}</p>
+                </div>
+                <div class="col-6">
+                  <p><b>List of registered users: </b>{{ test.reg_list }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-div" style="padding-top: 30vh; padding-left: 300px;">
+            <p><b>Register as the test user(enter your email id below):-</b></p>
+            <form method="POST" action="/product_test_individual/{{ test.id }}" enctype="multipart/form-data">
+              <fieldset>
+                <input name="txt" value={{ test.id }} readonly hidden></input>
+                <input style="width: 80%; padding: 5px 10px;" name="text" placeholder="Email Id">
+                <button class="btn btn-success" type="submit">Submit</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

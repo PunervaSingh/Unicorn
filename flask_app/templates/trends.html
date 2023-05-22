@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="trends-main-div container" style="padding-top: 150px;">
+    <form style="float: right; margin-left: auto;" action="/trends" method="post">
+        <input type="text" name="keyword" placeholder="Enter a keyword">
+        <input class="btn btn-success" type="submit" value="Submit">
+    </form>
+    <h2>User market analysis</h2>
+    <br>
+
+    {% if state==True %}
+    <div class="row">
+        <div class="col-3">
+            <h5 style="color: #F37878;">Interest By Region</h5>
+            <div style="height: 300px; overflow: scroll;">
+                {{ ibr.to_html() | safe }}
+            </div>
+        </div>
+        <div class="col-3">
+            <h5 style="color: #F37878;">Interest over Time</h5>
+            <div style="height: 300px; overflow: scroll;">
+                {{ regiondf.to_html() | safe }}
+            </div>
+        </div>
+        <div class="col-3">
+            <h5 style="color: #F37878;">RealTime Trends</h5>
+            <div style="height: 300px; overflow: scroll;">
+                {{ rt.to_html() | safe }}
+            </div>
+        </div>
+        <div class="col-3">
+            <h5 style="color: #F37878;">Related Queries</h5>
+            <div style="height: 300px; overflow: scroll;">
+                {{ rq.to_html() | safe }}
+            </div>
+        </div>
+    </div>
+    <h1 style="margin-top: 80px;">Interest over time Chart</h1>
+    <div>
+        {% include 'google_trends_chart.html' %}
+    </div>
+    <h1>Interest by region Chart</h1>
+    <div>
+        {% include 'google_trends_chart_ibr.html' %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

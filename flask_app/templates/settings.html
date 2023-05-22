@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<form action="/settings" method="POST" style="padding-top: 150px;">
+    <label for="theme">Theme:</label>
+    <select id="theme" name="theme">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+    <br>
+    <label for="font_size">Font Size:</label>
+    <select id="font_size" name="font_size">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+    </select>
+    <br>
+    <input type="submit" value="Save">
+</form>
+{% endblock %}

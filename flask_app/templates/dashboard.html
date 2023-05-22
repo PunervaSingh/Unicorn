@@ -1,0 +1,485 @@
+{% extends "layout.html" %} 
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+<style>
+  footer{
+    display: none;
+  }
+  .dashboard-cards {
+    border: 1px solid rgb(216, 215, 215);
+    border-radius: 10px;
+  }
+  /* .dashboard-cards:hover {
+    box-shadow: 5px 5px 10px rgb(208, 208, 208);
+  } */
+</style>
+{% endblock %} 
+
+{% block content %}
+<div
+  class="dashboard-div container-fluid"
+>
+<div class="row">
+  <div class="col-3" style="background-color: #f37878; padding: 0 30px; padding-top: 150px; position: fixed; left: 0; top: 0; height: 100vh; z-index: 10; margin-bottom: 100px;">
+    <div class="events">
+      <a style="float: right; text-decoration: none; color: white;" href="{{url_for('events')}}">Set events
+        <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+      </svg></a>
+      <h4 style="color: white; font-weight: bold;">Calender Events</h4>
+      {{ event_list | safe }}
+    </div>
+    
+    <div class="toDo" style="padding-top: 30px;">
+      <h4 style="color: white; font-weight: bold;">To-Do List</h4>
+      <form action="/add_item" method="POST">
+        <input type="text" name="task" required />
+        <input class="btn btn-light" type="submit" value="Add Task" />
+      </form>
+      <ol style=" margin-left: 0; padding-left: 20px;">
+        {% for task in tasks %}
+        {% if task.user==current_user.id %}
+        <li style="margin-top: 10px;">
+          {{ task.list_item }}
+          <a style="float: right; text-decoration: none; color: white;" href="{{url_for('delete_item', index=task.id)}}">Delete Item</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="col-12" style="padding-top: 150px; padding-left: 30%;">
+    <h1 style="margin-bottom: 50px;">DashBoard</h1>
+    <div class="row" style="margin-bottom: 70px;">
+    <div class="col-5">
+      <div class="survey-dashboard-div dashboard-cards" style="background-color: white; height: 100%; color: black;">
+        <p style="padding-left: 20px; padding-top: 15px; font-weight: bold;">Survey Div</p>
+        <hr>
+        <div style="height: 45%; padding: 10px 20px;">
+          <p>Your current survey sheets</p>
+          {% for survey in surveys %}
+          <div class="survey-list">
+            <li>
+              <a
+              href="{{url_for('google_sheet', sheet_no=survey.sheet)}}"
+              style="color: black; text-decoration: none; font-weight: bold;"
+              >Survey Name: {{ survey.survey_name }}</a
+              >
+            </li>
+          </div>
+          {% endfor %}
+        </div>
+        <hr>
+        <li style="list-style: none; padding-left: 20px;">
+          <a style="color: black; text-decoration: none; font-weight: bold;" href="{{url_for('dynamic_form')}}">Propose a new survey form
+            <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+          </a>
+        </li>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+      <div class="col-6">
+        <a style="text-decoration: none; color: black;" href="{{url_for('accelerator')}}">
+        <div class="accelerator dashboard-cards" style="position: relative; background-color: white;padding: 20px; height: 90%; margin-bottom: 10px;">
+          <h5>View Startup Incubators and Accelerators Worldwide</h5>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a style="text-decoration: none; color: black;" href="{{url_for('news')}}">
+        <div class="news dashboard-cards" style="position: relative; background-color: white; padding: 20px; height: 90%; margin-bottom: 10px;">
+          <h5>Latest news - regarding startup, acquisition and many more...</h5>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+      </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <a style="text-decoration: none; color: black;" href="{{url_for('motivational_corner')}}">
+        <div class="motivational dashboard-cards" style="position: relative; background-color: white; height: 90%; padding: 20px;">
+          <h5>Motivational Corner</h5>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a style="text-decoration: none; color: black;;" href="{{url_for('free_resources')}}">
+        <div class="resources dashboard-cards" style="position: relative; background-color: white; height: 90%; padding: 20px;">
+          <h5>Free resources Corner</h5>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+      </a>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- <div class="dashboard-cards" style="margin-bottom: 100px; margin-right: 80px; padding: 50px;">
+  <h5 style="margin-bottom: 50px;">Data Analysis</h5>
+  <div class="row">
+    <div class="col-6">
+      <canvas id="speedChart" width="400" height="250"></canvas>
+    </div>
+    <div class="col-6">
+      <canvas id="oilChart" width="400" height="250"></canvas>
+    </div>
+  </div>
+</div> -->
+  <div class="row">
+    <div class="row">
+      <div class="col-3">
+        <a style="text-decoration: none; color: white;" href="{{url_for('trends')}}">
+        <div class="trends dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 95%; padding: 30px">
+          <h5>User market analysis</h5>
+          <p style="color: gray; font-weight: lighter; font-size: small;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, ut.</p>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+        </a>
+      </div>
+      <div class="col-3">
+        <a style="text-decoration: none; color: white;" href="{{url_for('profit_prediction')}}">
+        <div class="profits dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 95%; padding: 30px">
+          <h5>Profit Projection</h5>
+          <p style="color: gray; font-weight: lighter; font-size: small;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, ut. Lorem ipsum dolor sit amet.</p>
+          <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+        </div>
+        </a>
+      </div>
+      <div class="col-5">
+        <div class="col-12">
+          <a style="text-decoration: none; color: white;" href="{{url_for('brand_name')}}">
+          <div class="brand-name dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 100%; padding: 30px">
+            <h5>Brand Name and Logo generator</h5>
+            <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+          </div>
+          </a>
+        </div>
+        <!-- <div class="row"> -->
+          <div class="col-12">
+            <a style="text-decoration: none; color: white;" href="{{url_for('ad_recommend')}}">
+            <div class="brand-name dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 100%; padding: 30px; margin-top: 20px;">
+              <h5>Ad Recommand</h5>
+              <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+            </div>
+            </a>
+          </div>
+          <!-- <div class="col-6">
+            <a style="text-decoration: none; color: white;" href="{{url_for('bulk_mail')}}">
+            <div class="brand-name dashboard-cards" style="position: relative; background-color: white;  color: #F37878;height: 90%; width: 80%; padding: 30px; margin-top: 20px;">
+              <h5>Bulk Mail Promotion</h5>
+              <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </svg>
+            </div>
+            </a>
+          </div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+    
+    <!-- 
+    <div class="col-5">
+      
+      
+      
+      
+    </div> -->
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="test-user dashboard-cards" style="position: relative; margin: 100px 0; background-color: white;  color: black;padding: 120px 80px 80px; width: 90%;">
+        <h3>Volunteers & Test Users</h3>
+        <li style="list-style: none;">
+          <a style="text-decoration: none; position: absolute; top: 70px; left: 80px;" href="{{url_for('volunteer')}}">View Available Test Users / Volunteers</a>
+        </li>
+        <li style="list-style: none;">
+          <a style="text-decoration: none; position: absolute; top: 70px; right: 80px;" href="{{url_for('product_test')}}">Visit Product Tests</a>
+        </li>
+        {% if tests %} 
+        <div class="row" style="margin-top: 30px;">
+          <div class="col-6" style="padding: 30px; background-color: ghostwhite;">
+            {% for test in tests %} 
+            <form style="float: right;" action="/stop_test" method="post">
+              <div class="input-group mb-3">
+                <input name="txt" value={{ test.id }} hidden></input>
+                <button class="btn btn-danger" type="submit" id="button-addon2">Stop Testing</button>
+              </div>
+            </form>
+            <h5 style="font-weight: bolder;">TEST: {{ test.id }}</h5>
+            <p style="margin-top: 20px;"><b> Test Description:</b> {{ test.test_details }}</p>
+            <p><b>Total Registartion: </b>{{ test.total_reg }}</p>
+            <p><b>Registration List: </b>{{ test.reg_list }}</p>
+            <form action="/open_credits" method="post">
+              <div class="input-group mb-3">
+                <input name="txt" value={{ test.id }} hidden></input>
+                <button class="btn btn-primary" type="submit" id="button-addon2">Send credits to all test users</button>
+              </div>
+            </form>
+            <div class="send-bulk-mail-registered" style="margin: 30px 0;">
+              <h5>Send mail to all registered test users:- </h5>
+              <form action="/send_test_bulk" method="post">
+                <div>
+                  <input name="txt" style="width: 100%; margin: 10px 0;" placeholder="Enter email subject"></input>
+                  <input name="text" style="width: 100%; margin: 10px 0;" placeholder="Enter email body"></input>
+                  <input name="textt" value={{ test.id }} hidden></input>
+                  <button class="btn btn-success" type="submit" id="button-addon2">Send mail to all registered test user</button>
+                </div>
+              </form>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>    
+    </div>
+    <div class="col-12">
+      <div class="location dashboard-cards"  style="padding: 80px; width: 90%; margin-bottom: 150px;">
+        <h3>Location specific challenges and opportunities faced by StartUps</h3>
+        <div class="row">
+          <div class="col-6">
+            <h5 style="margin-top: 20px; margin-bottom: 15px;">Challenges</h5>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  1. North America: 
+                </button>
+              </h2>
+            </div>
+        
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+                Intense competition: Startups in North America often face fierce competition due to the presence of established tech hubs like Silicon Valley. Standing out and securing market share can be challenging. <br> -  High cost of living: Cities like San Francisco and New York have high costs of living and operating expenses, making it difficult for startups to attract and retain talent and manage overhead costs. <br> -  Complex regulations: Navigating legal and regulatory requirements, such as intellectual property laws and tax regulations, can be a challenge for startups.          </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  2. Europe: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+              <div class="card-body">
+                Access to funding: While Europe has a vibrant startup ecosystem, access to funding can still be challenging, particularly for early-stage startups. Venture capital availability may vary across countries. <br> -  Fragmented market: Europe consists of multiple countries with different languages, cultures, and regulations. Expanding and scaling operations across borders can be complex and requires significant effort. <br> -  Talent acquisition: Hiring and retaining skilled talent can be difficult in some European countries due to talent shortages, language barriers, and competition from established companies.          </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  3. Asia: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+              <div class="card-body">
+                Diverse market conditions: Asian markets vary significantly in terms of culture, consumer preferences, and regulatory frameworks. Startups must adapt their products, business models, and marketing strategies to different markets. <br> -  Limited funding options: While some Asian countries have developed robust startup ecosystems, others may have limited access to venture capital or angel investors, making it challenging to secure funding. <br> -  Talent retention: In highly competitive markets like China and India, attracting and retaining top talent can be a significant challenge for startups. Established companies often offer higher salaries and more stable career paths.          </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingFour">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  4. Latin America:
+                </button>
+              </h2>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+              <div class="card-body">
+                Limited access to capital: Startups in Latin America often struggle to secure early-stage funding due to a shortage of venture capital and risk-averse investors. Lack of access to capital hampers growth and expansion plans. <br> -  Regulatory barriers: Complex and bureaucratic regulations can pose challenges for startups, including high taxes, licensing requirements, and legal barriers to entry. <br> -  Infrastructure gaps: Some Latin American countries face infrastructure challenges, such as limited internet connectivity and unreliable logistics networks, which can affect the operations and scalability of startups.          </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingFive">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  5. Africa: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+                Lack of funding and investment: Access to capital is a significant challenge for startups in many African countries. Limited venture capital, risk-averse investors, and underdeveloped banking systems make it difficult to secure funding. <br> -  Limited infrastructure: Poor physical infrastructure, including unreliable power supply and limited internet connectivity, can hamper the growth and operations of startups. <br> -  Market size and fragmentation: African markets can be fragmented, with diverse languages, cultures, and consumer behaviors. Startups often face the challenge of targeting and scaling within these fragmented markets.          </div>
+            </div>
+          </div>
+        </div>
+          </div>
+          <div class="col-6">
+            <h5 style="margin-top: 20px; margin-bottom: 15px;">Advantages and Opportunities</h5>
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingSix">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                  1. North America: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+              <div class="card-body">
+                Access to capital: North America, particularly the United States, has a well-established venture capital ecosystem. Startups in this region have better access to funding and investment opportunities compared to other regions. <br> -  Tech and innovation hubs: Silicon Valley in California, along with other tech hubs like New York City and Boston, provide a supportive ecosystem with a concentration of tech talent, mentorship, and networking opportunities. <br> -  Large consumer market: North America has a large consumer market, providing startups with opportunities to scale their products or services and reach a wide customer base.        </div>
+          </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingSeven">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                  2. Europe: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+              <div class="card-body">
+                Access to talent: Europe is home to many highly skilled professionals in various industries. Startups in Europe can leverage this talent pool for recruitment and build diverse and competent teams. <br> -  Supportive government initiatives: Several European countries offer supportive government programs, grants, and tax incentives for startups, fostering a favorable environment for innovation and growth. <br> -  Proximity to diverse markets: Europe's geographic proximity allows startups to expand and reach multiple markets with different consumer preferences and cultural backgrounds, enabling them to test and refine their offerings.        </div>
+          </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingEight">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                  3. Asia: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+              <div class="card-body">
+                Emerging markets: Many Asian countries have rapidly growing economies, such as China, India, and Southeast Asian nations. Startups can tap into these emerging markets with rising middle-class populations and increasing consumer spending power. <br> -  Mobile-first markets: Asia has a strong mobile-first culture, with a large number of smartphone users. This presents opportunities for startups to develop innovative mobile apps and services to cater to this tech-savvy population. <br> -  Manufacturing and supply chain advantages: Asian countries, particularly China, have well-developed manufacturing capabilities and efficient supply chain networks. Startups can leverage these resources for cost-effective production and distribution.        </div>
+          </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingNine">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                  4. Latin America:
+                </button>
+              </h2>
+            </div>
+            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+              <div class="card-body">
+                Growing middle class: Latin America has a rising middle class with increasing disposable incomes. Startups can target this expanding consumer base with innovative products and services. <br> -  Digital transformation: Latin America is experiencing a digital transformation, with increasing internet penetration and smartphone adoption. This presents opportunities for startups in areas such as e-commerce, fintech, and digital services. <br> -  Social innovation and impact: Latin America has a strong focus on social innovation and impact entrepreneurship. Startups that address social and environmental challenges have opportunities to receive support from impact investors and organizations.        </div>
+          </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTen">
+              <h2 class="mb-0">
+                <button style="color: #F37878; text-decoration: none;" class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                  5. Africa: 
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionExample">
+              <div class="card-body">
+                Untapped markets: Africa is home to a vast untapped market with a growing population and increasing urbanization. Startups can address the unique needs of African consumers and offer innovative solutions in sectors like mobile banking, agriculture, renewable energy, and healthcare. <br> -  Mobile and digital leapfrogging: With limited legacy infrastructure, many African countries have leapfrogged traditional technologies and embraced mobile and digital solutions. Startups can capitalize on this digital leapfrogging by providing mobile-based services and leveraging technology for social and economic development. <br> -  Supportive initiatives and organizations: Various initiatives and organizations, such as tech hubs, incubators, and government programs, are supporting the startup ecosystem in Africa. They provide mentorship, training, funding, and networking opportunities to help startups thrive.        </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+  var speedCanvas = document.getElementById("speedChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var dataFirst = {
+    label: "User Registration",
+    data: [0, 59, 75, 20, 20, 55, 40],
+    lineTension: 0,
+    fill: false,
+    borderColor: '#DB4437'
+  };
+
+var dataSecond = {
+    label: "User Visits",
+    data: [20, 15, 60, 60, 65, 30, 70],
+    lineTension: 0,
+    fill: false,
+  borderColor: '#4285F4'
+  };
+
+var speedData = {
+  labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+  datasets: [dataFirst, dataSecond]
+};
+
+var chartOptions = {
+  legend: {
+    display: true,
+    position: 'top',
+    labels: {
+      boxWidth: 80,
+      fontColor: 'black'
+    }
+  }
+};
+
+var lineChart = new Chart(speedCanvas, {
+  type: 'line',
+  data: speedData,
+  options: chartOptions
+});
+</script>
+<script>
+  var oilCanvas = document.getElementById("oilChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var oilData = {
+    labels: [
+        "Saudi Arabia",
+        "Russia",
+        "Iraq",
+        "United Arab Emirates",
+        "Canada"
+    ],
+    datasets: [
+        {
+            data: [133.3, 86.2, 52.2, 51.2, 50.2],
+            backgroundColor: [
+                "#8463FF",
+                "#4285F4",
+                "#DB4437",
+                "#F4B400",
+                "#0F9D58"
+            ]
+        }]
+};
+
+var pieChart = new Chart(oilCanvas, {
+  type: 'pie',
+  data: oilData
+});
+</script>
+{% endblock %}

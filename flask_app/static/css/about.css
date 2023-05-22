@@ -1136,3 +1136,7 @@ a:hover{
         display: none;
     }
 }
+
+footer {
+    text-align: left;
+}

@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<style>
+  footer {
+    display: none;
+  }
+  .program-dropdown {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="volunteer-main-div container-fluid">
+  <div class="row">
+    <div class="col-3" style="padding-top: 150px; position: fixed; left: 0; top: 0; background-color: #f37878; height: 100vh; z-index: 10;">
+      <form class="form">
+        <!-- <label for="location">Countries</label> -->
+        <div class="form__group">
+          <select class="program-dropdown" id="location" name="location" data-dropdown>
+            <option value>location</option>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Europe">Europe</option>
+            <option value="South Asi">South Asia</option>
+            <option value="Africa">Africa</option>
+            <option value="East Asia">East Asia</option>
+            <option value="Middle East">Middle East</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
+        <!-- <label for="industry">Industry Type</label> -->
+        <div class="form__group">
+          <select class="program-dropdown" id="industry" name="industry" data-dropdown>
+            <option value>Industry Type</option>
+            <option value="Tech">Tech</option>
+            <option value="Non-Tech">Non-Tech</option>
+          </select>
+        </div>
+
+        <label for="">Age Range</label>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault1" value="below 18">
+          <label class="form-check-label" for="flexRadioDefault1">
+            below 18
+          </label>
+        </div>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault2" value="18-40">
+          <label class="form-check-label" for="flexRadioDefault2">
+            18-40
+          </label>
+        </div>
+        <div class="form-check tvw_filter">
+          <input class="form-check-input" type="radio" name="options" id="flexRadioDefault3" value="40 above">
+          <label class="form-check-label" for="flexRadioDefault3">
+            40 above
+          </label>
+        </div>
+        <br>
+        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="col-11" style="padding-top: 150px; padding-left: 30vw;">
+      <form action="/save_csv" method="post">
+          <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" disabled>Save all Volunteeers as CSV</button>
+          </div>
+        </form>
+        <p style="color: red; font-weight: lighter;">* Only premium users can save csv and access email of the users.</p>
+        <a style="float: right;" class="btn btn-primary" href="{{url_for('volunteer_apply')}}">Apply to be a test user</a>
+      <h1 style="margin-bottom: 40px;">All test user / volunteer</h1>
+      <div class="row">
+          {% for volunteer in volunteers %} 
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="in" style="background-color: ghostwhite; width: 90%; padding: 30px;">
+              <p><b>Name: </b>{{ volunteer.name }}</p>
+              <!-- <p>email: {{ volunteer.email }}</p> -->
+              <p><b>Location: </b>{{ volunteer.location }}</p>
+              <p><b>Industry: </b>{{ volunteer.industry }}</p>
+              <!-- <p>phone: {{ volunteer.phone }}</p> -->
+              <p><b>Age Range: </b>{{ volunteer.age_range }}</p>
+            </div>
+          </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

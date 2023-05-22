@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/community.css')}}">
+{% endblock %}
+
+{% block content %}
+<div style="width: 40vw; margin: auto;">
+
+    <h1 style="padding-top: 150px;">Design Your Survey Form</h1>
+    <form method="POST">
+        <div id="form-fields">
+            <input style="width: 95%; margin: 10px 0; padding: 10px;" name="user" type="text" placeholder="Enter your name">
+            <input style="width: 95%; margin: 10px 0; padding: 10px;" name="survey_name" type="text" placeholder="Enter your survey name / objective">
+            <input style="width: 95%; margin: 10px 0; padding: 10px;" name="startup" type="text" placeholder="Enter your startup name">
+            <input style="width: 95%; margin: 10px 0; padding: 10px;" name="required" type="number" placeholder="Enter number of survey required">
+            <!-- Form fields will be dynamically added here -->
+            <p style="padding-top: 50px;">Fields which will be visible to survey taker</p>
+        </div>
+        <div style="margin: 50px 0;">
+            <p>Add fields for your survey by clicking button given below</p>
+            <button class="btn btn-primary" type="button" onclick="addField()">Add Field</button>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+    
+</div>
+    <script>
+        var fieldCount = 0;
+
+        function addField() {
+            fieldCount++;
+
+
+            var fieldLabel = prompt("Enter field label:");
+            if (!fieldLabel) return;
+
+            var fieldSelect = document.createElement("select");
+            fieldSelect.name = "field_type";
+            fieldSelect.style.width = "95%";
+            fieldSelect.style.padding = "10px";
+            fieldSelect.style.margin = "10px 0";
+            fieldSelect.innerHTML = `
+                <option value="text">Text Field</option>
+                <option value="textarea">Text Area</option>
+                <!-- Add more field types here -->
+            `;
+
+            var fieldDiv = document.createElement("div");
+            fieldDiv.id = "field-" + fieldCount;
+            fieldDiv.innerHTML = `
+                <label style="width: 80%;">${fieldLabel}</label>
+                <input style="width: 100%" type="text" name="field_label" value="${fieldLabel}" hidden>
+                <button class="btn btn-danger" type="button" onclick="removeField(${fieldCount})">Remove</button>
+            `;
+            fieldDiv.appendChild(fieldSelect);
+
+            $("#form-fields").append(fieldDiv);
+        }
+
+        function removeField(fieldId) {
+            $("#field-" + fieldId).remove();
+        }
+    </script>
+{% endblock %}

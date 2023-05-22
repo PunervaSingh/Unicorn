@@ -81,6 +81,22 @@ class Add_Women_Programs(FlaskForm):
     status = StringField('Status',
                         validators=[DataRequired()])
     submit = SubmitField('Add Program')
+
+
+class Add_Volunteer(FlaskForm):
+    name = StringField('Name',
+                           validators=[DataRequired(), Length(min=1, max=50)])
+    email = StringField('Email',
+                           validators=[DataRequired()])
+    location = StringField('Location(North America, South America, Europe, South Asia, Africa, East Asia, Middle East, others)',
+                           validators=[DataRequired()])
+    industry = StringField('Industry(Tech / Non-Tech)',
+                        validators=[DataRequired()])
+    phone = StringField('Phone',
+                        validators=[DataRequired()])
+    age_range = StringField('Age Range(below 18, 18-40, 40 above)',
+                        validators=[DataRequired()])
+    submit = SubmitField('Submit')
         
 
 class Add_Mentor_Counsellor_Form(FlaskForm):
@@ -419,3 +435,57 @@ class Ad_recommend(FlaskForm):
     input = StringField('Input a word regarding your advertisement idea',
                         validators=[DataRequired()])
     submit = SubmitField('Recommend')
+
+class Accelerator_Form(FlaskForm):
+    name = StringField('Name',
+                        validators=[DataRequired()], render_kw={"placeholder": "Name"})
+    email = StringField('Email Id',
+                        validators=[DataRequired()], render_kw={"placeholder": "Email Id"})
+    company = StringField('company',
+                        validators=[DataRequired()], render_kw={"placeholder": "company"})
+    program_name = StringField('Program Name',
+                        validators=[DataRequired()], render_kw={"placeholder": "Program Name"})
+    program_desc = StringField('Program Description',
+                        validators=[DataRequired()], render_kw={"placeholder": "Program Description"})
+    link = StringField('Link',
+                        validators=[DataRequired()], render_kw={"placeholder": "Link"})
+    location = StringField('Company Location',
+                        validators=[DataRequired()], render_kw={"placeholder": "Company Location"})
+    open_to = StringField('Open to(within country / worldwide)',
+                        validators=[DataRequired()], render_kw={"placeholder": "Open to(within country / worldwide)"})
+    resources = StringField('Resources provided to startups',
+                        validators=[DataRequired()], render_kw={"placeholder": "Resources provided to startups"})
+    submit = SubmitField('Submit')
+
+class Event_Form(FlaskForm):
+    summary = StringField('summary',
+                        validators=[DataRequired()], render_kw={"placeholder": "summary"})
+    location = StringField('location',
+                        validators=[DataRequired()], render_kw={"placeholder": "location"})
+    description = StringField('description',
+                        validators=[DataRequired()], render_kw={"placeholder": "description"})
+    start_dateTime = StringField('start time',
+                        validators=[DataRequired()], render_kw={"placeholder": "start time"})
+    start_timeZone = StringField('start zone',
+                        validators=[DataRequired()], render_kw={"placeholder": "start zone"})
+    end_dateTime = StringField('end time',
+                        validators=[DataRequired()], render_kw={"placeholder": "end time"})
+    end_timeZone = StringField('end zone',
+                        validators=[DataRequired()], render_kw={"placeholder": "end zone"})
+    attendees_one = StringField('First attendees',
+                        validators=[DataRequired()], render_kw={"placeholder": "First attendees"})
+    attendees_two = StringField('Second attendees',
+                        validators=[DataRequired()], render_kw={"placeholder": "Second attendees"})
+    submit = SubmitField('Submit')
+
+class Test_Form(FlaskForm):
+    name = StringField('name')
+    email = StringField('email')
+    startup_name = StringField('startup_name')
+    test_details = StringField('test_details')
+    location = StringField('location')
+    age_range = StringField('age_range')
+    industry = StringField('industry')
+    credits_given = StringField('credits_given')
+    link = StringField('link')
+    submit = SubmitField('Submit')

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<style>
+  table, th, td {
+  border: 1px solid;
+}
+td {
+  padding: 20px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="response container" style="padding-top: 150px;">
+  {% for survey in surveys %}
+  {% if survey.sheet==sheet_no %}
+  <p style="text-align: center; color: gray; font-weight: lighter; font-size: medium;">{{ survey.startup }}</p>
+  <h1 style="text-align: center; margin-bottom: 40px;"> {{ survey.survey_name }}</h1>
+  <p style="float: right;"><b>Done: </b>{{ survey.done }}</p>
+  <p><b>Required: </b>{{ survey.required }}</p>
+  <h5 style="margin: 20px 0;">Survey Responses</h5>
+  <h6 style="margin-bottom: 30px;"><b>Questions: </b>
+    <ol>
+  {% for q in question %} 
+  <br>
+      <li>{{ q }}</li>
+      {% endfor %}
+    </ol>
+  </h6>
+  <table>
+        <tbody>
+          {% for row in result['values'] %}
+          <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

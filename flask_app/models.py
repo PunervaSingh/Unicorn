@@ -352,3 +352,70 @@ class Comment(db.Model):
     comments_like = db.relationship('CommentLike', backref='like', lazy='dynamic',passive_deletes=True)
     profile_pic = db.Column(db.String(), nullable=True, default='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
 
+class Survey(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.Integer,db.ForeignKey('user.id'), nullable= False)
+    survey_name = db.Column(db.String(100), nullable= False)
+    startup = db.Column(db.String(100), nullable= False)
+    sheet = db.Column(db.Integer)
+    required = db.Column(db.Integer)
+    done = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Program('{self.user}','{self.survey_name}','{self.startup}','{self.sheet}','{self.required}','{self.done}')"
+
+class Accelerator(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable= False)
+    email = db.Column(db.String(100), nullable= False)
+    company = db.Column(db.String(100), nullable= False)
+    program_name = db.Column(db.String(100), nullable= False)
+    program_desc = db.Column(db.String(100), nullable= False)
+    link = db.Column(db.String(100), nullable= False)
+    location = db.Column(db.String(100), nullable= False)
+    open_to = db.Column(db.String(100), nullable= False)
+    resources = db.Column(db.String(100), nullable= False)
+    
+    def __repr__(self):
+        return f"Program('{self.name}','{self.email}','{self.company}','{self.program_name}','{self.program_desc}','{self.link}','{self.location}','{self.open_to}','{self.resources}')"
+    
+class Tasks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.Integer,db.ForeignKey('user.id'), nullable= False)
+    list_item = db.Column(db.String(1000), nullable= False)
+
+    def __repr__(self):
+        return f"Program('{self.user}','{self.list_item}')"
+    
+class Volunteer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(5000))
+    location = db.Column(db.String(50), nullable=False)
+    industry = db.Column(db.String(10))
+    phone = db.Column(db.String(10))
+    age_range = db.Column(db.String(200))
+
+    def __repr__(self):
+        return f"Program('{self.name}','{self.phone}','{self.email}','{self.industry}','{self.location}','{self.age_range}')"
+ 
+class Volunteer_test(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(50))
+    startup_name = db.Column(db.String(50))
+    test_details = db.Column(db.String(5000))
+    reg_list = db.Column(db.String(5000))
+    credits_given = db.Column(db.String(500))
+    location = db.Column(db.String(50), nullable=False)
+    industry = db.Column(db.String(10))
+    start_date = db.Column(db.String(10))
+    link = db.Column(db.String(500))
+    age_range = db.Column(db.String(200))
+    total_reg = db.Column(db.Integer)
+    status = db.Column(db.Boolean , default= False)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'), nullable= False)
+
+    def __repr__(self):
+        return f"Program('{self.name}','{self.email}','{self.startup_name}','{self.test_details}','{self.reg_list}','{self.credits_given}','{self.location}','{self.industry}','{self.start_date}','{self.link}','{self.age_range}','{self.total_reg}','{self.status}')"
+ 

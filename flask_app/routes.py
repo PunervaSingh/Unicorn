@@ -2,23 +2,42 @@ from flask_app import app
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, make_response, abort, current_app, jsonify
-from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant, Ad_recommend
-from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike
+from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant, Ad_recommend, Accelerator_Form, Event_Form, Add_Volunteer, Test_Form
+from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike, Survey, Accelerator, Tasks, Volunteer, Volunteer_test
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_app import db, bcrypt, admin, mail
 from flask_admin.contrib.sqla import ModelView
 from flask_app.decorators import admin_required
 from flask_mail import Message
 from werkzeug.utils import secure_filename
-from datetime import datetime, timedelta, date
+from datetime import datetime
+import os.path
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
 import uuid as uuid
 import os
-import subprocess
+from wtforms import Form
+import json
 # import numpy as np
 import pandas as pd
+import matplotlib
+import sqlite3
+from datetime import date
 # import seaborn as sns
 # import matplotlib.pyplot as plt
 import pickle
+from pytrends.request import TrendReq
+import plotly.express as px
+import plotly.io as pio
+import datetime
+import os.path
+
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+from newsapi import NewsApiClient
 # import sklearn
 
 # to run google assitant,run this command first in terminal - export GOOGLE_CLOUD_PROJECT=project_id
@@ -30,6 +49,8 @@ adata = pd.read_csv("/Users/punerva/Downloads/Unicorn/flask_app/cleaned_ads.csv"
 app.config['UPLOAD_FOLDER'] = '/Users/punerva/Downloads/Unicorn/flask_app/static/img'
 app.config['POSTS_PER_PAGE'] = 9
 app.config['FLASKY_COMMENTS_PER_PAGE'] = 9
+
+newsapi = NewsApiClient(api_key='1fbd54d2120045e38407d63aefde016c')
 
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/home/', methods=('GET', 'POST'))
@@ -960,6 +981,100 @@ def market_analysis():
 def about():
     return render_template('about.html')
 
+@app.route('/add_item', methods=['POST'])
+def add_item():
+    task = request.form['task']
+    t = Tasks(
+        list_item = task,
+        user = current_user.id
+    )
+    db.session.add(t)
+    db.session.commit()
+    return redirect(url_for('dashboard'))
+
+@app.route('/delete_item/<int:index>')
+def delete_item(index):
+    Tasks.query.filter_by(id=index).delete()
+    db.session.commit()
+    return redirect(url_for('dashboard'))
+
+@app.route("/accelerator")
+def accelerator():
+    company = request.args.get('company')
+    if company:
+        accelerators = Accelerator.query.filter(Accelerator.company.contains(company))
+    else:
+        accelerators = Accelerator.query.all()
+    return render_template('accelerator.html', accelerators=accelerators)
+
+@app.route("/accelerator_apply", methods=['GET', 'POST'])
+def accelerator_apply():
+    form = Accelerator_Form() 
+    if form.validate_on_submit():
+        accelerator = Accelerator(
+            name = form.name.data,
+            email = form.email.data,
+            company = form.company.data, 
+            program_name = form.program_name.data,
+            program_desc = form.program_desc.data,
+            link = form.link.data,
+            location = form.location.data,
+            open_to = form.open_to.data,
+            resources = form.resources.data
+        )
+        db.session.add(accelerator)
+        db.session.commit()
+        
+        return redirect(url_for('accelerator'))
+    return render_template('accelerator_apply.html', form=form)
+
+@app.route("/dashboard")
+def dashboard():
+    SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+    creds = None
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                '/Users/punerva/Desktop/Unicorn/flask_app/credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    service = build('calendar', 'v3', credentials=creds)
+    now = datetime.datetime.utcnow().isoformat() + 'Z'
+
+    event_list = ''
+    event_list += '<p>Getting the upcoming 5 events:-<p><ol>'
+    events_result = service.events().list(calendarId='primary', timeMin=now,
+                                            maxResults=5, singleEvents=True,
+                                            orderBy='startTime').execute()
+    events = events_result.get('items', [])
+
+    if not events:
+        print('No upcoming events found.')
+        return
+    
+    for event in events:
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        event_list += '<li>'
+        event_list += start
+        event_list += ' '
+        event_list += event['summary']
+        event_list += '</li>'
+        print(start, event['summary'])
+
+    event_list += '</ol></p>'
+    tasks = Tasks.query.all()
+    surveys = Survey.query.filter_by(user = current_user.id)
+
+    tests = Volunteer_test.query.filter_by(user_id = current_user.id)
+    return render_template('dashboard.html', surveys=surveys, tasks=tasks, event_list=event_list, tests=tests)
+
 # Community Page
 @app.route('/community', methods=['GET', 'POST'])
 def community():
@@ -1372,3 +1487,505 @@ def ad_recommend():
             print(" Url Link ",i)
         return render_template('ad_recommend.html', form=form, output = output)
     return render_template('ad_recommend.html', form=form)
+
+class DynamicForm(Form):
+    pass
+
+@app.route('/dynamic_form', methods=['GET', 'POST'])
+def dynamic_form():
+    if request.method == 'POST':
+        survey_len = len(Survey.query.all())
+        survey = Survey(
+            sheet = survey_len + 1,
+            user = current_user.id,
+            survey_name = request.form['survey_name'],
+            startup = request.form['startup'],
+            required = request.form['required']
+        )
+        db.session.add(survey)
+        db.session.commit()
+
+        # Access form data
+        form_data = {}
+        for key in request.form:
+            form_data[key] = request.form.getlist(key)
+        # Process the form data as needed
+        # print(form_data['field_label'])
+        
+        
+        SERVICE_ACCOUNT_FILE = '/Users/punerva/Desktop/Unicorn/flask_app/keys.json'
+
+        SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+
+        credentials = None
+
+        credentials = service_account.Credentials.from_service_account_file(
+                SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+        # The ID of spreadsheet.
+        SAMPLE_SPREADSHEET_ID = '1Mh-v5r-1AHfnbLbR6Q0QPePVSLf1EGZUNCCvN3QB-w8'
+
+        service = build('sheets', 'v4', credentials=credentials)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+
+        aoa = []
+
+        aoa.append(form_data['field_label'])
+        print(aoa)
+
+        survey_len = survey_len + 1
+        req = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID, 
+                                    range=f'Sheet{survey_len}!A1', valueInputOption="USER_ENTERED", 
+                                    insertDataOption="INSERT_ROWS", body={"values": aoa}).execute()
+
+        print(req)
+        return render_template('dashboard.html')
+    return render_template('dynamic_form.html')
+
+
+@app.route('/google_sheet/<int:sheet_no>', methods=['GET', 'POST'])
+def google_sheet(sheet_no):
+    SERVICE_ACCOUNT_FILE = '/Users/punerva/Desktop/Unicorn/flask_app/keys.json'
+
+    SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+
+    credentials = None
+
+    credentials = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+    # The ID of spreadsheet.
+    SAMPLE_SPREADSHEET_ID = '1Mh-v5r-1AHfnbLbR6Q0QPePVSLf1EGZUNCCvN3QB-w8'
+
+    service = build('sheets', 'v4', credentials=credentials)
+
+    # Call the Sheets API
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                range=f'Sheet{sheet_no}!A1:Z10').execute()
+
+    print(result['values'])
+    question = result['values'][0]
+    result['values'] = result['values']
+    # print(request)
+    surveys = Survey.query.filter_by(user = current_user.id)
+    return render_template('google_sheet.html', result=result, surveys=surveys, sheet_no=sheet_no, question=question)
+
+@app.route("/survey")
+def survey():
+    surveys = Survey.query.all()
+    return render_template('survey.html', surveys=surveys)
+
+@app.route("/take_survey/<int:sheet_no>", methods=['GET', 'POST'])
+def take_survey(sheet_no):
+    surveys = Survey.query.all()
+    if request.method == 'POST':
+        # Access form data
+        form_data = {}
+        for key in request.form:
+            form_data[key] = request.form.getlist(key)
+
+        for survey in surveys:
+            if survey.sheet==sheet_no:
+                survey.done += 1
+
+        db.session.commit()
+
+        SERVICE_ACCOUNT_FILE = '/Users/punerva/Desktop/Unicorn/flask_app/keys.json'
+
+        SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+
+        credentials = None
+
+        credentials = service_account.Credentials.from_service_account_file(
+                SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+        # The ID of spreadsheet.
+        SAMPLE_SPREADSHEET_ID = '1Mh-v5r-1AHfnbLbR6Q0QPePVSLf1EGZUNCCvN3QB-w8'
+
+        service = build('sheets', 'v4', credentials=credentials)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+
+        aoa = []
+
+        aoa.append(form_data['field_label'])
+
+        req = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID, 
+                                    range=f'Sheet{sheet_no}!A1', valueInputOption="USER_ENTERED", 
+                                    insertDataOption="INSERT_ROWS", body={"values": aoa}).execute()
+
+        print(req)
+        return render_template('survey.html', surveys=surveys)
+    
+    SERVICE_ACCOUNT_FILE = '/Users/punerva/Desktop/Unicorn/flask_app/keys.json'
+
+    SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+
+    credentials = None
+
+    credentials = service_account.Credentials.from_service_account_file(
+            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+
+    # The ID of spreadsheet.
+    SAMPLE_SPREADSHEET_ID = '1Mh-v5r-1AHfnbLbR6Q0QPePVSLf1EGZUNCCvN3QB-w8'
+
+    service = build('sheets', 'v4', credentials=credentials)
+
+    # Call the Sheets API
+    sheet = service.spreadsheets()
+    result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                range=f'Sheet{sheet_no}!A1:Z1').execute()
+
+    print(result['values'])
+    # print(request)
+    return render_template('take_survey.html', result=result, surveys=surveys, sheet_no=sheet_no)
+
+@app.route('/trends', methods=['GET', 'POST'])
+def trends():
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+
+        #get the google trends scraper
+        from pytrends.request import TrendReq
+        #add my parameters 
+        trend = TrendReq(hl='en-US', tz=360)
+        #keyword list
+        kw_list=[]
+        kw_list.append(keyword)
+
+        #create payload
+        trend.build_payload(kw_list,timeframe='2021-01-01 2022-01-01')
+
+        #create a dataframe of google trends
+        data = trend.interest_over_time()
+        print(data.head())
+        fig = px.line(data,x=data.index, y=kw_list,title=kw_list[0])
+
+
+        templates_dir = os.path.join(os.path.dirname('/Users/punerva/Desktop/Unicorn/flask_app/'), 'templates')
+        chart_html_path = os.path.join(templates_dir, 'google_trends_chart.html')
+        print(chart_html_path)
+        pio.write_html(fig, chart_html_path)
+        
+        '''Interest by region'''
+        ibr = trend.interest_by_region()
+        #looking at rows where all values are not equal to 0
+        ibr = ibr[(ibr != 0).all(1)]
+
+        #drop all rows that have null values in all columns
+        ibr.dropna(how='all',axis=0, inplace=True)
+
+        print(ibr.head())
+        fig2 = px.line(ibr,x=ibr.index, y=kw_list,title=kw_list[0])
+        chart_html_path2 = os.path.join(templates_dir, 'google_trends_chart_ibr.html')
+        print(chart_html_path2)
+        pio.write_html(fig2, chart_html_path2)
+
+        '''realtime Trends'''
+        rt = trend.trending_searches(pn='united_states')
+        print(rt.head(10))
+
+        '''related queries'''
+        rq = trend.related_queries()
+        rq = rq[kw_list[0]]['top']
+
+        print(rq.head(10))
+
+        return render_template('trends.html', ibr=ibr, rt=rt, rq=rq, regiondf=data, state=True)
+    ibr = pd.DataFrame()
+    rt = pd.DataFrame()
+    rq = pd.DataFrame()
+    data = pd.DataFrame()
+    return render_template('trends.html', ibr=ibr, rt=rt, rq=rq, regiondf=data, state=False)
+
+@app.route("/events", methods=['GET', 'POST'])
+def events():
+    form = Event_Form()
+    if form.validate_on_submit():
+        print(form.data)
+
+        SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+        creds = None
+        if os.path.exists('token.json'):
+            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        if not creds or not creds.valid:
+            if creds and creds.expired and creds.refresh_token:
+                creds.refresh(Request())
+            else:
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    '/Users/punerva/Desktop/Unicorn/flask_app/credentials.json', SCOPES)
+                creds = flow.run_local_server(port=0)
+            with open('token.json', 'w') as token:
+                token.write(creds.to_json())
+
+        service = build('calendar', 'v3', credentials=creds)
+
+        event = {
+            'summary': form.summary.data,
+            'location': form.location.data,
+            'description': form.description.data,
+            'start': {
+                'dateTime': form.start_dateTime.data,
+                'timeZone': form.start_timeZone.data,
+            },
+            'end': {
+                'dateTime': form.end_dateTime.data,
+                'timeZone': form.end_timeZone.data,
+            },
+            # 'attendees': [
+            #     {'email': form.attendees_one.data},
+            #     {'email': form.attendees_two.data},
+            # ],
+            'attendees': [
+                {'email': 'punerva21@gmail.com'}
+            ],
+            'reminders': {
+                'useDefault': False,
+                'overrides': [
+                {'method': 'email', 'minutes': 24 * 60}
+                ],
+            },
+            }
+
+        event = service.events().insert(calendarId='primary', body=event).execute()
+
+        # Mail
+        msg = Message("Unicorn: calendar Event",
+        sender="phoenix.we9574@gmail.com",
+        # recipients=[form.attendees_one.data, form.attendees_two.data])
+        recipients=["punerva21@gmail.com"])
+
+        msg.body = '''You have been added to a calendar event. Details for the same are given below:-
+        - Event Subject: %s,
+        - Event location: %s,
+        - Event Description: %s,
+        - Event Date: %s,
+        - Event calendar link: %s
+        '''%(form.summary.data, form.location.data, form.description.data, form.start_dateTime.data, event.get('htmlLink'))
+        mail.send(msg)
+        # print ('Event created: %s' % (event.get('htmlLink')))
+
+        return redirect(url_for('dashboard'))
+    return render_template('events.html', form=form)
+
+
+def get_sources_and_domains():
+    all_sources = newsapi.get_sources()['sources']
+    sources = []
+    domains = []
+    for e in all_sources:
+        id = e['id']
+        domain = e['url'].replace("http://", "")
+        domain = domain.replace("https://", "")
+        domain = domain.replace("www.", "")
+        slash = domain.find('/')
+        if slash != -1:
+            domain = domain[:slash]
+        sources.append(id)
+        domains.append(domain)
+    sources = ", ".join(sources)
+    domains = ", ".join(domains)
+    return sources, domains
+  
+@app.route("/news", methods=['GET', 'POST'])
+def news():
+    if request.method == "POST":
+        sources, domains = get_sources_and_domains()
+        keyword = request.form["keyword"]
+        related_news = newsapi.get_everything(q=keyword,
+                                      sources=sources,
+                                      domains=domains,
+                                      language='en',
+                                      sort_by='relevancy')
+        no_of_articles = related_news['totalResults']
+        if no_of_articles > 100:
+            no_of_articles = 100
+        all_articles = newsapi.get_everything(q=keyword,
+                                      sources=sources,
+                                      domains=domains,
+                                      language='en',
+                                      sort_by='relevancy',
+                                      page_size = no_of_articles)['articles']
+        return render_template("news.html", all_articles = all_articles, 
+                               keyword=keyword)
+    else:
+        top_headlines = newsapi.get_everything(q='Acquisition',
+                                      sources='Lifehacker.com, Engadget, Wired',
+                                      domains='bbc.co.uk, techcrunch.com, engadget.com',
+                                      language='en',
+                                      sort_by='relevancy')
+        total_results = top_headlines['totalResults']
+        if total_results > 100:
+            total_results = 100
+        all_headlines = newsapi.get_everything(q='Acquisition',
+                                      sources='Lifehacker.com, Engadget, Wired',
+                                      domains='bbc.co.uk, techcrunch.com, engadget.com',
+                                      language='en',
+                                      sort_by='relevancy')['articles']
+        return render_template("news.html", all_headlines = all_headlines)
+
+@app.route("/volunteer")
+def volunteer():
+    origin = request.args.get('location')
+    indus_type = request.args.get('industry')
+    # age_range = request.form.getlist('options')
+    if origin:
+        volunteers = Volunteer.query.filter((Volunteer.location.contains(origin)) & (Volunteer.industry.contains(indus_type)))
+    else:
+        volunteers = Volunteer.query.all()
+    return render_template('volunteer.html', volunteers=volunteers)
+
+@app.route("/volunteer_apply", methods=['GET', 'POST'])
+def volunteer_apply():
+    form = Add_Volunteer()
+    if form.validate_on_submit():
+        volunteer = Volunteer(
+            name = form.name.data,
+            email = form.email.data,
+            location = form.location.data,
+            industry = form.industry.data,
+            phone = form.phone.data,
+            age_range = form.age_range.data,
+        )
+        db.session.add(volunteer)
+        db.session.commit()
+        return redirect(url_for('volunteer'))
+    return render_template('volunteer_apply.html', form=form)
+
+
+@app.route("/save_csv", methods=['POST'])
+def save_csv():
+    if request.method == 'POST':
+        conn = sqlite3.connect('/Users/punerva/Desktop/Unicorn/instance/site.db', isolation_level=None,
+                        detect_types=sqlite3.PARSE_COLNAMES)
+        db_df = pd.read_sql_query("SELECT * FROM volunteer", conn)
+        db_df.to_csv('database.csv', index=False)
+        return redirect(url_for('volunteer'))
+    return redirect(url_for('volunteer'))
+
+@app.route("/product_test")
+def product_test():
+    tests = Volunteer_test.query.all()
+    return render_template('product_test.html', tests=tests)
+
+@app.route("/product_test_individual/<int:test_id>", methods=['POST'])
+def product_test_individual(test_id):
+    if request.method == 'POST':
+        email = request.form['text']
+        t_id = request.form['txt']
+        t_id = int(t_id[0])
+        test = Volunteer_test.query.filter_by(id=t_id).first()
+        test.reg_list += email
+        test.reg_list += ', '
+        test.total_reg += 1
+        db.session.commit()
+        return redirect(url_for('product_test'))
+    return redirect(url_for('product_test'))
+
+@app.route("/test_apply", methods=['GET', 'POST'])
+def test_apply():
+    form = Test_Form()
+    if form.validate_on_submit():
+        test = Volunteer_test(
+            name = form.name.data,
+            email = form.email.data,
+            startup_name = form.startup_name.data,
+            location = form.location.data,
+            industry = form.industry.data,
+            age_range = form.age_range.data,
+            test_details = form.test_details.data,
+            credits_given = form.credits_given.data,
+            link = form.link.data,
+            reg_list = '',
+            total_reg = 0,
+            start_date = date.today(),
+            user_id = current_user.id,
+        )
+        db.session.add(test)
+        db.session.commit()
+
+        # emails =  Volunteer.query.with_entities(Volunteer.email).all()
+        # recipients_list = '"'
+        # for email in emails:
+        #     recipients_list += email[0]
+        #     recipients_list += '","'
+
+        # recipients_list = recipients_list[:-2]
+
+        # # Mail
+        # msg = Message("Unicorn: New Product Test Available",
+        # sender="phoenix.we9574@gmail.com",
+        # recipients=["phoenix.we9574@gmail.com"])
+        # # recipients=[recipients_list])
+
+        # msg.body = '''A new product test has been added in our database. Details for the same are given below:-
+        # - Startup name: %s,
+        # - Industry: %s,
+        # - Test Details: %s,
+        # - Link: %s
+        # Take test now to get free credits upto $500, free Netflix Subscription and many more exciting gifts.
+        # '''%(form.startup_name.data, form.industry.data, form.test_details.data, form.link.data)
+        # mail.send(msg)
+
+        return redirect(url_for('product_test'))
+    return render_template('test_apply.html', form=form)
+
+@app.route("/stop_test", methods=['POST'])
+def stop_test():
+    if request.method == 'POST':
+        t_id = request.form['txt']
+        t_id = int(t_id[0])
+        test = Volunteer_test.query.filter_by(id=t_id).first()
+        test.status = 1
+        db.session.commit()
+        return redirect(url_for('product_test'))
+    return redirect(url_for('product_test'))
+
+@app.route("/open_credits", methods=['POST'])
+def open_credits():
+    if request.method == 'POST':
+        t_id = request.form['txt']
+        t_id = int(t_id[0])
+        test = Volunteer_test.query.filter_by(id=t_id).first()
+        registered = test.reg_list
+        registered = registered[0:-2]
+        x = registered.split(", ")
+        # Mail
+        msg = Message("Your free credits from Unicorn are here",
+        sender="phoenix.we9574@gmail.com",
+        recipients=["punerva045btcsai20@igdtuw.ac.in"])
+        # recipients=x)
+
+        msg.body = '''Your are eligible to free credits from Unicorn. Visit the link below to redeem them.
+        - Link: http://127.0.0.1:5000/dashboard
+        '''
+        mail.send(msg)
+        return redirect(url_for('dashboard'))
+    return redirect(url_for('dashboard'))
+
+@app.route("/send_test_bulk", methods=['POST'])
+def send_test_bulk():
+    if request.method == 'POST':
+        subject = request.form['txt']
+        body = request.form['text']
+        t_id = request.form['textt']
+        t_id = int(t_id[0])
+        test = Volunteer_test.query.filter_by(id=t_id).first()
+        registered = test.reg_list
+        registered = registered[0:-2]
+        x = registered.split(", ")
+        # Mail
+        msg = Message(subject,
+        sender="phoenix.we9574@gmail.com",
+        recipients=["punerva045btcsai20@igdtuw.ac.in"])
+        # recipients=x)
+
+        msg.body = body
+        mail.send(msg)
+        return redirect(url_for('dashboard'))
+    return redirect(url_for('dashboard'))
