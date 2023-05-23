@@ -96,6 +96,9 @@
       <input class="show-on-scroll inline-photo" type="text" name="positions" id="" placeholder="Position: {{ user.position }}" readonly/>
       <input class="show-on-scroll inline-photo" type="text" name="phone" id="" placeholder="Phone: {{ user.phone }}" readonly/>
       <input class="show-on-scroll inline-photo" type="text" name="validation" id="" placeholder="Validation Status: {{ user.validated }}" readonly/>
+      {% if current_user.is_authenticated and current_user.position!='StartUp' %}
+      <a class="btn btn-primary show-on-scroll inline-photo" href="{{url_for('volunteer_apply')}}">Apply to be a test user</a>
+      {% endif %}
       <!-- <input class="show-on-scroll inline-photo" type="text" placeholder={{ user.profile_pic }}> -->
       <!-- <label for="">Gender</label> -->
       <!-- <input class="show-on-scroll inline-photo" type="text" name="positions" id="" placeholder={{ user.gender }} /> -->

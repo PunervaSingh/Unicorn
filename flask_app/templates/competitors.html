@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div style="padding-top: 150px;">
+    <div class="dashboard-cards"  style="padding: 80px; width: 90%; margin-bottom: 150px;">
+    <form style="margin-bottom: 50px; float: right;" action="/competitors" method="post">
+        <div class="input-group mb-3">
+        <input name="txt" style="width: 20vw; margin-right: 20px;" placeholder="Enter Industry"></input>
+        <button class="btn btn-primary" type="submit" id="button-addon2">Submit</button>
+        </div>
+    </form>
+      <h3 style="margin-bottom: 50px;">Industry Specific Top-10 companies</h3>
+      <div class="competitor-div">
+            <h5 style="margin-bottom: 30px;">Top-10 Companies</h5>
+            <div class="row">
+              {% for company_name, company_link in companies.items() %} 
+              <div class="col-6">
+                <p><a target="_blank" href={{ company_link }}>{{ company_name }}</a></p>
+              </div>
+              {% endfor %}
+            </div>
+            
+            <h5 style="margin-bottom: 30px; margin-top: 50px;">Recent News</h5>
+            {{ recent_news | safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

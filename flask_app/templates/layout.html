@@ -237,6 +237,9 @@
                 >
               </li>
               {% endif %}
+              <li>
+                <a class="nav-link" href="{{url_for('product_test')}}">Visit Product Tests</a>
+              </li>
               {% if current_user.position=='StartUp' or current_user.is_admin==1 %}
               <li>
                 <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard</a>

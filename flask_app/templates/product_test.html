@@ -67,9 +67,6 @@
       </form>
     </div>
     <div class="col-11" style="padding-left: 30vw;">
-      {% if current_user.position == 'StartUp' %}
-      <a class="btn btn-primary" style="float: right;" href="{{url_for('test_apply')}}">New product test registration</a>
-      {% endif %}  
       <h1 style="margin-bottom: 80px;">All available tests</h1>
     <div class="row">
         {% for test in tests %} 
@@ -77,28 +74,38 @@
         <div class="col-lg-12 col-md-6 col-sm-12" style="background-color: ghostwhite; padding: 30px; height: 50vh;">
           <div class="row">
             <div class="col-4">
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 10px; color: white; width: 300px;"><b>Name: </b>{{ test.name }}</p>
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 60px; color: white; width: 300px;"><b>Email: </b>{{ test.email }}</p>
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 110px; color: white; width: 300px;"><b>Startup Name: </b>{{ test.startup_name }}</p>
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 160px; color: white; width: 300px;"><b>Location: </b>{{ test.location }}</p>
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 210px; color: white; width: 300px;"><b>Industry: </b>{{ test.industry }}</p>
-              <p style="position: absolute; background-color: #f37878; padding: 10px; left: -50px; top: 260px; color: white; width: 300px;"><b>Age Range: </b>{{ test.age_range }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 10px; color: white; width: 300px;"><b>Name: </b>{{ test.name }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 60px; color: white; width: 300px;"><b>Email: </b>{{ test.email }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 110px; color: white; width: 300px;"><b>Startup Name: </b>{{ test.startup_name }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 160px; color: white; width: 300px;"><b>Location: </b>{{ test.location }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 210px; color: white; width: 300px;"><b>Industry: </b>{{ test.industry }}</p>
+              <p style="position: absolute; background-color: #4C8492; padding: 10px; left: -50px; top: 260px; color: white; width: 300px;"><b>Age Range: </b>{{ test.age_range }}</p>
             </div>
-            <div class="col-8" style="background-color: #f37878; color: white; position: absolute; right: -30px; top: -30px; padding: 30px;">
+            {% if current_user.position=='StartUp' %}
+            <div class="col-8" style="color: white; top: 30px;">
+              {% else %}
+            <div class="col-8" style="color: white; position: absolute; right: -30px; top: -30px;">
+            {% endif %}
               <div class="row">
-                <div class="col-6">
+                <div class="col-6" style="background-color: #4C8492; padding: 30px;">
                   <p><b>Test Details: </b>{{ test.test_details }}</p>
                   <p><b>Credits Given: </b>{{ test.credits_given }}</p>
                   <p><b>Link: </b>{{ test.link }}</p>
                   <p><b>Total Registrations: </b>{{ test.total_reg }}</p>
                   <p><b>Start Date: </b>{{ test.start_date }}</p>
                 </div>
-                <div class="col-6">
-                  <p><b>List of registered users: </b>{{ test.reg_list }}</p>
+                <div class="col-5" style="background-color: #4C8492; padding: 30px; margin-left: 3px;">
+                  <p><b>List of registered users: </b>
+                    {% if current_user.position=='StartUp' %} 
+                    {{ test.reg_list }}</p>
+                    {% else %} 
+                    <p>Locked, only visible to StartUp Owners</p>
+                    {% endif %}
                 </div>
               </div>
             </div>
           </div>
+          {% if current_user.position!='StartUp' %}
           <div class="form-div" style="padding-top: 30vh; padding-left: 300px;">
             <p><b>Register as the test user(enter your email id below):-</b></p>
             <form method="POST" action="/product_test_individual/{{ test.id }}" enctype="multipart/form-data">
@@ -109,6 +116,7 @@
               </fieldset>
             </form>
           </div>
+          {% endif %}
         </div>
         {% endif %}
         {% endfor %}

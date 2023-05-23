@@ -38,6 +38,13 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from newsapi import NewsApiClient
+
+from urllib.request import urlopen, Request
+import re
+from bs4 import NavigableString
+from bs4 import BeautifulSoup
+import requests
+from urllib.parse import urlparse
 # import sklearn
 
 # to run google assitant,run this command first in terminal - export GOOGLE_CLOUD_PROJECT=project_id
@@ -1037,7 +1044,8 @@ def dashboard():
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            # creds.refresh(Request())
+            print()
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 '/Users/punerva/Desktop/Unicorn/flask_app/credentials.json', SCOPES)
@@ -1073,7 +1081,8 @@ def dashboard():
     surveys = Survey.query.filter_by(user = current_user.id)
 
     tests = Volunteer_test.query.filter_by(user_id = current_user.id)
-    return render_template('dashboard.html', surveys=surveys, tasks=tasks, event_list=event_list, tests=tests)
+    companies = {}
+    return render_template('dashboard.html', surveys=surveys, tasks=tasks, event_list=event_list, tests=tests, companies=companies)
 
 # Community Page
 @app.route('/community', methods=['GET', 'POST'])
@@ -1541,7 +1550,9 @@ def dynamic_form():
                                     insertDataOption="INSERT_ROWS", body={"values": aoa}).execute()
 
         print(req)
-        return render_template('dashboard.html')
+
+        companies = {}
+        return render_template('dashboard.html', companies=companies)
     return render_template('dynamic_form.html')
 
 
@@ -1692,6 +1703,7 @@ def trends():
         '''related queries'''
         rq = trend.related_queries()
         rq = rq[kw_list[0]]['top']
+        print(rq)
 
         print(rq.head(10))
 
@@ -1989,3 +2001,95 @@ def send_test_bulk():
         mail.send(msg)
         return redirect(url_for('dashboard'))
     return redirect(url_for('dashboard'))
+
+
+@app.route("/competitors", methods=['GET','POST'])
+def competitors():
+    if request.method == 'POST':
+        industry = request.form['txt']
+        query = "top 10 " + industry + " " + "companies list moneyworks4me.com "
+        from serpapi import GoogleSearch
+
+        params = {
+        "engine": "google",
+        "q": query,
+        "api_key": "5d62dc181d5d979f00fe36e1afd6fead68ee57fef3ff6b21c9904fb3209da2bf"
+        }
+
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        organic_results = results["organic_results"]
+
+        url = organic_results[0]['link']
+
+        req = Request(url)
+        req.add_header('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8')
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7')
+        content = urlopen(req).read()
+
+        source = urlopen(req).read()
+        # Make a soup 
+        soup = BeautifulSoup(source, 'html.parser')
+
+        page_title = soup.head.title.text
+
+        data = soup.find("div", {"id": "stock-data"})
+
+        if(data == None):
+            data = soup.find("div", {"class": "listintg-table"})
+        
+        if(len(data.find_all("div", {"class": "company-ellipses"})) != 0):
+            list_of_stocks = data.find_all("div", {"class": "company-ellipses"})
+
+        else:
+            list_of_stocks = data.find_all("div", {"class": "pr-0 comp-name"})
+
+        companies = {}
+        companies_links = {}
+        state = 0
+        for stock in list_of_stocks:
+            if state==10:
+                break
+            #companies_name.append(stock.text)
+            company_name = stock.text.replace("\n", "")
+            company_name = company_name.strip()
+            #print(stock.text)
+            link = stock.find("a")
+            #companies_links.append(link.get('href'))
+            cl = 'https://www.moneyworks4me.com/'
+            company_link = link.get('href')
+            company_link = cl + company_link
+            companies[company_name] = company_link
+            state += 1
+
+        print(companies)
+
+        news_query = "latest news related to " + industry 
+        from serpapi import GoogleSearch
+
+        params = {
+        "engine": "google",
+        "q": news_query,
+        "api_key": "5d62dc181d5d979f00fe36e1afd6fead68ee57fef3ff6b21c9904fb3209da2bf"
+        }
+
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        organic_results = results["organic_results"]
+
+        recent_news = '<ul>'
+        for item in organic_results:
+            recent_news += '<li><a target="_blank" href="'
+            recent_news += item['link']
+            recent_news += '">'
+            recent_news += item['snippet']
+            recent_news += '</a></li>'
+            recent_news += '<br>'
+
+        recent_news += '</ul>'
+        
+        return render_template('competitors.html', companies=companies, recent_news=recent_news)
+    
+    companies = {}
+    recent_news = ''
+    return render_template('competitors.html', companies=companies, recent_news=recent_news)
