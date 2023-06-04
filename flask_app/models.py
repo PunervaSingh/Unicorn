@@ -419,3 +419,26 @@ class Volunteer_test(db.Model):
     def __repr__(self):
         return f"Program('{self.name}','{self.email}','{self.startup_name}','{self.test_details}','{self.reg_list}','{self.credits_given}','{self.location}','{self.industry}','{self.start_date}','{self.link}','{self.age_range}','{self.total_reg}','{self.status}')"
  
+class challenges(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    challenge_name = db.Column(db.String(100))
+    challenge_desc = db.Column(db.String(500))
+    eligibility = db.Column(db.String(500))
+    company_name = db.Column(db.String(500))
+    location = db.Column(db.String(100))
+    theme = db.Column(db.String(100))
+    relevant_industry = db.Column(db.String(100))
+    Incentives = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    timeline = db.Column(db.String(5000))
+
+    def __repr__(self):
+        return f"Program('{self.challenge_name}','{self.challenge_desc}','{self.eligibility}','{self.company_name}','{self.location}','{self.theme}','{self.relevant_industry}','{self.Incentives}','{self.email}','{self.timeline}')"
+
+class Applicants(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100))
+    challenge_id = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f"Program('{self.email}','{self.challenge_id}')"

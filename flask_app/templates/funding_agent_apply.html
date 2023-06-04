@@ -31,21 +31,21 @@
               <div class="form-group">
                 {{ form.pic.label(class="form-label") }}
                 {{ form.pic(class="form-control") }}
-            </div>
-                <div class="form-group">
+              </div>
+              <div class="form-group">
                   <label for="Name" class="form-control-label">Name</label>
                   <input type="text" name="Name" id="" placeholder={{ current_user.name }} readonly />
               </div>
-            </div>
-          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
-            <div class="form-group">
+              <div class="form-group">
                 <label for="Email" class="form-control-label">Email</label>
                 <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly/>
+              </div>
+              <div class="form-group">
+                  <label for="Phone" class="form-control-label">Phone</label>
+                  <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
+              </div>
             </div>
-            <div class="form-group">
-                <label for="Phone" class="form-control-label">Phone</label>
-                <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
-            </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.profile.label(class="form-control-label") }}
                 {% if form.profile.errors %}
@@ -72,8 +72,6 @@
                 {{ form.description(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
               {{ form.country.label(class="form-control-label") }}
               {% if form.country.errors %}
@@ -100,6 +98,8 @@
               {{ form.role(class="form-control form-control-lg") }}
               {% endif %}
           </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.investment.label(class="form-control-label") }}
                 {% if form.investment.errors %}

@@ -45,34 +45,34 @@
                     {{ form.name(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.phone.label(class="form-control-label") }}
+                    {% if form.phone.errors %}
+                    {{ form.phone(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.phone.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.phone(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
             </div>
           <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
-            <div class="form-group">
-                {{ form.email.label(class="form-control-label") }}
-                {% if form.email.errors %}
-                {{ form.email(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.email.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.email(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.phone.label(class="form-control-label") }}
-                {% if form.phone.errors %}
-                {{ form.phone(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.phone.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.phone(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
             <div class="form-group">
                 {{ form.link.label(class="form-control-label") }}
                 {% if form.link.errors %}
@@ -99,8 +99,6 @@
                 {{ form.description(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
               {{ form.country.label(class="form-control-label") }}
               {% if form.country.errors %}
@@ -127,6 +125,8 @@
               {{ form.state(class="form-control form-control-lg") }}
               {% endif %}
           </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.service.label(class="form-control-label") }}
                 {% if form.service.errors %}

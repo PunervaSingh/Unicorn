@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="challenges-main-div container" style="padding-top: 150px;">
+
+    {% if current_user.position != 'StartUp' %}
+    <a style="float: right;" class="underline-small cm-apply" href="{{url_for('challenge')}}">Open challenge for startups
+        <svg style="height: 20px; width: 20px; color: #F37878; font-weight: bold;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+        </svg>
+    </a>
+    {% endif %}
+    <h1>Challenges for Startups</h1>
+
+    <div class="row">
+        {% for cha in chas %} 
+        <div class="challenge-inner-div col-4" style="margin: 30px 0; padding: 30px; background-color: ghostwhite;">
+            <p><b>Challenge Name: </b>{{ cha.challenge_name }}</p>
+            <p><b>Challenge Description: </b>{{ cha.challenge_desc }}</p>
+            <p><b>Eligibility: </b>{{ cha.eligibility }}</p>
+            <p><b>Company Name: </b>{{ cha.company_name }}</p>
+            <p><b>Location: </b>{{ cha.location }}</p>
+            <p><b>Theme: </b>{{ cha.theme }}</p>
+            <p><b>Relevant Industry: </b>{{ cha.relevant_industry }}</p>
+            <p><b>Incentives: </b>{{ cha.Incentives }}</p>
+            <p><b>Email Id: </b>{{ cha.email }}</p>
+            <p><b>Timeline: </b>{{ cha.timeline }}</p>
+            {% if current_user.position == 'StartUp' %}
+            <a href="{{url_for('apply_for_challenges', challenge_id=cha.id)}}" style="color: #f37878">Apply</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

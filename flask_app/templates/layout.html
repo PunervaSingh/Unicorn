@@ -76,7 +76,7 @@
             
             </li>
             <ul id="slidein-list" style="list-style: none; margin: 0;">
-              <li class="side-slidein-div" style="top: 30%; ">
+              <li class="side-slidein-div" style="top: 36%; ">
                 <a href="{{ url_for('partners') }}" style="text-decoration: none; color: white;">
                   Partners
                   <svg style="float: right; color: white;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
@@ -84,7 +84,7 @@
                   </svg>
                 </a>
               </li>
-              <li class="side-slidein-div" style="top: 36%; ">
+              <li class="side-slidein-div" style="top: 42%; ">
                 <a href="{{ url_for('special_offers') }}" style="text-decoration: none; color: white;">
                   Special Offers
                   <svg style="float: right; color: white;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16">
@@ -92,7 +92,7 @@
                   </svg>
                 </a>
               </li>
-              <li class="side-slidein-div" style="top: 42%; ">
+              <li class="side-slidein-div" style="top: 48%; ">
                 <a href="{{ url_for('trending_startups') }}" style="text-decoration: none; color: white;">
                   Trending StartUps
                   <svg style="float: right; color: white;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-laptop" viewBox="0 0 16 16">
@@ -100,7 +100,7 @@
                   </svg>
                 </a>
               </li>
-              <li class="side-slidein-div" style="top: 48%; ">
+              <!-- <li class="side-slidein-div" style="top: 48%; ">
                 <a href="{{ url_for('profit_prediction') }}" style="text-decoration: none; color: white;">
                   Profit Projection
                   <svg style="float: right; color: white;" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -118,8 +118,8 @@
                   <path d="M14 3a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
                 </svg>
               </a>
-            </li>
-            <li class="side-slidein-div" style="top: 60%; ">
+            </li> -->
+            <li class="side-slidein-div" style="top: 54%; ">
               <a href="{{ url_for('brand_name') }}" style="text-decoration: none; color: white;">
                 Brandname Generator
                 <svg style="float: right; color: white;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-robot" viewBox="0 0 16 16">
@@ -239,6 +239,9 @@
               {% endif %}
               <li>
                 <a class="nav-link" href="{{url_for('product_test')}}">Visit Product Tests</a>
+              </li>
+              <li>
+                <a class="nav-link" href="{{url_for('challenges_for_startups')}}">Challenges for Startups</a>
               </li>
               {% if current_user.position=='StartUp' or current_user.is_admin==1 %}
               <li>

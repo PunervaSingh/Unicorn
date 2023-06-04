@@ -2,8 +2,8 @@ from flask_app import app
 import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, make_response, abort, current_app, jsonify
-from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant, Ad_recommend, Accelerator_Form, Event_Form, Add_Volunteer, Test_Form
-from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike, Survey, Accelerator, Tasks, Volunteer, Volunteer_test
+from flask_app.forms import RegistrationForm, LoginForm, Add_Mentor_Counsellor_Form, Add_Validator_Form, Add_Legal_Advisor, Add_Project, Add_Funding_Agent, Add_Linkage_Agent, Add_Advertisement_Agent, Add_Position, Add_Open_Work, UpdateAccountForm, ResetPasswordForm, Validate_Project, Mentor_Project, Mentor_Request, Job_Apply, BulkMail, Add_Gift, Brand_Name, Update_Mentor_Detail, Update_Validator_Detail, Update_Linkage_Agent, Update_Advertiser_Detail, Update_Funding_Detail, Update_Legal_Detail, Update_Seeker_Detail, Update_Position_Detail, Update_Project_Detail, Profit_Projection, PostForm, CommentForm, Google_Assistant, Ad_recommend, Accelerator_Form, Event_Form, Add_Volunteer, Test_Form, Challenges
+from flask_app.models import Programs, User, MentorCounsellor, Validator, Legal_Advisor, Project, Funding_Agent, Linkage_Agent, Advertisement_Agent, Positions, Open_to_work, Notification, Trending, Gift, Post, Comment, PostLike, CommentLike, Survey, Accelerator, Tasks, Volunteer, Volunteer_test, challenges, Applicants
 from flask_login import login_user, current_user, logout_user, login_required
 from flask_app import db, bcrypt, admin, mail
 from flask_admin.contrib.sqla import ModelView
@@ -986,7 +986,15 @@ def market_analysis():
 
 @app.route("/about")
 def about():
-    return render_template('about.html')
+    mentors = User.query.filter(User.position=='Mentor' or User.position=='Counsellor').count()
+    validator = User.query.filter(User.position=='Validator').count()
+    legal = User.query.filter(User.position=='Legal Advisor').count()
+    startup = User.query.filter(User.position=='StartUp').count()
+    funding = User.query.filter(User.position=='Funding Agent').count()
+    linkage = User.query.filter(User.position=='Linkage Agent').count()
+    ad = User.query.filter(User.position=='Advertisement Agent').count()
+    job = User.query.filter(User.position=='Job Seeker').count()
+    return render_template('about.html', mentors=mentors, validator=validator, legal=legal, startup=startup, funding=funding, linkage=linkage, ad=ad, job=job)
 
 @app.route('/add_item', methods=['POST'])
 def add_item():
@@ -1058,31 +1066,32 @@ def dashboard():
 
     event_list = ''
     event_list += '<p>Getting the upcoming 5 events:-<p><ol>'
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                            maxResults=5, singleEvents=True,
-                                            orderBy='startTime').execute()
-    events = events_result.get('items', [])
+    # events_result = service.events().list(calendarId='primary', timeMin=now,
+    #                                         maxResults=5, singleEvents=True,
+    #                                         orderBy='startTime').execute()
+    # events = events_result.get('items', [])
 
-    if not events:
-        print('No upcoming events found.')
-        return
+    # if not events:
+    #     print('No upcoming events found.')
+    #     return
     
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        event_list += '<li>'
-        event_list += start
-        event_list += ' '
-        event_list += event['summary']
-        event_list += '</li>'
-        print(start, event['summary'])
+    # for event in events:
+    #     start = event['start'].get('dateTime', event['start'].get('date'))
+    #     event_list += '<li>'
+    #     event_list += start
+    #     event_list += ' '
+    #     event_list += event['summary']
+    #     event_list += '</li>'
+    #     print(start, event['summary'])
 
-    event_list += '</ol></p>'
+    # event_list += '</ol></p>'
     tasks = Tasks.query.all()
     surveys = Survey.query.filter_by(user = current_user.id)
 
     tests = Volunteer_test.query.filter_by(user_id = current_user.id)
     companies = {}
-    return render_template('dashboard.html', surveys=surveys, tasks=tasks, event_list=event_list, tests=tests, companies=companies)
+    return render_template('dashboard.html', surveys=surveys, tasks=tasks, tests=tests, companies=companies)
+    # return render_template('dashboard.html', surveys=surveys, tasks=tasks, event_list=event_list, tests=tests, companies=companies)
 
 # Community Page
 @app.route('/community', methods=['GET', 'POST'])
@@ -1482,6 +1491,7 @@ def ad_recommend():
     form = Ad_recommend()
     if form.validate_on_submit():
         input = form.input.data
+        input = input.lower()
         output = ""
         def find(dec,k):
             r=[]
@@ -1491,6 +1501,8 @@ def ad_recommend():
             return r
 
         result=set(find(adata, input)) 
+        print(result)
+
         for i in result:
             output += "<a target = '_blank' href = '" + i + "'>" + i +  "</a> <br>"
             print(" Url Link ",i)
@@ -1751,7 +1763,6 @@ def events():
             },
             # 'attendees': [
             #     {'email': form.attendees_one.data},
-            #     {'email': form.attendees_two.data},
             # ],
             'attendees': [
                 {'email': 'punerva21@gmail.com'}
@@ -1885,6 +1896,47 @@ def product_test():
     tests = Volunteer_test.query.all()
     return render_template('product_test.html', tests=tests)
 
+@app.route("/challenge", methods=['GET', 'POST'])
+def challenge():
+    form = Challenges()
+    if form.validate_on_submit():
+        print(form)
+        cha = challenges(
+            challenge_name = form.challenge_name.data,
+            challenge_desc = form.challenge_desc.data,
+            eligibility = form.eligibility.data,
+            company_name = form.company_name.data,
+            location = form.location.data,
+            theme = form.theme.data,
+            relevant_industry = form.relevant_industry.data,
+            Incentives = form.incentives.data,
+            email = form.email.data,
+            timeline = form.timeline.data
+        )
+        db.session.add(cha)
+        db.session.commit()
+        return redirect(url_for('challenges_for_startups'))
+    return render_template('challenge.html', form=form)
+
+@app.route("/challenges_for_startups", methods=['GET', 'POST'])
+def challenges_for_startups():
+    chas = challenges.query.all()
+    return render_template('challenges_for_startups.html', chas = chas)
+
+@app.route("/apply_for_challenges/<int:challenge_id>", methods=['GET', 'POST'])
+def apply_for_challenges(challenge_id):
+    chas = challenges.query.filter_by(id=challenge_id).first()
+    if request.method == 'POST':
+        email = request.form['text']
+        applicant = Applicants(
+            email = email,
+            challenge_id = challenge_id
+        )
+        db.session.add(applicant)
+        db.session.commit()
+        return redirect(url_for('challenges_for_startups'))
+    return render_template('apply_for_challenges.html', chas = chas)
+
 @app.route("/product_test_individual/<int:test_id>", methods=['POST'])
 def product_test_individual(test_id):
     if request.method == 'POST':
@@ -1895,6 +1947,10 @@ def product_test_individual(test_id):
         test.reg_list += email
         test.reg_list += ', '
         test.total_reg += 1
+        # if test.total_reg > 10 and test.premium_account==True:
+        #     db.session.commit()
+        # else:
+        #     test.status = false
         db.session.commit()
         return redirect(url_for('product_test'))
     return redirect(url_for('product_test'))
@@ -2013,7 +2069,7 @@ def competitors():
         params = {
         "engine": "google",
         "q": query,
-        "api_key": "5d62dc181d5d979f00fe36e1afd6fead68ee57fef3ff6b21c9904fb3209da2bf"
+        "api_key": "API_KEY"
         }
 
         search = GoogleSearch(params)
@@ -2070,7 +2126,7 @@ def competitors():
         params = {
         "engine": "google",
         "q": news_query,
-        "api_key": "5d62dc181d5d979f00fe36e1afd6fead68ee57fef3ff6b21c9904fb3209da2bf"
+        "api_key": "API_KEY"
         }
 
         search = GoogleSearch(params)
@@ -2093,3 +2149,52 @@ def competitors():
     companies = {}
     recent_news = ''
     return render_template('competitors.html', companies=companies, recent_news=recent_news)
+
+@app.route("/projection", methods=['GET','POST'])
+def projection():
+    return render_template('projection.html')
+
+@app.route("/basic_method", methods=['POST'])
+def basic_method():
+    if request.method == 'POST':
+        funding_amount = int(request.form['txt'])
+        equity_dilution = int(request.form['text'])
+        basic_val = (funding_amount / equity_dilution) * 100
+        
+        return render_template('projection.html', basic_val=basic_val)
+
+@app.route("/equity_dilution", methods=['POST'])
+def equity_dilution():
+    if request.method == 'POST':
+        funding_amount = float(request.form['txt'])
+        expected_val = float(request.form['text'])
+        equity_dilution = (funding_amount / expected_val) * 100
+        
+        return render_template('projection.html', equity_dilution=equity_dilution)
+    
+@app.route("/revenue_triple", methods=['POST'])
+def revenue_triple():
+    if request.method == 'POST':
+        df = pd.read_csv('/Users/punerva/Desktop/Unicorn/IT_Data.csv', encoding= 'unicode_escape')
+        df['Multiplication_factor'] = df['Market_Cap']/df['Revenue']
+        avg_mul_fac = df['Multiplication_factor'].mean()
+        arr = float(request.form['txt'])
+        mf = float(request.form['text'])
+        val_avg = arr * avg_mul_fac
+        val = arr * mf
+        
+        return render_template('projection.html', val_avg=val_avg, val=val)
+    
+@app.route("/berkus_method", methods=['POST'])
+def berkus_method():
+    if request.method == 'POST':
+        idea = float(request.form['idea'])
+        prototype = float(request.form['prototype'])
+        founders = float(request.form['founders'])
+        team = float(request.form['team'])
+        traction = float(request.form['traction'])
+        strategic = float(request.form['strategic'])
+        revenue = float(request.form['revenue'])
+        berkus = idea + prototype + founders + team + traction + strategic + revenue
+        
+        return render_template('projection.html', berkus=berkus)

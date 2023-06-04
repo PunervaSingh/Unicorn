@@ -40,25 +40,25 @@
                     <label for="Email">Email</label>
                     <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly/>
                 </div>
+                <div class="form-group">
+                    <label for="Phone">Phone</label>
+                    <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
+                </div>
+                <div class="form-group">
+                    {{ form.profile.label(class="form-control-label") }}
+                    {% if form.profile.errors %}
+                    {{ form.profile(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.profile.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.profile(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
             </div>
           <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
-            <div class="form-group">
-                <label for="Phone">Phone</label>
-                <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
-            </div>
-            <div class="form-group">
-                {{ form.profile.label(class="form-control-label") }}
-                {% if form.profile.errors %}
-                {{ form.profile(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.profile.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.profile(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
             <div class="form-group">
                 {{ form.description.label(class="form-control-label") }}
                 {% if form.description.errors %}
@@ -111,8 +111,6 @@
                 {{ form.role(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-          </div>
-          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.awards.label(class="form-control-label") }}
                 {% if form.awards.errors %}
@@ -126,6 +124,8 @@
                 {{ form.awards(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+          </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.cases.label(class="form-control-label") }}
                 {% if form.cases.errors %}

@@ -2,119 +2,119 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<style>
+    footer {
+        display: none;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-<h1 style="padding-top: 150px;">Provide program by your company</h1>
-<form method="POST" action="">
-    {{ form.hidden_tag() }}
-    <fieldset class="form-group">
-        <div class="row">
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.summary.errors %} 
-            {{ form.summary(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.summary.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.summary(class="form-control form-control-lg") }} {%
-            endif %}
+<div class="container-fluid" style="padding: 0; margin: 0;">
+    <div class="row">
+        <div class="col-7">
+            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+      alt="" style="height: 100vh; width: 60%;object-fit: cover; position: fixed;">
         </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.location.errors %} 
-            {{ form.location(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.location.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.location(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.description.errors %} 
-            {{ form.description(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.description.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.description(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.start_dateTime.errors %} 
-            {{ form.start_dateTime(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.start_dateTime.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.start_dateTime(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.start_timeZone.errors %} 
-            {{ form.start_timeZone(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.start_timeZone.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.start_timeZone(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.end_dateTime.errors %} 
-            {{ form.end_dateTime(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.end_dateTime.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.end_dateTime(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.end_timeZone.errors %} 
-            {{ form.end_timeZone(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.end_timeZone.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.end_timeZone(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.attendees_one.errors %} 
-            {{ form.attendees_one(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.attendees_one.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.attendees_one(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12">
-            {% if form.attendees_two.errors %} 
-            {{ form.attendees_two(class="form-control form-control-lg is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.attendees_two.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
-            {% else %} {{ form.attendees_two(class="form-control form-control-lg") }} {%
-            endif %}
-        </div>
-        <div class="form-group col-lg-6 col-md-12 col-sm-12" style="text-align: end;">
-            {{ form.submit(class="btn btn-dark submit-btn") }}
+        <div class="col-5" style="padding: 0 50px 100px;">
+            <h1 style="padding-top: 150px; padding-left: 20px;">Enter event details</h1>
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.summary.errors %} 
+                        {{ form.summary(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.summary.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.summary(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.location.errors %} 
+                        {{ form.location(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.location(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.description.errors %} 
+                        {{ form.description(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.description(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.start_dateTime.errors %} 
+                        {{ form.start_dateTime(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.start_dateTime.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.start_dateTime(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.start_timeZone.errors %} 
+                        {{ form.start_timeZone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.start_timeZone.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.start_timeZone(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.end_dateTime.errors %} 
+                        {{ form.end_dateTime(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.end_dateTime.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.end_dateTime(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.end_timeZone.errors %} 
+                        {{ form.end_timeZone(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.end_timeZone.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.end_timeZone(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;">
+                        {% if form.attendees_one.errors %} 
+                        {{ form.attendees_one(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.attendees_one.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %} {{ form.attendees_one(class="form-control form-control-lg") }} {%
+                        endif %}
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12" style="margin: 30px 0;" >
+                        {{ form.submit(class="btn btn-dark submit-btn") }}
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
-    </fieldset>
-</form>
 </div>
 {% endblock %}

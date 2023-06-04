@@ -1,0 +1,143 @@
+{%extends "layout.html"%}
+
+{% block head %}
+<!-- Page title -->
+<title>Unicorn</title>
+
+<style>
+    .projection-div {
+        padding: 50px 100px;
+        border: 1px solid gray;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 70px">
+    <h3 class="underline-small" style="
+        position: absolute;
+        top: 50px;
+        left: 40%;
+        font-weight: 400;
+        letter-spacing: 1px;
+      "> 
+        Profit Projection
+    </h3>
+
+    <div id="profits" class="container tabcontent" style="margin-top: 150px;">
+        <div class="container">
+
+            <div class="projection-div">
+            <h4>Basic Method: Vauation Based on Equity when no sales/revenue. Mostly suited for early startups or startups going for first round of investment (angel investors)</h4>
+            <div class="row">
+                <div class="col-6" style="margin-top: 30px;">
+                    <h6>Find the valuation based on equity.</h6>
+                    <form action="/basic_method" method="post">
+                        <div>
+                          <input type="number" name="txt" style="width: 100%; margin: 10px 0;" placeholder="Enter the funding amount "></input>
+                          <input type="number" name="text" style="width: 100%; margin: 10px 0;" placeholder="Enter the percentage of equity dilution "></input>
+                          <button class="btn btn-success" type="submit" id="button-addon2">Evaluate</button>
+                        </div>
+                        <div>
+                            {% if basic_val %}
+                            <h4>
+                                {{ basic_val }}
+                            </h4>
+                            {% endif %}
+                        </div>
+                      </form>
+                </div>
+                <div class="col-6" style="margin-top: 30px;">
+                    <h6>Find equity dilution for expected valution</h6>
+                    <form action="/equity_dilution" method="post">
+                        <div>
+                          <input type="number" name="txt" style="width: 100%; margin: 10px 0;" placeholder="Enter the funding amount "></input>
+                          <input type="number" name="text" style="width: 100%; margin: 10px 0;" placeholder="Enter the valuation amount of the company "></input>
+                          <button class="btn btn-success" type="submit" id="button-addon2">Evaluate</button>
+                        </div>
+                        <div>
+                            {% if equity_dilution %}
+                            <h4>
+                                {{ equity_dilution }}
+                            </h4>
+                            {% endif %}
+                        </div>
+                      </form>
+                    </div>
+                </div>
+                <div style="margin-top: 50px;">
+                    <p>Based on the equity deal you get, the valuation will change. There are makorly 4 brackets:</p>
+                    <ul>
+                        <li>Bracket-1: 5-10 % equity (Great Deal)</li>
+                        <li>Bracket-2: 10-20 % equity (Good Deal)</li>
+                        <li>Bracket-3: 20-30 % equity (Ok Deal)</li>
+                        <li>Bracket-4: 30+ % equity (Bad Deal)</li>
+                    </ul>
+                </div>
+                
+            </div>
+
+            <div class="projection-div">
+            <h4>Revenue Triple Method: Useful for startups that have min 16-18 months of revenue. Commonly used by both startups and investors.</h4>
+            <form action="/revenue_triple" method="post">
+                <div>
+                  <input type="number" name="txt" style="width: 100%; margin: 10px 0;" placeholder="Expected Annual Revenue "></input>
+                  <input type="number" name="text" style="width: 100%; margin: 10px 0;" placeholder="Enter multiplication factor "></input>
+                  <button class="btn btn-success" type="submit" id="button-addon2">Evaluate</button>
+                </div>
+                <div>
+                    {% if val_avg %}
+                    <h4>
+                        {{ val_avg }}
+                    </h4>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if val %}
+                    <h4>
+                        {{ val }}
+                    </h4>
+                    {% endif %}
+                </div>
+              </form>
+            </div>
+
+            <div class="projection-div">
+            <h4>Berkus Method</h4>
+            <div>
+                <p>Rate your start-up on the following based on their progress or completion:
+                <ul>
+                    <li>Idea: 50L - 1Cr</li>
+                    <li>Prototype: 50L - 1Cr</li>
+                    <li>Founders: 50L - 1Cr</li>
+                    <li>Team: 50L - 1Cr</li>
+                    <li>Traction: 50L - 1Cr</li>
+                    <li>Strategic Relationships: 50L - 1Cr</li>
+                    <li>Revenue: 50L - 1Cr</p></li>
+                </ul>
+            </div>
+            <form action="/berkus_method" method="post">
+                <div>
+                  <input type="number" name="idea" style="width: 100%; margin: 10px 0;" placeholder="idea"></input>
+                  <input type="number" name="prototype" style="width: 100%; margin: 10px 0;" placeholder="prototype"></input>
+                  <input type="number" name="founders" style="width: 100%; margin: 10px 0;" placeholder="founders"></input>
+                  <input type="number" name="team" style="width: 100%; margin: 10px 0;" placeholder="team"></input>
+                  <input type="number" name="traction" style="width: 100%; margin: 10px 0;" placeholder="traction"></input>
+                  <input type="number" name="strategic" style="width: 100%; margin: 10px 0;" placeholder="strategic"></input>
+                  <input type="number" name="revenue" style="width: 100%; margin: 10px 0;" placeholder="revenue"></input>
+                  <button class="btn btn-success" type="submit" id="button-addon2">Evaluate</button>
+                </div>
+                <div>
+                    {% if berkus %}
+                    <h4>
+                        {{ berkus }}
+                    </h4>
+                    {% endif %}
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

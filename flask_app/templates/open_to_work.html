@@ -39,25 +39,25 @@
                     <label for="Name">Email</label>
                     <input type="text" name="Email" id="" placeholder={{ current_user.email }} readonly />
                 </div>
+                <div class="form-group">
+                    <label for="Name">Phone</label>
+                        <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
+                </div>
+                <div class="form-group">
+                    {{ form.profession.label(class="form-control-label") }}
+                    {% if form.profession.errors %}
+                    {{ form.profession(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.profession.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.profession(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
             </div>
           <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
-            <div class="form-group">
-                <label for="Name">Phone</label>
-                    <input type="text" name="Phone" id="" placeholder={{ current_user.phone }} readonly />
-            </div>
-            <div class="form-group">
-                {{ form.profession.label(class="form-control-label") }}
-                {% if form.profession.errors %}
-                {{ form.profession(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.profession.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.profession(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
             <div class="form-group">
                 {{ form.linkedin_link.label(class="form-control-label") }}
                 {% if form.linkedin_link.errors %}
@@ -110,8 +110,6 @@
                 {{ form.about(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-        </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.past_experience.label(class="form-control-label") }}
                 {% if form.past_experience.errors %}
@@ -125,6 +123,8 @@
                 {{ form.past_experience(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 cm-apply-div">
             <div class="form-group">
                 {{ form.year_of_experience.label(class="form-control-label") }}
                 {% if form.year_of_experience.errors %}

@@ -28,7 +28,7 @@
         <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
       </svg></a>
       <h4 style="color: white; font-weight: bold;">Calender Events</h4>
-      {{ event_list | safe }}
+      <!-- {{ event_list | safe }} -->
     </div>
     
     <div class="toDo" style="padding-top: 30px;">
@@ -51,6 +51,7 @@
   </div>
   <div class="col-12" style="padding-top: 150px; padding-left: 30%;">
     <h1 style="margin-bottom: 50px;">DashBoard</h1>
+    <h5 style="margin-bottom: 30px; margin-top: 60px; color: #dc3545;">Unpaid Features</h5>
     <div class="row" style="margin-bottom: 30px;">
     <div class="col-5">
       <div class="survey-dashboard-div dashboard-cards" style="background-color: white; height: 100%; color: black;">
@@ -66,6 +67,12 @@
               style="color: black; text-decoration: none; font-weight: bold;"
               >Survey Name: {{ survey.survey_name }}</a
               >
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                aria-valuemin="0" aria-valuemax="100" style="width:70%">
+                  70%
+                </div>
+              </div>
             </li>
           </div>
           {% endfor %}
@@ -128,7 +135,9 @@
     </div>
   </div>
 
-  <div class="col-12" style="margin-bottom: 30px; padding-left: 0;">
+  <h5 style="margin-bottom: 30px; margin-top: 100px; color: #dc3545;">Recently Visited</h5>
+  <div class="row" style="margin: 0 40px 0 7px;">
+  <div class="col-6" style="margin-bottom: 30px; padding-left: 0;">
     <a style="text-decoration: none; color: black;;" href="{{url_for('competitors')}}">
   <div class="trends dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 93%; padding: 30px">
     <h5>Industry Specific Top-10 companies </h5>
@@ -138,6 +147,18 @@
     </svg>
   </div>
 </a>
+</div>
+  <div class="col-6" style="margin-bottom: 30px; padding-left: 0;">
+    <a style="text-decoration: none; color: black;;" href="{{url_for('projection')}}">
+  <div class="trends dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 93%; padding: 30px">
+    <h5>Profit Projection</h5>
+    <p style="color: gray; font-weight: lighter; font-size: small;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, ut.</p>
+    <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+      <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+    </svg>
+  </div>
+</a>
+</div>
 </div>
   
   <!-- <div class="dashboard-cards" style="margin-bottom: 100px; margin-right: 80px; padding: 50px;">
@@ -151,6 +172,7 @@
     </div>
   </div>
 </div> -->
+<h5 style="margin-bottom: 30px; margin-top: 60px; color: #dc3545;">Frequently Visited</h5>
   <div class="row">
     <div class="row">
       <div class="col-3" style="padding: 0; padding-left: 35px;">
@@ -167,7 +189,7 @@
       <div class="col-3" style="padding: 0;">
         <a style="text-decoration: none; color: white;" href="{{url_for('profit_prediction')}}">
         <div class="profits dashboard-cards" style="position: relative; background-color: white;  color: black;height: 90%; width: 95%; padding: 30px">
-          <h5>Profit Projection</h5>
+          <h5>Revenue Projection</h5>
           <p style="color: gray; font-weight: lighter; font-size: small;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nulla, ut. Lorem ipsum dolor sit amet.</p>
           <svg style="position: absolute; bottom: 10px; right: 10px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
             <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
@@ -221,7 +243,8 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <div class="test-user dashboard-cards" style="position: relative; margin: 100px 0; background-color: white;  color: black;padding: 120px 80px 80px; width: 90%;">
+      <h5 style="margin-top: 100px; margin-bottom: 30px; color: #dc3545;">Paid Features</h5>
+      <div class="test-user dashboard-cards" style="position: relative; margin: 0 0 100px 0; background-color: white;  color: black;padding: 120px 80px 80px; width: 90%;">
         <h3>Volunteers & Test Users</h3>
         <li style="list-style: none;">
           <a style="text-decoration: none; position: absolute; top: 70px; left: 80px;" href="{{url_for('volunteer')}}">View Available Test Users / Volunteers</a>
