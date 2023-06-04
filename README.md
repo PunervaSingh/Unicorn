@@ -61,6 +61,11 @@
 - Motivational Corner
 - Bulk Mail Promotional Services
 - Chatbot
+- Dashboard for Startup Owner
+- Test User Feature
+- User Market Analysis using Google Trends
+- Survey Form
+- Evaluation Estimator
 
 <a id="overview"></a>
 ## 📖 Application Overview
@@ -100,6 +105,13 @@
 ![Website Image](flask_app/static/img/brand_ss.png?raw=true "Title")
 ### Success Stories Page 
 ![Website Image](flask_app/static/img/success_ss.png?raw=true "Title")
+### Dashboard Page
+![Website Image](flask_app/static/img/dashboard.png?raw=true "Title")
+### Product Test Page
+![Website Image](flask_app/static/img/test_user.png?raw=true "Title")
+### User Market Analysis(Google Trends)
+![Website Image](flask_app/static/img/user_market.png?raw=true "Title")
+
 
 <a id="resources"></a>
 ## 📚 Resources
@@ -175,6 +187,12 @@ Samya Jain<br>
 [@Linkedin](https://www.linkedin.com/in/samya-jain-a68443204)
 <br>
 [@Github](https://github.com/samya02)
+<br>
+
+Kashika Akhouri<br>
+[@Linkedin](https://www.linkedin.com/in/kashika-akhouri-050b4a202/)
+<br>
+[@Github](https://github.com/kashika0112)
 <br>
 
 
